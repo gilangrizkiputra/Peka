@@ -21,7 +21,7 @@ class Splashscreen : ComponentActivity() {
             PekaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting2(
-                        name = "Android",
+                        name = "Ozi Mengedit Halaman Ini",
                         modifier = Modifier.padding(innerPadding)
 //                        add fitur splashcreen
                     )
