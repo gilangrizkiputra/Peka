@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             PekaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = "Nabil Mengedit bang",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
