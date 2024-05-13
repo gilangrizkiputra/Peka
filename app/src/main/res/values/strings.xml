@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Peka</string>
+    <string name="title_activity_splashscreen">Splashscreen</string>
 </resources>
