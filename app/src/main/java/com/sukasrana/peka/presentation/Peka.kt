@@ -25,6 +25,8 @@ import com.sukasrana.peka.R
 import com.sukasrana.peka.navigation.NavigationItem
 import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.presentation.screen.home.HomeScreen
+import com.sukasrana.peka.presentation.screen.login.SwitchScreen
+import com.sukasrana.peka.presentation.screen.onboarding.OnBoardingScreen
 import com.sukasrana.peka.presentation.screen.splash.SplashScreen
 import com.sukasrana.peka.utils.shouldShowBottomBar
 
@@ -52,6 +54,15 @@ fun PekaApp(
             composable(Screen.Splash.route){
                 SplashScreen(navController = navController)
             }
+
+            composable(Screen.OnBoarding.route) {
+                OnBoardingScreen(navController = navController)
+            }
+
+            composable(Screen.Switch.route) {
+                SwitchScreen(navController = navController)
+            }
+
             composable(Screen.Home.route){
                 HomeScreen(navController = navController)
             }
