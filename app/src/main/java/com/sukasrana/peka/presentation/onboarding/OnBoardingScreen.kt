@@ -1,4 +1,4 @@
-package com.sukasrana.peka.presentation.screen.onboarding
+package com.sukasrana.peka.presentation.onboarding
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -96,7 +96,7 @@ fun OnBoardingContent(
                         Image(
                             painter = painterResource(id = R.drawable.image_onboarding_background),
                             contentDescription = "BG_OnBoarding",
-                            modifier = Modifier.offset(x = -70.dp, y = -145.dp)
+                            modifier = Modifier.offset(x = (-70).dp, y = (-145).dp)
                         )
                         Image(
                             painter = painterResource(id = onBoardings[page].resId),
@@ -106,6 +106,7 @@ fun OnBoardingContent(
                     Text(
                         text = onBoardings[page].title,
                         style = MaterialTheme.typography.titleLarge,
+
                         textAlign = TextAlign.Center
                     )
                     Spacer(modifier = Modifier.height(11.dp))

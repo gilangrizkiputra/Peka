@@ -1,4 +1,4 @@
-package com.sukasrana.peka.presentation.screen.login
+package com.sukasrana.peka.presentation.login
 
 
 import android.annotation.SuppressLint
@@ -59,13 +59,13 @@ fun SwitchScreen(
                         .clip(MaterialTheme.shapes.extraLarge)
                 ) {
                     Text(
-                        text = "Login",
+                        text = "Log In",
                         style = MaterialTheme.typography.bodyLarge
                     )
                 }
                 Button(
                     onClick = {
-                        navController.navigate(Screen.Signin.route)
+                        navController.navigate(Screen.Signup.route)
                     },
                     modifier = Modifier
                         .padding(16.dp, 5.dp, 16.dp, 16.dp)

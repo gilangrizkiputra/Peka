@@ -4,6 +4,6 @@ package com.sukasrana.peka.navigation
   data object OnBoarding: Screen("onboarding")
   data object Switch: Screen("switch")
   data object Login: Screen("login")
-  data object Signin: Screen("signin")
+  data object Signup: Screen("signup")
   data object Home: Screen("home")
  }

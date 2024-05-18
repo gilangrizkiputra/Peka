@@ -1,4 +1,4 @@
-package com.sukasrana.peka.presentation.screen.splash
+package com.sukasrana.peka.presentation.splash
 
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image

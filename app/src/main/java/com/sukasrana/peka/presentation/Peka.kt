@@ -24,10 +24,12 @@ import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.navigation.NavigationItem
 import com.sukasrana.peka.navigation.Screen
-import com.sukasrana.peka.presentation.screen.home.HomeScreen
-import com.sukasrana.peka.presentation.screen.login.SwitchScreen
-import com.sukasrana.peka.presentation.screen.onboarding.OnBoardingScreen
-import com.sukasrana.peka.presentation.screen.splash.SplashScreen
+import com.sukasrana.peka.presentation.home.HomeScreen
+import com.sukasrana.peka.presentation.login.LoginScreen
+import com.sukasrana.peka.presentation.login.SignUpScreen
+import com.sukasrana.peka.presentation.login.SwitchScreen
+import com.sukasrana.peka.presentation.onboarding.OnBoardingScreen
+import com.sukasrana.peka.presentation.splash.SplashScreen
 import com.sukasrana.peka.utils.shouldShowBottomBar
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,6 +63,14 @@ fun PekaApp(
 
             composable(Screen.Switch.route) {
                 SwitchScreen(navController = navController)
+            }
+
+            composable(Screen.Login.route) {
+                LoginScreen(navController = navController)
+            }
+
+            composable(Screen.Signup.route) {
+                SignUpScreen(navController = navController)
             }
 
             composable(Screen.Home.route){

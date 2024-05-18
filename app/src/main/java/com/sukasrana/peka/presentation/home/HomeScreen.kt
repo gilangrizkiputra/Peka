@@ -1,4 +1,4 @@
-package com.sukasrana.peka.presentation.screen.home
+package com.sukasrana.peka.presentation.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
