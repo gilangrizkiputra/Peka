@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Peka</string>
     <string name="title_activity_splashscreen">Splashscreen</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_article">Article</string>
+    <string name="menu_mkia">MKIA</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_notification">Notification</string>
 </resources>
