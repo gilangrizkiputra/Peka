@@ -1,4 +1,183 @@
 <resources>
     <string name="app_name">Peka</string>
     <string name="title_activity_splashscreen">Splashscreen</string>
+    <string name="titleArticle1">Kenali Nutrisi dan Manfaatnya bagi \nAnak</string>
+    <string name="titleArticle2">Pola Asuh yang Baik untuk Kesehatan Mental Anak</string>
+    <string name="titleArticle3">Perlu Diketahui, Gejala Awal Demam Berdarah Pada Bayi</string>
+    <string name="titleArticle4">Anak Pendiam dan Susah Bergaul? Kenali Penyebabnya</string>
+    <string name="titleArticle5">Anak Menelan Benda Asing? Lakukan Langkah Berikut</string>
+
+    <string name="contentArticle1">
+        Mengenal Nutrisi Anak
+        Pertumbuhan anak akan optimal apabila mereka memperoleh kebutuhan gizi secara optimal, meliputi makronutrien serta mikronutrien. Berikut adalah penjelasan dari makronutrien dan mikronutrien untuk asupan anak. \n
+        \n
+        Makronutrien \n
+        Terdapat 3 nutrisi utama yang menjadi golongan makronutrien, yakni protein, karbohidrat, serta lemak. \n
+
+        1. Protein \n
+        Protein adalah asupan yang mendukung pertumbuhan fisik pada anak secara optimal, meliputi pertumbuhan jaringan serta otot. Sumber protein bisa diperoleh dari hewan maupun tumbuhan seperti telur, daging, susu, keju, tempe, tahu, dan lainnya.\n
+
+        2. Karbohidrat \n
+        Karbohidrat merupakan asupan penting sebagai sumber energi agar putra-putri Anda dapat menjalani aktivitas sehari-hari dengan bertenaga. Sumber karbohidrat antara lain beras, gandum, tepung, serta kacang-kacangan.\n
+
+        3. Lemak \n
+        Selain karbohidrat dan protein, masa pertumbuhan juga sangat membutuhkan nutrisi dari lemak. Makanan yang kaya akan lemak misalnya minyak, mentega, susu, dan kacang-kacangan. Kebutuhan asupan lemak untuk anak usia 4-18 tahun adalah sebanyak 25-53% dari total kalori per hari.\n
+
+        \n
+        Mikronutrien  \n
+        Sedangkan mikronutrien meliputi vitamin serta mineral yang juga penting untuk mendukung tumbuh kembang buah hati.
+        \n
+        1. Vitamin\n
+        Makanan dengan kandungan vitamin tinggi sangat penting untuk memenuhi kebutuhan gizi pada anak. Vitamin juga berperan dalam mengatur metabolisme tubuh. Ada banyak jenis vitamin dengan fungsi serta perannya masing-masing.
+        \n
+        2. Mineral\n
+        Mineral juga merupakan nutrisi penting dalam proses metabolisme. Karena mineral tidak diproduksi oleh tubuh secara alami, maka harus ada asupan makanan dengan kandungan mineral yang diberikan.
+        \n
+        3. Kalsium\n
+        Kalsium menjadi zat yang sangat penting untuk pertumbuhan. Peran zat ini sangat penting dalam pembentukan gigi serta kekuatan tulang. Makanan dengan kandungan kalsium tinggi antara lain susu, keju, jeruk, dan yogurt.
+        \n
+
+
+
+    </string>
+    <string name="contentArticle2">
+        Mengenal 3 Jenis Pola Asuh
+        Demi mendapatkan hasil positif, tidak ada salahnya Anda mulai belajar dan mencari tahu bagaimana cara mendidik anak yang tepat. Beberapa orang tua mungkin berpegang teguh dengan teknik didikkan mereka, namun Anda perlu mengingat bahwa tiap zaman berbeda dari zaman lainnya, sehingga tidak ada salahnya untuk menambah pengetahuan saat ini dalam pola asuh Anda. Berikut adalah beberapa jenis pola asuh yang perlu Anda ketahui.
+
+            1. Otoritatif
+            Pola asuh pertama adalah otoritatif. Teknik ini hampir sama dengan zaman orang tua dulu di mana Anda harus memberikan aturan khusus dan anak wajib mematuhinya. Perbedaannya, Anda harus memberikan alasan untuk tiap aturan yang mudah dipahami dan masuk akal.
+
+            Contohnya, bagi anak remaja, Anda memberlakukan aturan bahwa tidak boleh keluar rumah di atas jam 9 malam. Jelaskan bahwa aturan ini disebabkan bahwa pada jam 9 malam jalanan akan mulai sepi dan potensi terjadinya kriminal lebih tinggi, sehingga akan lebih aman untuk pulang sebelum jam 9 malam.
+
+            Bila anak atau remaja ada masukan, bisa dipertimbangkan bersama. Dengan demikian, anak dan remaja akan belajar untuk disiplin, kompromi, dan komunikasi.
+
+            2. Kasih Sayang
+            Pola asuh berikutnya adalah kasih sayang. Anda akan menciptakan lingkungan hangat yang melibatkan kontak fisik secara proporsional. Dari menggendong, mengelus kepala, pelukan, dan lain sebagainya untuk menunjukkan rasa sayang dan perhatian pada anak dan remaja. Rutinitas ini dapat mengembangkan kualitas emosional dan empati anak.
+
+            Teknik ini juga perlu diimbangi dengan disiplin yang tegas sehingga anak dan remaja dapat membangun pendirian mereka sendiri dengan standar yang sehat dan berkualitas.
+
+            3. Pendampingan
+            Pola asuh terakhir adalah pendampingan, disini Anda akan membebaskan buah hati melakukan apa saja sesuai kemauan dan kreativitasnya. Bahkan, mendukung keinginannya tetapi tidak dibebaskan sepenuhnya terutama saat salah.
+
+            Baca Juga: Aduh, Anak Terlambat Bicara
+
+            Orang tua akan memberi tahu dan memberikan alasan sekaligus melakukan contoh yang benar. Pola seperti ini mendorong buah hati untuk kreatif, serta mengetahui solusi terbaik dari sebuah masalah.
+
+
+        5 Tips Pola Asuh yang Baik untuk Kesehatan Anak
+            Setelah mengetahui bagaimana pola yang benar, saatnya masuk ke tipsnya tambahan dalam mengasuh anak. Berikut adalah beberapa cara yang dapat Anda terapkan sejak dini.
+
+            1. Menciptakan Suasana Kondusif
+            Tips yang pertama adalah menciptakan lingkungan kondusif. Usahakan anak selalu nyaman terhadap Anda. Akan ada saatnya Anda mengalami emosi negatif, dan upayakan agar anak tidak melihat emosi ini. Bila memungkingkan, titipkan anak pada pasangan Anda sebelum melepaskan emosi sehingga Anda dapat kembali pada anak dengan perasaan hati yang lebih segar.
+
+            2. Waktu Bermain yang Sehat
+            Orang tua yang terlalu protektif dapat menghasilkan anak dengan kemampuan sosial rendah. Biarkan anak bermain dalam jarak yang aman agar anak dapat mengenal dunia di sekitarnya. Dengan demikian, anak Anda akan terbiasa untuk bereksplorasi dan bertanggung jawab atas dirinya sendiri.
+
+            3. Tumbuhkan Rasa Percaya Diri
+            Kritik konstruktif dapat membangun karakter anak, namun pastikan juga untuk memberikan pujian yang setimpal. Dengan demikian, anak dapat belajar mengoreksi diri sendiri juga membangun kepercayaan diri.
+            Jika anak mengalami kegagalan, Anda dapat menyemangatinya dengan membantu anak untuk belajar agar menjadi lebih baik lagi. Pola asuh ini akan mengajarkan anak untuk tetap bersemangat meski telah gagal berkali-kali.
+
+            4. Budayakan Kebiasaan Hidup Sehat
+            Kebiasaan hidup sehat dapat dimulai dari olahraga rutin, pola makan sehat, serta mentalitas yang berkualitas. Ajarkan anak untuk menjadi dirinya sendiri tanpa perlu mengembangkan rasa iri atau menjatuhkan orang lain untuk menjadi yang terbaik. Ajarkan mengapa perundungan itu buruk untuk dilakukan dan untuk tidak membeda-bedakan orang berdasarkan penampilan belaka.
+            5. Bangun Kepercayaan
+            Akan ada saatnya anak belajar untuk berbohong. Hal ini merupakan hal yang normal, dan Anda dapat mengajarkan anak untuk mengurangi perilaku ini melalui praktik kepercayaan pada satu sama lain.
+            Hal ini bisa dimulai dengan menghormati privasi anak. Dari mengetuk pintu sebelum memasuki kamar anak, hingga tidak membaca jurnal harian (diary) anak. Jika Anda menemukan anak sedang berbohong, hindari amarah terhadap kebohongan dan fokus untuk meminta kejujuran anak.
+            Setelah anak jujur pada Anda, hargai kejujuran tersebut sehingga anak juga akan belajar bahwa aman untuk jujur pada Anda.
+            Dengan demikian, anak Anda akan belajar untuk mengurangi perilaku berbohong dan mulai mempercayai Anda.
+
+    </string>
+    <string name="contentArticle3">
+
+        Gejala Awal Demam Berdarah Pada Bayi
+        Serangan demam berdarah sangat lumrah terjadi di negara beriklim tropis seperti Indonesia. Penyebarannya juga sangat luas dan dapat mengenai segala umur, termasuk balita. Sebab utamanya dari gigitan nyamuk A. aegypti yang biasanya bersarang pada genangan air.
+        Sebagai langkah pencegahan, berikut kami berikan penjelasan beberapa gejala yang patut Anda waspadai sebagai identifikasi awal:
+
+            1.Demam dengan suhu cenderung di angka 39 sampai 41 derajat celcius selama 2 sampai 7 hari. Untuk memastikan suhu tubuh anak, pastikan Anda mengukurnya menggunakan termometer dan hindari asumsi mengukur suhu anak dengan tangan.
+            2.Terjadinya gangguan pencernaan, seperti mual yang menyebabkan muntah dan anak cenderung rewel karena demam berdarah pada bayi dapat menyebabkan nyeri perut.
+            3.Enggan menyusu sama sekali dan tidak memiliki selera makan. Anda dapat mengidentifikasinya melalui penolakan anak ketika disuapi makanan.
+            4.Terlihat lemas dan mengantuk karena energinya seolah terkuras habis untuk melawan paparan virus DBD.
+            5.Menangis terus-menerus karena merasa kesakitan atau lebih rewel dari kondisi balita normal.
+            6.Kulit anak mengalami ruam kemerahan.
+            7.Hidung mengeluarkan darah dan gusi berdarah.
+            8.Pada urine, feses, dan muntahannya terdapat darah.
+            9.Sulit memproses napas. Gejala ini bisa Anda identifikasi melalui suara napas ketika bayi tidur maupun terjaga. Biasanya kesulitan bernapas cenderung yang dapat Anda dengar sebagai suara seperti mendengkur.
+            10.Sembilan gejala awal di atas bisa membantu Anda sebagai orang tua untuk melakukan penanganan tepat mengatasi demam berdarah pada bayi. Pertolongan pertama adalah hal penting sebelum anak dibawa ke pusat pelayanan kesehatan, rumah sakit maupun puskesmas.
+
+        Penanganan Tepat
+        Ketika sudah mengetahui gejala awal yang mengenai anak Anda, selanjutnya untuk pertolongan pertama butuh penanganan tepat. Pengetahuan penanganan tepat membantu Anda bergerak sesuai rules ketika belum bisa pergi ke fasilitas kesehatan.
+        Selain itu, pengetahuan terkait penanganan tepat juga membantu orang tua merawat anak di rumah setelah pengobatan dari rumah sakit. Untuk kondisi apapun, beberapa hal yang wajib orang tua perhatikan saat merawat anak DBD adalah:
+
+            1.Cukupi kebutuhan cairan anak sesuai dengan usianya. Misal, untuk anak di bawah 6 bulan tidak boleh konsumsi air putih, namun Anda bisa memenuhi cairannya dengan asupan ASI maupun sufor. Di atas usia 6 bulan, anak sudah bisa konsumsi air.
+            2.Penanganan tepat mencegah kondisi demam berdarah pada bayi yang kian parah bisa dilakukan melalui cara pemberian obat penurun demam sesuai anjuran dokter. Penanganan ini hanya bisa dilakukan setelah Anda berkonsultasi dengan dokter.
+            3.Cukupi kebutuhan istirahat si kecil. Hindari ia dari berbagai aktivitas yang menguras tenaga, seperti bermain berlebihan, bepergian, kurang tidur karena tidak nyaman, dan sebagainya.
+    </string>
+
+    <string name="contentArtikel4">
+        Faktor Penyebab Anak Menarik Diri
+        Anak pendiam dan susah bergaul bukan tanpa alasan. Pasti ada beberapa faktor penyebab mengapa mereka menjadi seperti itu. Namun karena anak-anak di usia 10 tahun ke bawah masih sulit mengkomunikasikan diri mereka, ayah dan ibu perlu mengambil intuitif pertama untuk mengamati perilaku anak dengan lebih dekat.
+        Lakukan riset kecil dengan sejumlah pertanyaan. Biasanya ada beberapa penyebab utama mengapa buah hati menarik diri dari lingkungan. Faktor paling besar adalah malu atau kurangnya rasa percaya diri.
+        Rasa malu dan kurang percaya diri dapat menjadi tekanan tersendiri bagi dirinya. Sebenarnya ingin sekali bermain, tertawa, dan bersuka cita. Hanya saja mereka sulit berinteraksi, selain itu masih ada lagi, seperti:
+
+            1. Pemalu
+            Sebagian besar anak memiliki sikap pemalu terutama saat pertama kali berkenalan dengan lingkungan dan orang-orang baru. Sikap ini akan berangsur hilang selama anak dapat mengeksplorasi dunia sekitar dengan leluasa.
+
+            Sebagai orang tua, Anda tentu ingin anak Anda dapat bermain dengan aman. Untuk menghilangkan sikap pemalu namun tetap memastikan anak tetap aman, Anda dapat mulai dengan memantau kegiatan anak dari jarak yang cukup jauh untuk memberi ruang pada anak, namun cukup dekat untuk mengawasi dan mencapai anak seandainya terjadi sesuatu yang tidak diinginkan.
+
+            2. Introvert
+            Berbeda dari sikap pemalu, introvert adalah jenis kepribadian yang tidak bisa hilang begitu saja. Anak-anak dengan kepribadian ini dapat bersosialisasi dengan normal, namun sebagian besar waktu mereka akan lebih banyak menyendiri.
+
+            Anak dengan kepribadian ini tidak perlu untuk dipaksa bersosialisasi, namun Anda tetap dapat mengajaknya untuk beraktifitas di luar ruangan untuk melatih kemampuan sosial dasarnya.
+
+            Baca Juga: Bunda! Coba Perhatikan Kesehatan Mental Remaja Sejak Dini
+
+            3. Trauma Psikis
+            Kejadian yang mengguncangkan atau perlakuan dari orang lain yang menyakitkan bisa mengubah kepribadian anak menjadi pendiam. Contoh paling sederhana adalah bila anak sering mendapat gertakan atau bentakan.
+
+            Terlalu sering menerima kata atau kalimat yang kasar dan nyaring bisa membuat anak menjadi lebih pendiam dan enggan untuk berkumpul dengan orang lain. Pasalnya, ia jadi menganggap dirinya akan terus berbuat kesalahan terhadap orang lain. Akibatnya, anak cenderung tidak percaya diri dan lebih suka menyendiri.
+
+            4. Mengalami Terlambat Bicara (Speech Delay)
+            Anak pendiam juga bisa merupakan dampak dari adanya keterlambatan pada kemampuan bicaranya atau speech delay. Salah satu kelainan yang bisa menyebabkannya adalah retardasi mental.
+
+        Bila mengalami kondisi ini, anak akan mengalami kesulitan untuk mengerti apa yang dikatakan orang lain atau menyampaikan apa yang ingin ia katakan, sehingga dia akan lebih memilih diam daripada orang tidak mengerti apa yang dikatakan.
+
+        Mengatasi Anak Pendiam dan Susah Bergaul
+        Setelah mengetahui apa penyebab anak pendiam dan susah bergaul saatnya untuk mencari solusi mengatasi permasalahan tersebut. Poin pertama adalah jangan menuntut mereka terlalu banyak, langkah itu justru membuat psikologinya turun.
+
+        1. Jangan Membandingkan Anak
+        Cara mengatasi permasalahan ini berikutnya adalah jangan sampai membandingkan mereka dengan lainnya. Tentu maksud orang tua adalah memberikan contoh langsung pada anak agar lebih mudah dipraktikkan, namun bagi anak, hal ini hanyalah tekanan mental lainnya. Jika terlalu sering dilakukan, bisa jadi anak justru akan fokus untuk mengembangkan rasa tidak suka pada anak orang lain ketimbang mengembangkan dirinya sendiri.
+
+        2. Dampingi Mereka dengan Baik
+        Ketika anak mulai menarik diri, biasanya saat inilah anak mulai lebih membutuhkan orang tua. Anda dapat mulai memberikan perhatian yang lebih banyak dari biasanya, disertai dengan kesabaran untuk mendengarkan anak tanpa terus-menerus memasukkan opini Anda dalam cerita anak.
+
+        Kesabaran ini akan membangun rasa kepercayaan diri anak dan lambat laun anak akan belAajar untuk percaya diri di lingkungan sosial yang lebih luas. Usahakan juga agar tidak terlalu memanjakan anak agar nantinya anak juga dapat tumbuh tanpa terlalu banyak bergantung pada orang tua.
+    </string>
+
+    <string name="contentArticle5">
+        Gejala Anak Menelan Sesuatu yang Tidak Biasa
+        Anak usia 6 bulan hingga 3 tahun memang sering menelan benda asing karena rasa keingintahuannya yang tinggi. Misalnya seperti koin, aksesoris, bagian dari mainan, dan sebagainya.
+        Sebagian besar memang tidak menimbulkan gejala khusus, namun harus diwaspadai apabila objek tersebut tersangkut di kerongkongan atau esofagus. Berikut beberapa tanda-tandanya:
+
+        1.Sulit menelan makanan, berbicara, maupun menangis
+        2.Tiba-tiba tersedak dan sulit bernafas
+        3.Mengeluarkan banyak air liur disertai dengan batuk batuk
+        4.Bunyi nafas seperti terkena mengi
+        5.sakit perut dan menolak makanan
+        6.Muntah-muntah
+        Dalam beberapa kasus, objek yang tertelan bisa berupa benda tajam seperti jarum atau peniti di mana dapat menimbulkan rasa sakit. Biasanya anak akan langsung menangis terus-terusan tapi cenderung tidak bersuara.
+
+        Penanganan saat Anak Menelan Benda Asing
+        Segera bawa ke unit gawat darurat apabila mengetahui anak menelan benda tajam berukuran besar. Benda berukuran lebih dari 1 inci cenderung tersangkut di kerongkongan sehingga beresiko menghalangi jalan nafas.
+        ndari mencoba mengeluarkannya secara paksa karena justru beresiko menyebabkan kerusakan lebih parah. Selain itu juga jangan memaksa anak untuk memuntahkan benda tersebut.
+        Berikut yang biasanya dilakukan oleh medis untuk penanganannya:
+
+            1. Perawatan di Rumah
+            Apabila anak tidak menunjukkan gejala tertentu meski telah menelan objek asing, dokter akan memantau terlebih dahulu apakah benda tersebut melewati metabolisme tubuh secara normal sehingga anak masih bisa dilakukan perawatan di rumah.
+            Orang tua harus memperhatikan gejalanya lebih lanjut, apakah menimbulkan demam, muntah atau tanda-tanda nyeri. Dokter juga akan meminta agar orang tua memeriksa feses anak untuk memastikan apakah objek tersebut sudah keluar secara alami.
+
+            2. Operasi
+            Jika benda yang tertelan menimbulkan rasa sakit serta gangguan pernapasan, maka harus dilakukan tindakan operasi segera. Operasi diperlukan untuk tindakan pembedahan atau endoskopi agar dapat mengangkat benda tanpa menusuk kerongkongan maupun usus.
+            Sebelum tindakan operasi, dokter perlu melakukan pemeriksaan dengan CT scan atau rontgen terlebih dahulu untuk memastikan jenis benda yang tertelan serta lokasinya di dalam tubuh.
+            Pemeriksaan tersebut bertujuan untuk memperkirakan dampak yang mungkin timbul, termasuk besar kecilnya resiko saat operasi pengangkatan benda asing yang tertelan.
+            Benda-benda runcing dan tajam dapat menusuk usus dan esofagus. Begitu juga baterai kecil dan magnet yang berpotensi merusak jaringan tubuh. Maka dari itu, segera minta bantuan medis ketika benda-benda tersebut tertelan oleh si kecil.
+    </string>
 </resources>
