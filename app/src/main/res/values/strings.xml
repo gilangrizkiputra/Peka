@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name" translatable="false">Peka</string>
-    <string name="menu_home" translatable="false">Home</string>
     <string name="title_activity_splashscreen" translatable="false">Splashscreen</string>
-    <string name="app_name">Peka</string>
     <string name="title_activity_splashscreen">Splashscreen</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_article">Article</string>
+    <string name="menu_mkia">MKIA</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_notification">Notification</string>
     <string name="titleArticle1">Kenali Nutrisi dan Manfaatnya bagi \nAnak</string>
     <string name="titleArticle2">Pola Asuh yang Baik untuk Kesehatan Mental Anak</string>
     <string name="titleArticle3">Perlu Diketahui, Gejala Awal Demam Berdarah Pada Bayi</string>

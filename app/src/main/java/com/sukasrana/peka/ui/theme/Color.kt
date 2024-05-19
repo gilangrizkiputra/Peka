@@ -2,6 +2,12 @@ package com.sukasrana.peka.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val primaryColor = Color(0xFF105C8C)
+val secondaryColor = Color(0xFF30A1E9)
+val secondaryTwoColor = Color(0xFF5EB6EE)
+val secondaryTreeColor = Color(0XFFA7DDFF)
+val blueBackground = Color(0XFFE5F4FE)
+
 val primaryLight = Color(0xFF2E628C)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFFCDE5FF)
