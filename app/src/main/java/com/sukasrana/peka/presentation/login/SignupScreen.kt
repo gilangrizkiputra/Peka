@@ -85,11 +85,7 @@ fun SignUpScreen(
             navController.navigate(Screen.Login.route)
         },
         onLoginClick = {
-            Toast.makeText(
-                context,
-                "Silahkan di kembangkan sendiri",
-                Toast.LENGTH_SHORT
-            ).show()
+            navController.navigate(Screen.Home.route)
         })
 
 }
@@ -111,7 +107,7 @@ fun SignupContent(
         painter = painterResource(id = R.drawable.image_onboarding_background),
         contentDescription = "OnBoarding BG",
         modifier = modifier
-            .offset(x = 195.dp, y = -50.dp)
+            .offset(x = 150.dp, y = -50.dp)
             .graphicsLayer {
                 this.rotationZ = 120f
             })

@@ -88,11 +88,7 @@ fun LoginScreen(
             navController.navigate(Screen.Signup.route)
         },
         onLoginClick = {
-            Toast.makeText(
-                context,
-                "Silahkan di kembangkan sendiri",
-                Toast.LENGTH_SHORT
-            ).show()
+            navController.navigate(Screen.Home.route)
         },
         modifier = modifier
     )
