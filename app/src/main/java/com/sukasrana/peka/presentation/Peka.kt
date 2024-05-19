@@ -209,7 +209,8 @@ private fun BottomBar(
 
 @Preview(showBackground = true)
 @Composable
-private fun InfiniteAppPrev() {
+private fun PekaAppPrev() {
     Peka()
+//    update peka
 }
 
