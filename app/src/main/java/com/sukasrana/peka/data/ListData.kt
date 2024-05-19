@@ -35,6 +35,7 @@ object ListData {
             tanggal = "15 Mei 2024",
             photo = R.drawable.image_bubur_pisang_jeruk_mpasi_beranda2
         )
+    )
 
     val TheArticel = listOf(
         Article(

@@ -1,4 +1,10 @@
 package com.sukasrana.peka.presentation
+
+import com.sukasrana.peka.presentation.login.LoginScreen
+import com.sukasrana.peka.presentation.login.SignUpScreen
+import com.sukasrana.peka.presentation.login.SwitchScreen
+import com.sukasrana.peka.presentation.onboarding.OnBoardingScreen
+import com.sukasrana.peka.presentation.splash.SplashScreen
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,7 +21,6 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -33,7 +38,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -47,7 +51,6 @@ import com.sukasrana.peka.presentation.home.HomeScreen
 import com.sukasrana.peka.presentation.notification.NotificationScreen
 import com.sukasrana.peka.ui.theme.primaryColor
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBar
@@ -76,15 +79,15 @@ fun Peka(
 
     Scaffold(
         topBar = {
-            if (title.value == "Home" || title.value == "Article" || title.value == "MKIA" || title.value == "Profile" ){
+            if (title.value == "Home" || title.value == "Article" || title.value == "MKIA" || title.value == "Profile") {
                 println("")
-            }else{
+            } else {
                 TopAppBar(
                     title = {
                         Column(
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" ||  title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online") {
+                            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online") {
                                 Icon(
                                     imageVector = Icons.Default.ArrowBack,
                                     contentDescription = "Back",
@@ -93,28 +96,31 @@ fun Peka(
                                         .padding(top = 16.dp,)
                                 )
                                 Spacer(modifier = Modifier.padding(top = 16.dp))
-                                Row (
+                                Row(
                                     horizontalArrangement = Arrangement.Center,
                                     modifier = Modifier.fillMaxWidth().padding(end = 16.dp)
-                                ){
+                                ) {
                                     Text(
                                         text = title.value,
                                         fontFamily = bodyFontFamily,
-                                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 19.sp, fontWeight = FontWeight.Bold),
+                                        style = MaterialTheme.typography.bodyLarge.copy(
+                                            fontSize = 19.sp,
+                                            fontWeight = FontWeight.Bold
+                                        ),
                                         color = Color.Black,
                                     )
                                 }
                             }
                         }
                     },
-                    modifier = Modifier.height(135.dp)
+                    modifier = Modifier.height(100.dp)
                 )
             }
         },
         bottomBar = {
-            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" ||  title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online") {
+            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online") {
                 println("")
-            }else{
+            } else {
                 BottomBar(navController)
             }
         },
@@ -125,7 +131,7 @@ fun Peka(
             startDestination = Screen.Home.route,
             modifier = modifier.padding(contentPadding)
         ) {
-            composable(Screen.Splash.route){
+            composable(Screen.Splash.route) {
                 SplashScreen(navController = navController)
             }
 
@@ -169,7 +175,7 @@ fun Peka(
             }
         }
     }
-
+}
 @Composable
 private fun BottomBar(
     navController: NavHostController,

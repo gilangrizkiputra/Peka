@@ -25,9 +25,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -36,7 +35,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.data.ListData
 import com.sukasrana.peka.model.Balita
@@ -81,34 +79,40 @@ fun HomeScreen(
                     contentDescription = "background beranda",
                     modifier = Modifier.fillMaxWidth()
                 )
-                Row (
+                Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(start = 16.dp, end = 16.dp, top = 50.dp)
-                ){
-                    Column (
+                ) {
+                    Column(
                         verticalArrangement = Arrangement.Center,
                         modifier = Modifier
                     ) {
                         Text(
                             text = "Hai, Bunda",
                             fontFamily = bodyFontFamily,
-                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp, fontWeight = FontWeight.Normal),
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Normal
+                            ),
                             color = Color.White,
                             modifier = Modifier
                         )
                         Text(
                             text = "Sri Wahyuni",
                             fontFamily = bodyFontFamily,
-                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp, fontWeight = FontWeight.Bold),
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
                             color = Color.White,
                             modifier = Modifier
                         )
                     }
                     Box(
                         modifier = Modifier
-                    ){
+                    ) {
                         Surface(
                             modifier = modifier
                                 .clip(CircleShape)
@@ -139,7 +143,10 @@ fun HomeScreen(
                 Text(
                     text = "Pantau tumbuh kembang anak",
                     fontFamily = bodyFontFamily,
-                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 14.sp, fontWeight = FontWeight.Bold),
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
+                    ),
                     color = Color.Gray,
                     modifier = Modifier
                 )
@@ -148,14 +155,14 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = modifier.padding(top = 8.dp)
                 ) {
-                    items(balita, key = {it.id}){
+                    items(balita, key = { it.id }) {
                         BalitaItem(balita = it, modifier = Modifier)
                     }
-                    item{
+                    item {
                         AddBalitaItem(modifier = Modifier)
                     }
                 }
-                Row{
+                Row {
                     Surface(
                         modifier = modifier
                             .width(173.dp)
@@ -179,7 +186,10 @@ fun HomeScreen(
                             Text(
                                 text = "Pendaftaran online",
                                 fontFamily = bodyFontFamily,
-                                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 11.sp, fontWeight = FontWeight.Bold),
+                                style = MaterialTheme.typography.bodyLarge.copy(
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold
+                                ),
                                 color = Color.White,
                                 lineHeight = 15.4.sp,
                             )
@@ -209,7 +219,10 @@ fun HomeScreen(
                             Text(
                                 text = "Cek No Antrian",
                                 fontFamily = bodyFontFamily,
-                                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 11.sp, fontWeight = FontWeight.Bold),
+                                style = MaterialTheme.typography.bodyLarge.copy(
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold
+                                ),
                                 color = Color.White,
                                 lineHeight = 15.4.sp,
                             )
@@ -233,17 +246,23 @@ fun HomeScreen(
                         modifier = Modifier
                             .padding(top = 8.dp, end = 16.dp)
                             .fillMaxWidth()
-                    ){
+                    ) {
                         Text(
                             text = "Menu Makanan Bergizi",
                             fontFamily = bodyFontFamily,
-                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 14.sp, fontWeight = FontWeight.Bold),
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
                             color = Color.Black,
                         )
                         Text(
                             text = "Lihat semua",
                             fontFamily = bodyFontFamily,
-                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 10.sp, fontWeight = FontWeight.Normal),
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Normal
+                            ),
                             color = secondaryColor,
                             textAlign = TextAlign.End,
                             modifier = Modifier
@@ -256,14 +275,17 @@ fun HomeScreen(
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         modifier = modifier.padding(top = 8.dp)
                     ) {
-                        items(mpasi, key = {it.id}){
+                        items(mpasi, key = { it.id }) {
                             MpasiItem(mpasi = it, modifier = Modifier)
                         }
                     }
                     Text(
                         text = "Artikel Rekomendasi",
                         fontFamily = bodyFontFamily,
-                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 14.sp, fontWeight = FontWeight.Bold),
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
                         color = Color.Black,
                         modifier = Modifier.padding(top = 16.dp)
                     )
@@ -272,24 +294,12 @@ fun HomeScreen(
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         modifier = modifier.padding(top = 8.dp)
                     ) {
-                        items(artikelRekomendasi, key = {it.id}){
+                        items(artikelRekomendasi, key = { it.id }) {
                             ArtikelRekomendasiItem(mpasi = it, modifier = Modifier)
                         }
                     }
                 }
             }
         }
-    modifier: Modifier = Modifier
-){
-    Column {
-        Text(text = "Halo! Ini Home", fontFamily = bodyFontFamily)
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun HomeScreenPreview(){
-    PekaTheme {
-        HomeScreen(navController = rememberNavController())
     }
 }
