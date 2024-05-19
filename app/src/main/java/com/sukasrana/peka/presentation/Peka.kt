@@ -79,7 +79,7 @@ fun Peka(
 
     Scaffold(
         topBar = {
-            if (title.value == "Home" || title.value == "Article" || title.value == "MKIA" || title.value == "Profile") {
+            if (title.value == "Home" || title.value == "Article" || title.value == "MKIA" || title.value == "Profile" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signin") {
                 println("")
             } else {
                 TopAppBar(
@@ -118,7 +118,7 @@ fun Peka(
             }
         },
         bottomBar = {
-            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online") {
+            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signin") {
                 println("")
             } else {
                 BottomBar(navController)
@@ -128,26 +128,31 @@ fun Peka(
     ) { contentPadding ->
         NavHost(
             navController = navController,
-            startDestination = Screen.Home.route,
+            startDestination = Screen.Splash.route,
             modifier = modifier.padding(contentPadding)
         ) {
             composable(Screen.Splash.route) {
+                title.value = "splashscreen"
                 SplashScreen(navController = navController)
             }
 
             composable(Screen.OnBoarding.route) {
+                title.value = "onboarding"
                 OnBoardingScreen(navController = navController)
             }
 
             composable(Screen.Switch.route) {
+                title.value = "switch"
                 SwitchScreen(navController = navController)
             }
 
             composable(Screen.Login.route) {
+                title.value = "login"
                 LoginScreen(navController = navController)
             }
 
             composable(Screen.Signup.route) {
+                title.value = "signup"
                 SignUpScreen(navController = navController)
             }
 
