@@ -1,4 +1,7 @@
 <resources>
+    <string name="app_name" translatable="false">Peka</string>
+    <string name="menu_home" translatable="false">Home</string>
+    <string name="title_activity_splashscreen" translatable="false">Splashscreen</string>
     <string name="app_name">Peka</string>
     <string name="title_activity_splashscreen">Splashscreen</string>
     <string name="titleArticle1">Kenali Nutrisi dan Manfaatnya bagi \nAnak</string>
