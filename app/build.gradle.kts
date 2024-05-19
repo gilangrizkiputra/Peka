@@ -74,4 +74,11 @@ dependencies {
     implementation("androidx.media3:media3-exoplayer:1.3.1")
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("com.airbnb.android:lottie-compose:5.2.0")
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+
+    //nabil menambahkan depencies
+    implementation("androidx.navigation:navigation-compose:2.5.3")
+    implementation("androidx.compose.material:material-icons-extended:1.1.0-alpha05")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 }
