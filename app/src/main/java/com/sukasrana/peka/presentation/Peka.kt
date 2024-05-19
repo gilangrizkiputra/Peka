@@ -98,7 +98,9 @@ fun Peka(
                                 Spacer(modifier = Modifier.padding(top = 16.dp))
                                 Row(
                                     horizontalArrangement = Arrangement.Center,
-                                    modifier = Modifier.fillMaxWidth().padding(end = 16.dp)
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(end = 16.dp)
                                 ) {
                                     Text(
                                         text = title.value,
@@ -128,7 +130,7 @@ fun Peka(
     ) { contentPadding ->
         NavHost(
             navController = navController,
-            startDestination = Screen.Splash.route,
+            startDestination = Screen.Home.route,
             modifier = modifier.padding(contentPadding)
         ) {
             composable(Screen.Splash.route) {
@@ -163,7 +165,7 @@ fun Peka(
 
             composable(Screen.Article.route) {
                 title.value = "Article"
-                HomeScreen(navController)
+                ArticleScreen(navController)
             }
 
             composable(Screen.Mkia.route) {

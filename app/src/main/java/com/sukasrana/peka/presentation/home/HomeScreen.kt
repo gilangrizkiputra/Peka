@@ -55,6 +55,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.ui.theme.PekaTheme
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
@@ -64,7 +65,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     balita: List<Balita> = ListData.dataBalita,
     mpasi: List<Mpasi> = ListData.mpasi,
-    artikelRekomendasi: List<Mpasi> = ListData.mpasi,
+    artikelRekomendasi: List<Article> = ListData.TheArticel,
 
 ) {
     LazyColumn(
@@ -295,7 +296,9 @@ fun HomeScreen(
                         modifier = modifier.padding(top = 8.dp)
                     ) {
                         items(artikelRekomendasi, key = { it.id }) {
-                            ArtikelRekomendasiItem(mpasi = it, modifier = Modifier)
+                            ArtikelRekomendasiItem(rekomArt = it, modifier = Modifier) {
+
+                            }
                         }
                     }
                 }
