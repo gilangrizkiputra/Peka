@@ -1,5 +1,4 @@
 package com.sukasrana.peka.presentation
-
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,9 +11,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -29,6 +32,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -65,6 +70,8 @@ fun Peka(
 ) {
     val context = LocalContext.current
     val title = remember { mutableStateOf("") }
+    val navBackStack by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStack?.destination?.route
 
 
     Scaffold(
@@ -118,6 +125,26 @@ fun Peka(
             startDestination = Screen.Home.route,
             modifier = modifier.padding(contentPadding)
         ) {
+            composable(Screen.Splash.route){
+                SplashScreen(navController = navController)
+            }
+
+            composable(Screen.OnBoarding.route) {
+                OnBoardingScreen(navController = navController)
+            }
+
+            composable(Screen.Switch.route) {
+                SwitchScreen(navController = navController)
+            }
+
+            composable(Screen.Login.route) {
+                LoginScreen(navController = navController)
+            }
+
+            composable(Screen.Signup.route) {
+                SignUpScreen(navController = navController)
+            }
+
             composable(Screen.Home.route) {
                 title.value = "Home"
                 HomeScreen(navController)
@@ -142,7 +169,6 @@ fun Peka(
             }
         }
     }
-}
 
 @Composable
 private fun BottomBar(
@@ -209,7 +235,6 @@ private fun BottomBar(
 
 @Preview(showBackground = true)
 @Composable
-private fun InfiniteAppPrev() {
+private fun PekaAppPrev() {
     Peka()
 }
-
