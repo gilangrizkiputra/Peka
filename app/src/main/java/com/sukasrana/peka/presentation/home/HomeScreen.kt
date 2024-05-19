@@ -160,7 +160,7 @@ fun HomeScreen(
                         BalitaItem(balita = it, modifier = Modifier)
                     }
                     item {
-                        AddBalitaItem(modifier = Modifier)
+                        AddBalitaItem(navController = navController)
                     }
                 }
                 Row {

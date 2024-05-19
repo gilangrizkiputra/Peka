@@ -63,6 +63,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.sukasrana.peka.presentation.addFormChild.AddFormChildScreen
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -79,7 +80,7 @@ fun Peka(
 
     Scaffold(
         topBar = {
-            if (title.value == "Home" || title.value == "Article" || title.value == "MKIA" || title.value == "Profile" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signin") {
+            if (title.value == "Home" || title.value == "Article" || title.value == "MKIA" || title.value == "Profile" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup") {
                 println("")
             } else {
                 TopAppBar(
@@ -120,7 +121,7 @@ fun Peka(
             }
         },
         bottomBar = {
-            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signin") {
+            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup") {
                 println("")
             } else {
                 BottomBar(navController)
@@ -179,6 +180,10 @@ fun Peka(
             composable(Screen.Notification.route) {
                 title.value = "Notifikasi"
                 NotificationScreen(navController) { }
+            }
+            composable(Screen.TambahIdentitasAnak.route) {
+                title.value = "Tambah Identitas Anak"
+                AddFormChildScreen(navController)
             }
         }
     }

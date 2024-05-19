@@ -28,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,6 +51,8 @@ fun SignUpScreen(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+
     var name by remember {
         mutableStateOf("")
     }
@@ -75,9 +78,9 @@ fun SignUpScreen(
     }
 
     SignupContent(
-        name = "",
-        email = "",
-        password = "",
+        name = name,
+        email = email,
+        password = password,
         onNameChange = {name = it},
         onEmailChange = {email = it},
         onPasswordChange = {password = it},
