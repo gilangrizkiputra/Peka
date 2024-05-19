@@ -30,6 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,6 +53,8 @@ fun LoginScreen(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+
     var email by remember {
         mutableStateOf("")
     }
@@ -73,8 +76,8 @@ fun LoginScreen(
     }
 
     LoginContent(
-        email = "",
-        password = "",
+        email = email,
+        password = password,
         onEmailChange = { email = it },
         onPasswordChange = { password = it },
         moveToForgot = {

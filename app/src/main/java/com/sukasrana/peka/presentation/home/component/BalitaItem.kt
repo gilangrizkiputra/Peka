@@ -39,7 +39,7 @@ import com.sukasrana.peka.ui.theme.bodyFontFamily
 fun BalitaItem(
     modifier: Modifier = Modifier,
     balita: Balita,
-    //onItemClicked: (Int) -> Unit
+    //zonItemClicked: (Int) -> Unit
 )
 {
     val font = GoogleFont("Poppins")
