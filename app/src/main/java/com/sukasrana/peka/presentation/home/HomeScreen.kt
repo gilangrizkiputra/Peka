@@ -48,15 +48,12 @@ import com.sukasrana.peka.ui.theme.blueBackground
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 import com.sukasrana.peka.ui.theme.secondaryColor
 import com.sukasrana.peka.ui.theme.secondaryTwoColor
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.ui.theme.PekaTheme
-import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @Composable
 fun HomeScreen(
@@ -156,7 +153,7 @@ fun HomeScreen(
                     modifier = modifier.padding(top = 8.dp)
                 ) {
                     items(balita, key = { it.id }) {
-                        BalitaItem(balita = it, modifier = Modifier)
+                        BalitaItem(balita = it, navController = navController, modifier = Modifier)
                     }
                     item {
                         AddBalitaItem(modifier = Modifier)
@@ -301,5 +298,13 @@ fun HomeScreen(
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun HomeScreenPreview(){
+    PekaTheme {
+        HomeScreen(navController = rememberNavController())
     }
 }

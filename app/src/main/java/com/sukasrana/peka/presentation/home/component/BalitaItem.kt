@@ -1,6 +1,7 @@
 package com.sukasrana.peka.presentation.home.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,6 +31,9 @@ import com.sukasrana.peka.model.Balita
 import com.sukasrana.peka.ui.theme.PekaTheme
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.text.googlefonts.Font
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.ui.theme.provider
 import com.sukasrana.peka.ui.theme.secondaryTreeColor
 import com.sukasrana.peka.ui.theme.secondaryTwoColor
@@ -37,6 +41,7 @@ import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @Composable
 fun BalitaItem(
+    navController: NavController,
     modifier: Modifier = Modifier,
     balita: Balita,
     //onItemClicked: (Int) -> Unit
@@ -54,6 +59,7 @@ fun BalitaItem(
     Surface(
         modifier = modifier
             //.clickable { onItemClicked(balita.id) }
+            .clickable { navController.navigate(Screen.Balita.route) }
             .width(235.dp),
         color = MaterialTheme.colorScheme.surface,
         shadowElevation = 4.dp,
@@ -134,7 +140,7 @@ private fun BalitaItemHorizontalPreview() {
             2,
             "A",
             "Laki-laki",
-        ),
+        ), navController = rememberNavController()
 //            onItemClicked = { balitaId ->
 //                println("Balita Id : $balitaId")
 //            }

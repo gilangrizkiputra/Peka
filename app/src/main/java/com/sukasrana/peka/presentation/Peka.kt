@@ -63,6 +63,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.sukasrana.peka.presentation.graphic.GraphicScreen
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -98,7 +99,9 @@ fun Peka(
                                 Spacer(modifier = Modifier.padding(top = 16.dp))
                                 Row(
                                     horizontalArrangement = Arrangement.Center,
-                                    modifier = Modifier.fillMaxWidth().padding(end = 16.dp)
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(end = 16.dp)
                                 ) {
                                     Text(
                                         text = title.value,
@@ -118,7 +121,7 @@ fun Peka(
             }
         },
         bottomBar = {
-            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signin") {
+            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signin" || title.value == "Balita") {
                 println("")
             } else {
                 BottomBar(navController)
@@ -164,6 +167,11 @@ fun Peka(
             composable(Screen.Article.route) {
                 title.value = "Article"
                 HomeScreen(navController)
+            }
+
+            composable(Screen.Balita.route) {
+                title.value = "Balita"
+                GraphicScreen(navController)
             }
 
             composable(Screen.Mkia.route) {
