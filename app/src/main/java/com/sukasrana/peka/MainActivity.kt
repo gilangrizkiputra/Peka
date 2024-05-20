@@ -17,6 +17,7 @@ import com.sukasrana.peka.presentation.notification.NotificationScreen
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.sukasrana.peka.presentation.cekNoAntrian.CekNoAntrianScreen
 import com.sukasrana.peka.ui.theme.PekaTheme
 
 class MainActivity : ComponentActivity() {

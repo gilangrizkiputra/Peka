@@ -65,6 +65,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.sukasrana.peka.presentation.PendaftaranOnline.PendaftaranOnlineScreen
 import com.sukasrana.peka.presentation.addFormChild.AddFormChildScreen
+import com.sukasrana.peka.presentation.cekNoAntrian.CekNoAntrianScreen
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -81,7 +82,7 @@ fun Peka(
 
     Scaffold(
         topBar = {
-            if (title.value == "Home" || title.value == "Article" || title.value == "MKIA" || title.value == "Profile" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup") {
+            if (title.value == "Home" || title.value == "Article" || title.value == "MKIA" || title.value == "Profile" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup" || title.value == "Cek No Antrian") {
                 println("")
             } else {
                 TopAppBar(
@@ -122,7 +123,7 @@ fun Peka(
             }
         },
         bottomBar = {
-            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup") {
+            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup" || title.value == "Cek No Antrian") {
                 println("")
             } else {
                 BottomBar(navController)
@@ -189,6 +190,10 @@ fun Peka(
             composable(Screen.PendaftaranOnlineAnak.route) {
                 title.value = "Pendaftaran Online"
                 PendaftaranOnlineScreen(navController)
+            }
+            composable(Screen.CekNoAntrian.route) {
+                title.value = "Cek No Antrian"
+                CekNoAntrianScreen(navController)
             }
         }
     }
