@@ -1,16 +1,12 @@
 package com.sukasrana.peka.presentation
 
-
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -24,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -37,51 +32,44 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.sukasrana.peka.data.ListData
-import com.sukasrana.peka.model.Article
+import com.sukasrana.peka.model.MpasiModel
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @Composable
-fun DetailArticle(
+fun DetailMpasi(
     modifier: Modifier = Modifier,
     navController: NavController,
-    articleId: Int?
+    mpasiId: Int?
 ) {
-    val newArticle = ListData.TheArticel.filter { article ->
-        article.id == articleId
+    val newMpasi = ListData.TheMpasi.filter { mpasi ->
+        mpasi.id == mpasiId
     }
     Column(
-        modifier = modifier
-            .background(Color.White)
-            .verticalScroll(rememberScrollState())
+        modifier = modifier.verticalScroll(rememberScrollState())
     ) {
-        Row(
+        IconButton(
+            onClick = { navController.popBackStack() },
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .align(Alignment.Start)
+                .padding(8.dp)
         ) {
-            IconButton(
-                onClick = { navController.popBackStack() }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "Kembali"
-                )
-            }
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "Kembali"
+            )
         }
-
-        DetailArticleContent(newArticleList = newArticle)
+        DetailMpasiContent(newMpasiList = newMpasi)
     }
 }
 
 @Composable
-private fun DetailArticleContent(
-    newArticleList: List<Article>,
+private fun DetailMpasiContent(
+    newMpasiList: List<MpasiModel>,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
-            .padding(start = 16.dp, end = 16.dp, top = 100.dp)
+            .padding(start = 16.dp, end = 16.dp, top = 32.dp)
             .verticalScroll(rememberScrollState())
     ) {
         Row(
@@ -90,7 +78,7 @@ private fun DetailArticleContent(
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(data = newArticleList[0].photo)
+                    .data(data = newMpasiList[0].photo)
                     .build(),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -103,25 +91,31 @@ private fun DetailArticleContent(
 
         Column(modifier = Modifier.padding(top = 16.dp)) {
             Text(
-                text = "${stringResource(id = newArticleList[0].title)}",
+                text = "${stringResource(id = newMpasiList[0].nama)}",
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
             )
             Text(
-                text = "${stringResource(id = newArticleList[0].contentAr)}",
+                text = "${stringResource(id = newMpasiList[0].gizi)}",
+                fontFamily = bodyFontFamily,
+                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp, fontWeight = FontWeight.Normal)
+            )
+            Text(
+                text = "${stringResource(id = newMpasiList[0].bahan)}",
+                fontFamily = bodyFontFamily,
+                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 13.sp, fontWeight = FontWeight.Normal)
+            )
+            Text(
+                text = "${stringResource(id = newMpasiList[0].caramemasak)}",
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp, fontWeight = FontWeight.Normal, textAlign = TextAlign.Justify),
-                modifier = Modifier.padding(top = 16.dp)
-            )
+                modifier = Modifier.padding(top = 16.dp)          )
         }
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 private fun DetailMapContentPreview() {
-    DetailArticleContent(newArticleList = ListData.TheArticel)
+    DetailMpasiContent(newMpasiList = ListData.TheMpasi)
 }
-
-
