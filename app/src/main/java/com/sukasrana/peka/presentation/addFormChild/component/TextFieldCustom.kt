@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun TextFieldCustom(
     value: String,
+    trailingIcon: (@Composable () -> Unit)? = null,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -23,6 +24,7 @@ fun TextFieldCustom(
         value = value,
         shape = MaterialTheme.shapes.medium,
         onValueChange = onValueChange,
+        trailingIcon = trailingIcon,
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Ascii),
         modifier = modifier
