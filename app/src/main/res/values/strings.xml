@@ -6,11 +6,266 @@
     <string name="menu_mkia">MKIA</string>
     <string name="menu_profile">Profile</string>
     <string name="menu_notification">Notification</string>
+    
+    //Artikel
     <string name="titleArticle1">Kenali Nutrisi dan Manfaatnya bagi \nAnak</string>
     <string name="titleArticle2">Pola Asuh yang Baik untuk Kesehatan Mental Anak</string>
     <string name="titleArticle3">Perlu Diketahui, Gejala Awal Demam Berdarah Pada Bayi</string>
     <string name="titleArticle4">Anak Pendiam dan Susah Bergaul? Kenali Penyebabnya</string>
     <string name="titleArticle5">Anak Menelan Benda Asing? Lakukan Langkah Berikut</string>
+    
+    
+    //Mpasi
+    <string name="menu_buburWortel">Bubur Wortel Brokoli</string>
+    <string name="menu_appleStew">Apple Stew Cinnamon</string>
+    <string name="menu_buburTongseng">Bubur Tongseng Sapi Tofu </string>
+    <string name="menu_oatmeal">Oatmeal dan Salmon</string>
+    <string name="menu_nasiTim">Nasi Tim Ikan Tuna</string>
+    <string name="menu_berasMerah">Beras Merah dan Tahu</string>
+    <string name="menu_buburKentang">Bubur Kentang dan Daging Sapi</string>
+
+    //Gizi
+
+    <string name="gizi_buburWortel">
+        Porsi 1 kali makan(100g)\n
+            Kalori	    100 kkal\n
+            Protein	                                        4 gram\n
+            Lemak	        2 gram\n
+            Karbohidrat	    18 gram\n
+            Serat	        3 gram\n
+            Vitamin A	    40% AKG\n
+            Vitamin C	    50% AKG\n
+            Vitamin K	    25% AKG\n
+            Kalium	        10% AKG\n
+            Kalsium	        15% AKG\n
+            Zat besi	    20% AKG\n
+            Magnesium	    10% AKG\n
+    </string>
+
+
+    <string name="gizi_appleStew">
+        Porsi 1 kali makan(100g)\n
+            Kalori	        50 kkal\n
+            Protein	        2 gram\n
+            Lemak	        1 gram\n
+            Karbohidrat	    10 gram\n
+            Serat	        2 gram\n
+            Vitamin C	    10 mg\n
+            Vitamin A	    500 mcg\n
+            Kalsium	        50 mg\n
+            Zat besi	    1 mg\n
+            Kalium	        100 mg\n
+    </string>
+
+    <string name="gizi_buburTongseng">
+        Porsi 1 kali makan(100g)\n
+            Kalori	        450	kkal\n
+            Protein	        30	gram\n
+            Lemak	        20	gram\n
+            Karbohidrat	    50	gram\n
+            Serat	        5	gram\n
+            Kalsium	        200	mg\n
+            Zat besi	    5	mg\n
+            Vitamin A	    500	mcg\n
+            Vitamin C	    30	mg\n
+    </string>
+
+    <string name="gizi_oatmeal">
+        Porsi 1 kali makan(100g)\n
+            Kalori	        206 kcal\n
+            Protein 	    20.5 gram\n
+            Lemak	        13.6 gram\n
+            Karbohidrat	    0 gram\n
+            Omega-3	        2.3 gram\n
+            Kalsium	        13 mg\n
+            Zat Besi	    0.5 mg\n
+            Zinc	        0.7 mg\n
+            Vitamin B12 	2.7 mcg\n
+            Vitamin D	    10.2 mcg\n
+    </string>
+    <string name="gizi_nasiTim">
+        Porsi 1 kali makan(100g)\n
+            Kalori	        100 kkal\n
+            Protein	        10 gram\n
+            Lemak	        3 gram\n
+            Karbohidrat	    15 gram\n
+            Serat	        1 gram\n
+            Vitamin B12	    2 mcg\n
+            Vitamin D	    1 mcg\n
+            Zat besi	    1 mg\n
+            Zinc	        1 mg\n
+            Kalsium	        50 mg\n
+    </string>
+    <string name="gizi_berasMerah">
+        Porsi 1 kali makan(100g)\n
+            Energi	        360 kkal\n
+            Protein	        14,8 gram\n
+            Lemak	        1,7 gram\n
+            Karbohidrat	    72 gram\n
+            Serat	        5,1 gram\n
+            Kalsium	        50 mg\n
+            Fosfor	        356 mg\n
+            Zat besi	    5 mg\n
+            Vitamin B1 	    0,3 mg\n
+            Vitamin B3 	    5,4 mg\n
+    </string>
+    <string name="gizi_buburKentang">
+        Porsi 1 kali makan(100g)\n
+            Kalori		    134 kkal\n
+            Protein		    14.3 gram\n
+            Lemak		    5.3 gram\n
+            Karbohidrat		10 gram\n
+            Serat		    0.9 gram\n
+            Kalsium		    9 mg\n
+            Zat besi		1.6 mg\n
+            Zinc		    1.8 mg\n
+            Vitamin B6		0.15 mg\n
+            Vitamin C		4.5 mg\n
+    </string>
+
+    //Bahan
+
+    <string name="bahan_buburWortel">
+        1.	1/2 buah Wortel\n
+        2.	1/4 Brokoli\n
+        3.	1 sdm Beras putih\n
+        4.	1 mangkuk Air Garam\n
+        5.	220 ml Air Matang untuk memasak\n
+    </string>
+
+    <string name="bahan_appleStew">
+        1.	1 buah apel\n
+        2.	½ sdt bubuk kayu manis\n
+        3.	air secukupnya\n
+
+    </string>
+    <string name="bahan_buburTongseng">
+        1.	45 gr daging sapi giling\n
+        2.	80 ml beef bone broth homemade\n
+        3.	15 gram beras\n
+        4.	200 ml air\n
+        5.	30 ml santan kental\n
+        6.	20 gr tofu telur udang\n
+        7.	1/2 sdt kecap manis organik (optional)\n
+        8.	1 1/2 sdm beef fat oil\n
+        9.	10 gr tomat\n
+        10.	1/3 batang sereh (geprek)\n
+        11.	1 lembar daun salam\n
+        12.	1 lembar daun jeruk (buang tulang daun nya agar tidak pahit)\n
+        13.	1 ruas jari lengkuas (geprek)\n
+        14.	Bumbu halus\n
+        15.	2 siung bawang merah\n
+        16.	1 siung bawang putih\n
+        17.	1/2 cm kunyit\n
+        18.	1 cm jahe\n
+        19.	1/2 butir kemiri sangrai\n
+        20.	2 jumput ketumbar sangrai\n
+
+    </string>
+
+    <string name="bahan_oatmeal">
+        1. 2 sendok makan oat\n
+        2. 30gr daging ikan salmon\n
+        3. 1 siung bawang putih\n
+        4. 15gr kabocha\n
+        5. Seledri secukupnya\n
+        6. Air secukupnya\n
+
+    </string>
+
+    <string name="bahan_nasiTim">
+        1. 1 ruas jari ikan tuna\n
+        2. 1 genggam beras putih\n
+        3. 3 iris bawang bombai\n
+        4. Jahe secukupnya\n
+        5. Seledri secukupnya\n
+        6. Air secukupnya\n
+
+    </string>
+
+    <string name="bahan_berasMerah">
+        1. 1 sdm tepung beras merah\n
+        2. 1 buah tahu kecil, kukus\n
+        3. Kaldu ayam\n
+    </string>
+
+    <string name="bahan_buburKentang">
+        1. 25gr kentang, potong dadu\n
+        2. 15gr daging sapi giling\n
+        3. 15gr wortel\n
+        4. 10gr tomat\n
+        5. 1 siung bawang putih\n
+        6. 1 siung bawang merah\n
+    </string>
+
+
+    //cara masak
+    <string name="cara_buburWortel">
+        1. Rebus 1 sdm beras yg telah dibersihkan bersama 220ml air matang. (jika tidak memakai slowcooker khusus bayi, masak di kompor dengan api kecil). Tujuan beras disini untuk diambil air sarinya, makanya tidak membutuhkan banyak\n
+
+        2. Jika sudah mulai mendidih, Masukkan wortel yg telah dicuci bersih, dikupas  diiris bulat. Tunggu hingga beras menjadi nasi  wortel mulai masak.Sambil menunggu wortel masak, cuci brokoli dengan air garam, tujuannya untuk mematikan kuman\n
+
+        3. Jika beras sudah menjadi nasi dan wortel mulai masak, masukkan brokoliTunggu hingga brokoli masak, matikan api dan dinginkan sebentar.\n
+        4. Setelah matang, pisahkan air,Masukkan rebusan nasi, wortel dan brokoli kedalam blender dan blender hingga saaangat halus.\n
+        5. Setelah disaring lebih halus lagi, dituang ke mangkuk dan tambahkan air beras yg sudah dicampur wortel dan brokoli tadi. Aduk lalu sajikan untuk makan siang/sore baby.\n
+
+    </string>
+    <string name="cara_appleStew">
+        1.	Kupas dan potong dadu apel yang telah dicuci bersih.\n
+        2.	Kukus apel hingga teksturnya empuk.\n
+        3.	Haluskan apel yang telah dikukus dengan food processor.\n
+        4.	Saringlah apel yang sudah dihaluskan menggunakan alat saringan halus.\n
+        5.	Tambahkan bubuk kayu manis diatas apel yang telah disaring.\n
+        6.	Aduk hingga tercampur, lalu siap untuk disajikan.\n
+
+    </string>
+    <string name="cara_buburTongseng">
+        1. Cuci bersih semua bahan. Panaskan wajan dengan api kecil lalu tuang beef fat oil dalam wajan. Tumis sereh, daun salam, lengkuas dan daun jeruk hingga wangi (tips agar bumbu aromatik lebih keluar wangi nya). Tambahkan bumbu yang telah dihaluskan, irisan bamer dan baput. Aduk rata sampai bumbu matang sempurna agar tidak bau langu.\n
+
+        2. Masukkan daging sapi giling masak hingga matang lalu tambahkan beef bone broth. Sesekali di aduk sampai mendidih.\n
+
+        3. Tambahkan tofu, beras dan air 200 ml aduk rata. Beri santan kental. Aduk rata hingga air menyusut dan bubur tampak kalis. Lalu tambahkan irisan tomat dan kecap manis. Koreksi rasa lalu angkat.\n
+
+        4. Ulek saring disesuaikan dengan tekstur dan konsistensi bubur sesuai usia pemberian mpasi. Lau bagi sesuai porsi makan ke dalam food container.\n
+
+    </string>
+    <string name="cara_oatmeal">
+        1. Cincang ikan salmon.\n
+        2. Kukus salmon dengan bawang putih yang sudah digeprek dan taburi daun seledri.\n
+        3. Masak hingga warnanya berubah. Sisihkan.\n
+        4. Kukus kabocha (labu parang) hingga empuk.\n
+        5. Masak oat dengan air secukupnya hingga matang menjadi bubur.\n
+        6. Blender salmon, oat, dan kabocha hingga lunak.\n
+        7. Saring kembali agar teksturnya halus, sajikan untuk bayi.\n
+
+    </string>
+    <string name="cara_nasiTim">
+        1. Rebus air dan masak beras putih.\n
+        2. Aduk hingga nasi setengah lembek, lalu masukkan ikan tuna, bawang bombai yang sudah dicincang.\n
+        3. Tambahkan jahe secukupnya untuk menghilangkan amis pada ikan.\n
+        4. Aduk hingga beras menjadi bubur ikan yang tercampur rata, kemudian masukkan seledri untuk menambah aroma.\n
+        5. Aduk hingga kekentalan bubur dirasa pas.\n
+        6. Biarkan setengah dingin kemudian saring dan sajikan selagi hangat.\n
+
+    </string>
+    <string name="cara_berasMerah">
+
+        1. Siapkan kaldu, rebus hingga mendidih.\n
+        2. Masukkan tepung beras merah ke dalam kaldu. Aduk-aduk hingga kental.\n
+        3. Ketika beras merah sudah meletup-letup, angkat dan tiriskan.\n
+        4. Blender beras merah bersama tahu hingga halus.\n
+        5. Siap disajikan.\n
+
+    </string>
+    <string name="cara_buburKentang">
+        1. Kukus kentang, wortel, dan tomat hingga empuk.\n
+        2. Geprek dan cincang bawang putih, iris halus bawang merah, tumis daging sapi giling hingga matang dan harum.\n
+        3. Haluskan daging sapi yang sudah ditumis, kentang, wortel, dan tomat dengan menggunakan blender atau saringan kawat.\n
+        4. Tambahkan parutan keju supaya lebih nikmat. Sajikan.\n
+
+    </string>
+
+
 
     <string name="contentArticle1">
         Mengenal Nutrisi Anak

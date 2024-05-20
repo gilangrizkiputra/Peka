@@ -128,7 +128,7 @@ fun Peka(
     ) { contentPadding ->
         NavHost(
             navController = navController,
-            startDestination = Screen.Home.route,
+            startDestination = Screen.Splash.route,
             modifier = modifier.padding(contentPadding)
         ) {
             composable(Screen.Splash.route) {
@@ -158,7 +158,7 @@ fun Peka(
 
             composable(Screen.Article.route) {
                 title.value = "Article"
-                HomeScreen(navController)
+                ArticleScreen(navController)
             }
 
             composable(Screen.Mkia.route) {
