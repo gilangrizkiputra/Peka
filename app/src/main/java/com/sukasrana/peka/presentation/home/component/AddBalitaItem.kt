@@ -3,6 +3,7 @@ package com.sukasrana.peka.presentation.home.component
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
@@ -26,15 +27,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
+import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.ui.theme.PekaTheme
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @Composable
 fun AddBalitaItem(
+    navController: NavController,
     modifier: Modifier = Modifier,
-    //balita: Balita,
-    //onItemClicked: (Int) -> Unit
 )
 {
     val stroke = Stroke(width = 10f,
@@ -43,9 +46,15 @@ fun AddBalitaItem(
 
     Surface(
         modifier = modifier
-            //.clickable { onItemClicked(balita.id) }
+            .clickable {
+                navController.navigate(Screen.TambahIdentitasAnak.route)
+            }
             .drawBehind {
-                drawRoundRect(color = Color.Black,style = stroke, cornerRadius = CornerRadius(10.dp.toPx()))
+                drawRoundRect(
+                    color = Color.Black,
+                    style = stroke,
+                    cornerRadius = CornerRadius(10.dp.toPx())
+                )
             },
         color = Color.LightGray,
         shadowElevation = 4.dp,
@@ -78,11 +87,11 @@ fun AddBalitaItem(
     }
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 private fun BalitaItemHorizontalPreview() {
     PekaTheme {
-        AddBalitaItem()
+        AddBalitaItem(navController = rememberNavController())
 //            onItemClicked = { balitaId ->
 //                println("Balita Id : $balitaId")
 //            }

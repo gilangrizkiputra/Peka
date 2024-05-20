@@ -2,6 +2,7 @@ package com.sukasrana.peka.presentation.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -12,29 +13,34 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sukasrana.peka.R
+import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.model.Mpasi
 import com.sukasrana.peka.ui.theme.PekaTheme
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @Composable
 fun ArtikelRekomendasiItem(
+    rekomArt: Article,
     modifier: Modifier = Modifier,
-    mpasi: Mpasi,
-    //onItemClicked: (Int) -> Unit
+    onItemClicked: (Int) -> Unit,
 ) {
     Surface(
         modifier = modifier
             //.clickable { onItemClicked(mpasi.id) }
             .width(187.dp)
-            .height(133.dp),
+            .height(140.dp),
         color = MaterialTheme.colorScheme.surface,
         shadowElevation = 4.dp,
         shape = RoundedCornerShape(10.dp)
@@ -44,45 +50,45 @@ fun ArtikelRekomendasiItem(
             modifier = Modifier.padding(bottom = 8.dp)
         ) {
             Image(
-                painter = painterResource(id = mpasi.photo),
+                painter = painterResource(id = rekomArt.photo),
                 contentDescription = "Bubur Brokoli dan Wortel",
-                modifier = Modifier
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.width(187.dp).height(90.dp)
+                    .clip(RectangleShape)
             )
             Text(
-                text = mpasi.nama,
+                text = stringResource(id = rekomArt.title),
                 style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp, fontWeight = FontWeight.SemiBold),
                 color = Color.Black,
                 textAlign = TextAlign.Start,
-                modifier = Modifier.width(187.dp).padding(top = 8.dp, start = 8.dp),
+                modifier = Modifier
+                    .width(187.dp)
+                    .padding(top = 8.dp, start = 8.dp),
                 maxLines = 1
             )
             Text(
-                text = mpasi.tanggal,
+                text = rekomArt.date,
                 fontFamily = bodyFontFamily,
-                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 6.sp, fontWeight = FontWeight.Normal),
-                color = Color.Gray,
-                textAlign = TextAlign.End,
-                modifier = Modifier.width(187.dp).padding(end = 8.dp),
-                maxLines = 1
+                style = MaterialTheme.typography.bodyMedium.copy(fontSize = 7.sp, fontWeight = FontWeight.ExtraLight),
+                textAlign = TextAlign.Right,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(end = 8.dp, top = 4.dp)
+
             )
         }
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-private fun MpasiItemHorizontalPreview() {
+private fun BossHorizontalPreview() {
     PekaTheme {
-        ArtikelRekomendasiItem(mpasi = Mpasi(
-            1,
-            "Penyebab dan Cara Mencegah Anak Kekurangan Gizi",
-            "lorem",
-            "15 Mei 24",
-            R.drawable.image_bubur_brokoli_mpasi_beranda
-        ),
-//            onItemClicked = { balitaId ->
-//                println("Balita Id : $balitaId")
-//            }
+        ArtikelRekomendasiItem(
+            rekomArt = Article(1, R.string.titleArticle1, R.string.contentArticle1, "2 Januari 2024", R.drawable.nutrisi),
+            onItemClicked = { articleId ->
+                println("Boss Id : $articleId")
+            }
         )
     }
 }

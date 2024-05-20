@@ -48,15 +48,13 @@ import com.sukasrana.peka.ui.theme.blueBackground
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 import com.sukasrana.peka.ui.theme.secondaryColor
 import com.sukasrana.peka.ui.theme.secondaryTwoColor
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.ui.theme.PekaTheme
-import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @Composable
 fun HomeScreen(
@@ -64,7 +62,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     balita: List<Balita> = ListData.dataBalita,
     mpasi: List<Mpasi> = ListData.mpasi,
-    artikelRekomendasi: List<Mpasi> = ListData.mpasi,
+    artikelRekomendasi: List<Article> = ListData.TheArticel,
 
 ) {
     LazyColumn(
@@ -156,17 +154,20 @@ fun HomeScreen(
                     modifier = modifier.padding(top = 8.dp)
                 ) {
                     items(balita, key = { it.id }) {
-                        BalitaItem(balita = it, modifier = Modifier)
+                        BalitaItem(balita = it, navController = navController, modifier = Modifier)
                     }
                     item {
-                        AddBalitaItem(modifier = Modifier)
+                        AddBalitaItem(navController = navController)
                     }
                 }
                 Row {
                     Surface(
                         modifier = modifier
                             .width(173.dp)
-                            .padding(top = 16.dp),
+                            .padding(top = 16.dp)
+                            .clickable {
+                            navController.navigate(Screen.PendaftaranOnlineAnak.route)
+                        },
                         color = secondaryTwoColor,
                         shape = RoundedCornerShape(5.dp)
                     ) {
@@ -192,6 +193,7 @@ fun HomeScreen(
                                 ),
                                 color = Color.White,
                                 lineHeight = 15.4.sp,
+                                modifier = Modifier
                             )
                         }
                     }
@@ -199,7 +201,10 @@ fun HomeScreen(
                     Surface(
                         modifier = modifier
                             .width(173.dp)
-                            .padding(top = 16.dp),
+                            .padding(top = 16.dp)
+                            .clickable {
+                                       navController.navigate(Screen.CekNoAntrian.route)
+                            },
                         color = secondaryTwoColor,
                         shape = RoundedCornerShape(5.dp)
                     ) {
@@ -295,11 +300,21 @@ fun HomeScreen(
                         modifier = modifier.padding(top = 8.dp)
                     ) {
                         items(artikelRekomendasi, key = { it.id }) {
-                            ArtikelRekomendasiItem(mpasi = it, modifier = Modifier)
+                            ArtikelRekomendasiItem(rekomArt = it, modifier = Modifier) {
+
+                            }
                         }
                     }
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun HomeScreenPreview(){
+    PekaTheme {
+        HomeScreen(navController = rememberNavController())
     }
 }
