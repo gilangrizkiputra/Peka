@@ -65,6 +65,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.sukasrana.peka.presentation.PendaftaranOnline.PendaftaranOnlineScreen
 import com.sukasrana.peka.presentation.addFormChild.AddFormChildScreen
+import com.sukasrana.peka.presentation.graphic.GraphicScreen
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -122,7 +123,7 @@ fun Peka(
             }
         },
         bottomBar = {
-            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup") {
+            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup" || title.value == "Balita") {
                 println("")
             } else {
                 BottomBar(navController)
