@@ -63,6 +63,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.sukasrana.peka.presentation.PendaftaranOnline.PendaftaranOnlineScreen
 import com.sukasrana.peka.presentation.addFormChild.AddFormChildScreen
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
@@ -184,6 +185,10 @@ fun Peka(
             composable(Screen.TambahIdentitasAnak.route) {
                 title.value = "Tambah Identitas Anak"
                 AddFormChildScreen(navController)
+            }
+            composable(Screen.PendaftaranOnlineAnak.route) {
+                title.value = "Pendaftaran Online"
+                PendaftaranOnlineScreen(navController)
             }
         }
     }

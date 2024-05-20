@@ -167,7 +167,10 @@ fun HomeScreen(
                     Surface(
                         modifier = modifier
                             .width(173.dp)
-                            .padding(top = 16.dp),
+                            .padding(top = 16.dp)
+                            .clickable {
+                            navController.navigate(Screen.PendaftaranOnlineAnak.route)
+                        },
                         color = secondaryTwoColor,
                         shape = RoundedCornerShape(5.dp)
                     ) {
@@ -193,6 +196,7 @@ fun HomeScreen(
                                 ),
                                 color = Color.White,
                                 lineHeight = 15.4.sp,
+                                modifier = Modifier
                             )
                         }
                     }
