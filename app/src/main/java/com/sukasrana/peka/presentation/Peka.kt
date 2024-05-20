@@ -63,6 +63,8 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.sukasrana.peka.presentation.PendaftaranOnline.PendaftaranOnlineScreen
+import com.sukasrana.peka.presentation.addFormChild.AddFormChildScreen
 import com.sukasrana.peka.presentation.graphic.GraphicScreen
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
@@ -80,7 +82,7 @@ fun Peka(
 
     Scaffold(
         topBar = {
-            if (title.value == "Home" || title.value == "Article" || title.value == "MKIA" || title.value == "Profile" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signin") {
+            if (title.value == "Home" || title.value == "Article" || title.value == "MKIA" || title.value == "Profile" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup") {
                 println("")
             } else {
                 TopAppBar(
@@ -121,7 +123,7 @@ fun Peka(
             }
         },
         bottomBar = {
-            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signin" || title.value == "Balita") {
+            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup" || title.value == "Balita") {
                 println("")
             } else {
                 BottomBar(navController)
@@ -166,7 +168,7 @@ fun Peka(
 
             composable(Screen.Article.route) {
                 title.value = "Article"
-                HomeScreen(navController)
+                ArticleScreen(navController)
             }
 
             composable(Screen.Balita.route) {
@@ -185,6 +187,14 @@ fun Peka(
             composable(Screen.Notification.route) {
                 title.value = "Notifikasi"
                 NotificationScreen(navController) { }
+            }
+            composable(Screen.TambahIdentitasAnak.route) {
+                title.value = "Tambah Identitas Anak"
+                AddFormChildScreen(navController)
+            }
+            composable(Screen.PendaftaranOnlineAnak.route) {
+                title.value = "Pendaftaran Online"
+                PendaftaranOnlineScreen(navController)
             }
         }
     }

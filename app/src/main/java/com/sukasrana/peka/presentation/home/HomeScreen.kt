@@ -53,6 +53,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.ui.theme.PekaTheme
 
 @Composable
@@ -61,7 +62,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     balita: List<Balita> = ListData.dataBalita,
     mpasi: List<Mpasi> = ListData.mpasi,
-    artikelRekomendasi: List<Mpasi> = ListData.mpasi,
+    artikelRekomendasi: List<Article> = ListData.TheArticel,
 
 ) {
     LazyColumn(
@@ -156,14 +157,17 @@ fun HomeScreen(
                         BalitaItem(balita = it, navController = navController, modifier = Modifier)
                     }
                     item {
-                        AddBalitaItem(modifier = Modifier)
+                        AddBalitaItem(navController = navController)
                     }
                 }
                 Row {
                     Surface(
                         modifier = modifier
                             .width(173.dp)
-                            .padding(top = 16.dp),
+                            .padding(top = 16.dp)
+                            .clickable {
+                            navController.navigate(Screen.PendaftaranOnlineAnak.route)
+                        },
                         color = secondaryTwoColor,
                         shape = RoundedCornerShape(5.dp)
                     ) {
@@ -189,6 +193,7 @@ fun HomeScreen(
                                 ),
                                 color = Color.White,
                                 lineHeight = 15.4.sp,
+                                modifier = Modifier
                             )
                         }
                     }
@@ -292,7 +297,9 @@ fun HomeScreen(
                         modifier = modifier.padding(top = 8.dp)
                     ) {
                         items(artikelRekomendasi, key = { it.id }) {
-                            ArtikelRekomendasiItem(mpasi = it, modifier = Modifier)
+                            ArtikelRekomendasiItem(rekomArt = it, modifier = Modifier) {
+
+                            }
                         }
                     }
                 }

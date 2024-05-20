@@ -2,6 +2,7 @@ package com.sukasrana.peka.presentation.home.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -34,7 +35,7 @@ fun MpasiItem(
         modifier = modifier
             //.clickable { onItemClicked(mpasi.id) }
             .width(187.dp)
-            .height(133.dp),
+            .height(140.dp),
         color = MaterialTheme.colorScheme.surface,
         shadowElevation = 4.dp,
         shape = RoundedCornerShape(10.dp)
@@ -60,11 +61,11 @@ fun MpasiItem(
             Text(
                 text = mpasi.tanggal,
                 fontFamily = bodyFontFamily,
-                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 6.sp, fontWeight = FontWeight.Normal),
-                color = Color.Gray,
-                textAlign = TextAlign.End,
-                modifier = Modifier.width(187.dp).padding(end = 8.dp),
-                maxLines = 1
+                style = MaterialTheme.typography.bodyMedium.copy(fontSize = 7.sp, fontWeight = FontWeight.ExtraLight),
+                textAlign = TextAlign.Right,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(end = 8.dp, top = 4.dp)
             )
         }
     }

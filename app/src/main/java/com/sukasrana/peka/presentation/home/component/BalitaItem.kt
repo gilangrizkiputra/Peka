@@ -44,7 +44,7 @@ fun BalitaItem(
     navController: NavController,
     modifier: Modifier = Modifier,
     balita: Balita,
-    //onItemClicked: (Int) -> Unit
+    //zonItemClicked: (Int) -> Unit
 )
 {
     val font = GoogleFont("Poppins")
