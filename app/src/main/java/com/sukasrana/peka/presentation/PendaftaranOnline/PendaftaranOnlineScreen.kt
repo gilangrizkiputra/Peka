@@ -1,6 +1,7 @@
 package com.sukasrana.peka.presentation.PendaftaranOnline
 
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -74,7 +75,7 @@ fun PendaftaranOnlineScreen(
         onNikAnakChange = {nikAnak = it},
         onJamChange = {jam = it},
         onDaftarClick = {
-            navController.navigate(Screen.Home.route)
+            navController.navigate(Screen.CekNoAntrian.route)
         }
     )
 }
@@ -146,6 +147,9 @@ fun  AddFormChildContent(
                 .fillMaxWidth()
                 .padding(vertical = 32.dp)
                 .height(48.dp)
+                .clickable {
+
+                }
         ) {
             Text(
                 text = "Daftar",

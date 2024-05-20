@@ -201,7 +201,10 @@ fun HomeScreen(
                     Surface(
                         modifier = modifier
                             .width(173.dp)
-                            .padding(top = 16.dp),
+                            .padding(top = 16.dp)
+                            .clickable {
+                                       navController.navigate(Screen.CekNoAntrian.route)
+                            },
                         color = secondaryTwoColor,
                         shape = RoundedCornerShape(5.dp)
                     ) {

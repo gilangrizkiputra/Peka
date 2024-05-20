@@ -87,7 +87,7 @@ fun AddBalitaItem(
     }
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 private fun BalitaItemHorizontalPreview() {
     PekaTheme {
