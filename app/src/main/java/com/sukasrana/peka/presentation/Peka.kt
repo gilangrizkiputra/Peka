@@ -171,6 +171,11 @@ fun Peka(
                 ArticleScreen(navController)
             }
 
+            composable(Screen.Balita.route) {
+                title.value = "Balita"
+                GraphicScreen(navController)
+            }
+
             composable(Screen.Mkia.route) {
                 title.value = "MKIA"
                 HomeScreen(navController)
