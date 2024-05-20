@@ -40,6 +40,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.data.ListData
+import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.model.Mpasi
 import com.sukasrana.peka.presentation.component.ArtikelRekomendasiItem
 import com.sukasrana.peka.ui.theme.PekaTheme
@@ -51,7 +52,7 @@ import com.sukasrana.peka.ui.theme.secondaryTwoColor
 fun GraphicScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    artikelRekomendasi: List<Mpasi> = ListData.mpasi
+    artikelRekomendasi: List<Article> = ListData.TheArticel
 ) {
     LazyColumn(
         modifier = modifier
@@ -59,31 +60,6 @@ fun GraphicScreen(
     ) {
         item {
             Column {
-                IconButton(
-                    onClick = { navController.navigateUp() },
-                    modifier = modifier
-                        .padding(start = 10.dp, top = 10.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back",
-                        modifier = modifier
-                            .size(50.dp)
-                    )
-                }
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Text(
-                        text = "Pantau Tumbuh Kembang Anak",
-                        style = MaterialTheme.typography.titleLarge.copy(
-                            fontWeight = FontWeight.SemiBold),
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .padding(5.dp)
-                    )
-                }
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
@@ -344,7 +320,9 @@ fun GraphicScreen(
                         modifier = modifier.padding(top = 8.dp)
                     ) {
                         items(artikelRekomendasi, key = { it.id }) {
-                            ArtikelRekomendasiItem(mpasi = it, modifier = Modifier)
+                            ArtikelRekomendasiItem(rekomArt = it, modifier = Modifier) {
+
+                            }
                         }
                     }
                 }
