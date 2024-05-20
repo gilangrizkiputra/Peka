@@ -91,7 +91,7 @@ fun Peka(
                         Column(
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online") {
+                            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "Cek Tumbuh Kembang Anak") {
                                 Icon(
                                     imageVector = Icons.Default.ArrowBack,
                                     contentDescription = "Back",
@@ -124,7 +124,7 @@ fun Peka(
             }
         },
         bottomBar = {
-            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup" || title.value == "Cek No Antrian" || title.value == "Balita") {
+            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup" || title.value == "Cek No Antrian" || title.value == "Cek Tumbuh Kembang Anak") {
                 println("")
             } else {
                 BottomBar(navController)
@@ -173,7 +173,7 @@ fun Peka(
             }
 
             composable(Screen.Balita.route) {
-                title.value = "Balita"
+                title.value = "Cek Tumbuh Kembang Anak"
                 GraphicScreen(navController)
             }
 
