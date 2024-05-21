@@ -8,7 +8,6 @@ import androidx.compose.material3.Surface
 import com.sukasrana.peka.presentation.Peka
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
-import com.sukasrana.peka.presentation.cekNoAntrian.CekNoAntrianScreen
 import com.sukasrana.peka.ui.theme.PekaTheme
 
 class MainActivity : ComponentActivity() {
