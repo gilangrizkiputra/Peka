@@ -6,15 +6,15 @@
     <string name="menu_mkia">MKIA</string>
     <string name="menu_profile">Profile</string>
     <string name="menu_notification">Notification</string>
-    
+
     //Artikel
     <string name="titleArticle1">Kenali Nutrisi dan Manfaatnya bagi \nAnak</string>
     <string name="titleArticle2">Pola Asuh yang Baik untuk Kesehatan Mental Anak</string>
     <string name="titleArticle3">Perlu Diketahui, Gejala Awal Demam Berdarah Pada Bayi</string>
     <string name="titleArticle4">Anak Pendiam dan Susah Bergaul? Kenali Penyebabnya</string>
     <string name="titleArticle5">Anak Menelan Benda Asing? Lakukan Langkah Berikut</string>
-    
-    
+
+
     //Mpasi
     <string name="menu_buburWortel">Bubur Wortel Brokoli</string>
     <string name="menu_appleStew">Apple Stew Cinnamon</string>
@@ -266,7 +266,6 @@
     </string>
 
 
-
     <string name="contentArticle1">
         Mengenal Nutrisi Anak
         Pertumbuhan anak akan optimal apabila mereka memperoleh kebutuhan gizi secara optimal, meliputi makronutrien serta mikronutrien. Berikut adalah penjelasan dari makronutrien dan mikronutrien untuk asupan anak. \n
@@ -439,5 +438,18 @@
             Sebelum tindakan operasi, dokter perlu melakukan pemeriksaan dengan CT scan atau rontgen terlebih dahulu untuk memastikan jenis benda yang tertelan serta lokasinya di dalam tubuh.
             Pemeriksaan tersebut bertujuan untuk memperkirakan dampak yang mungkin timbul, termasuk besar kecilnya resiko saat operasi pengangkatan benda asing yang tertelan.
             Benda-benda runcing dan tajam dapat menusuk usus dan esofagus. Begitu juga baterai kecil dan magnet yang berpotensi merusak jaringan tubuh. Maka dari itu, segera minta bantuan medis ketika benda-benda tersebut tertelan oleh si kecil.
+    </string>
+
+    <string name="About">
+        Kami adalah tim Sukasrana yang peduli di balik layanan Posyandu Manggis. Dengan komitmen kami terhadap kesehatan dan kesejahteraan masyarakat, kami berupaya memberikan layanan yang berkualitas dan terjangkau bagi keluarga di sekitar kami.
+        \n
+        \n
+        PEKA(Peduli Kesehatan Anak) adalah aplikasi inovatif yang dirancang khusus untuk membantu meningkatkan efisiensi dan efektivitas layanan di posyandu.
+         \n
+         \n
+        Dengan PEKA, posyandu dapat meningkatkan akurasi dan keterjangkauan layanan kesehatan, memberikan dampak positif bagi kesehatan masyarakat secara keseluruhan.
+         \n
+         \n
+        “Anak-anak adalah investasi terbaik untuk masa depan kita. Berikan mereka makanan dan layanan kesehatan yang baik, dan Anda memberi mereka modal untuk sukses sepanjang hidup mereka.”
     </string>
 </resources>

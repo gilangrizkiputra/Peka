@@ -1,14 +1,12 @@
 package com.sukasrana.peka.presentation.addFormChild
 
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
@@ -29,7 +27,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,10 +35,7 @@ import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.presentation.addFormChild.component.TextFieldCustom
-import com.sukasrana.peka.presentation.login.SignUpScreen
-import com.sukasrana.peka.presentation.login.component.EmailTextField
 import com.sukasrana.peka.ui.theme.PekaTheme
-import kotlin.math.tan
 
 @Composable
 fun AddFormChildScreen(
@@ -117,6 +111,12 @@ fun  AddFormChildContent(
             .verticalScroll(scrollState)
             .padding(16.dp)
     ) {
+        Text(
+            text = "Tambah Identitas Anak",
+            style = MaterialTheme.typography.titleLarge,
+            modifier = modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(bottom = 16.dp))
         Text(
             text = "Nomor Kartu Keluarga",
             modifier = Modifier.padding(bottom = 8.dp)

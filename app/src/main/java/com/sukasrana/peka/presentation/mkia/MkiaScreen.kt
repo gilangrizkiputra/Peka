@@ -1,3 +1,4 @@
+
 package com.sukasrana.peka.presentation.mkia
 
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -28,14 +29,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.data.ListData
 import com.sukasrana.peka.model.Mkia
+import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.presentation.mkia.component.MkiaItem
 import com.sukasrana.peka.ui.theme.PekaTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MkiaContent(
+fun MkiaScreen(
+    navController: NavController,
     modifier: Modifier = Modifier,
     mkia: List<Mkia> = ListData.listMkia
 ) {
@@ -56,7 +61,7 @@ fun MkiaContent(
         selectedTabIndex = pagerState.currentPage
     }
 
-    val filterdMkia = mkia.filter { it.category == pagerState.currentPage}
+    val filterdMkia = mkia.filter { it.category == pagerState.currentPage }
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier.fillMaxSize()
@@ -104,10 +109,14 @@ fun MkiaContent(
                     .fillMaxWidth()
                     .padding(10.dp)
             ) {
-                items(filterdMkia, key = { it.id }){
+                items(filterdMkia, key = { it.id }) {
                     MkiaItem(
                         mkia = it,
-                        modifier = modifier.padding(bottom = 10.dp))
+                        modifier = modifier
+                            .padding(bottom = 10.dp)
+                    ) { mkiaId ->
+                        navController.navigate(Screen.MkiaDetail.route + "/$mkiaId")
+                    }
                 }
             }
         }
@@ -123,6 +132,6 @@ data class TabItems(
 @Composable
 private fun MkiaScreenPreview() {
     PekaTheme {
-        MkiaContent()
+        MkiaScreen(navController = rememberNavController())
     }
 }

@@ -64,7 +64,7 @@ fun HomeScreen(
     mpasi: List<Mpasi> = ListData.mpasi,
     artikelRekomendasi: List<Article> = ListData.TheArticel,
 
-) {
+    ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
     ) {
@@ -166,8 +166,8 @@ fun HomeScreen(
                             .width(173.dp)
                             .padding(top = 16.dp)
                             .clickable {
-                            navController.navigate(Screen.PendaftaranOnlineAnak.route)
-                        },
+                                navController.navigate(Screen.PendaftaranOnlineAnak.route)
+                            },
                         color = secondaryTwoColor,
                         shape = RoundedCornerShape(5.dp)
                     ) {
@@ -203,7 +203,7 @@ fun HomeScreen(
                             .width(173.dp)
                             .padding(top = 16.dp)
                             .clickable {
-                                       navController.navigate(Screen.CekNoAntrian.route)
+                                navController.navigate(Screen.CekNoAntrian.route)
                             },
                         color = secondaryTwoColor,
                         shape = RoundedCornerShape(5.dp)
@@ -273,6 +273,7 @@ fun HomeScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(top = 5.dp)
+                                .clickable { navController.navigate(Screen.Mpasi.route) }
                         )
                     }
                     LazyRow(
@@ -281,7 +282,9 @@ fun HomeScreen(
                         modifier = modifier.padding(top = 8.dp)
                     ) {
                         items(mpasi, key = { it.id }) {
-                            MpasiItem(mpasi = it, modifier = Modifier)
+                            MpasiItem(mpasi = it){ mpasiId ->
+                                navController.navigate(Screen.DetailMpasi.route+"/$mpasiId")
+                            }
                         }
                     }
                     Text(
@@ -300,8 +303,8 @@ fun HomeScreen(
                         modifier = modifier.padding(top = 8.dp)
                     ) {
                         items(artikelRekomendasi, key = { it.id }) {
-                            ArtikelRekomendasiItem(rekomArt = it, modifier = Modifier) {
-
+                            ArtikelRekomendasiItem(rekomArt = it) {articleId->
+                                navController.navigate(Screen.DetailArticle.route+"/$articleId")
                             }
                         }
                     }

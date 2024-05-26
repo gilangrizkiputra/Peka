@@ -22,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -99,6 +100,12 @@ fun  AddFormChildContent(
             .verticalScroll(scrollState)
             .padding(16.dp)
     ) {
+        Text(
+            text = "Pendaftaran Online",
+            style = MaterialTheme.typography.titleLarge,
+            modifier = modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(bottom = 16.dp))
         Text(
             text = "Isi data diri Bunda",
             fontWeight = FontWeight.Bold,

@@ -1,5 +1,4 @@
-
-package com.sukasrana.peka.presentation
+package com.sukasrana.peka.presentation.mkia
 
 
 import androidx.compose.foundation.layout.Arrangement
@@ -20,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,25 +28,25 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.sukasrana.peka.data.ListData
-import com.sukasrana.peka.model.Article
+import com.sukasrana.peka.model.Mkia
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @Composable
-fun DetailArticle(
-    modifier: Modifier = Modifier,
+fun MkiaDetail(
     navController: NavController,
-    articleId: Int?
+    modifier: Modifier = Modifier,
+    mkiaId: Int?
 ) {
-    val newArticle = ListData.TheArticel.filter { article ->
-        article.id == articleId
+    val newMkia = ListData.listMkia.filter { mkia ->
+        mkia.id == mkiaId
     }
-    DetailArticleContent(newArticleList = newArticle)
+    MkiaContent(newMkiaList = newMkia)
 }
 
 @Composable
-private fun DetailArticleContent(
-    newArticleList: List<Article>,
-    modifier: Modifier = Modifier
+private fun MkiaContent(
+    modifier: Modifier = Modifier,
+    newMkiaList: List<Mkia>
 ) {
     Column(
         modifier = modifier
@@ -61,7 +59,7 @@ private fun DetailArticleContent(
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(data = newArticleList[0].photo)
+                    .data(data = newMkiaList[0].image)
                     .build(),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -74,7 +72,7 @@ private fun DetailArticleContent(
 
         Column(modifier = Modifier.padding(top = 16.dp)) {
             Text(
-                text = stringResource(id = newArticleList[0].title),
+                text = newMkiaList[0].name,
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontSize = 18.sp,
@@ -82,7 +80,7 @@ private fun DetailArticleContent(
                 )
             )
             Text(
-                text = stringResource(id = newArticleList[0].contentAr),
+                text = newMkiaList[0].description,
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyMedium.copy(
                     fontSize = 14.sp,
@@ -95,9 +93,8 @@ private fun DetailArticleContent(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 private fun DetailMapContentPreview() {
-    DetailArticleContent(newArticleList = ListData.TheArticel)
+    MkiaContent(newMkiaList = ListData.listMkia)
 }

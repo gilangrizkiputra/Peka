@@ -6,15 +6,10 @@ import com.sukasrana.peka.presentation.login.SwitchScreen
 import com.sukasrana.peka.presentation.onboarding.OnBoardingScreen
 import com.sukasrana.peka.presentation.splash.SplashScreen
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -42,17 +37,21 @@ import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.presentation.home.HomeScreen
 import com.sukasrana.peka.presentation.notification.NotificationScreen
 import com.sukasrana.peka.ui.theme.primaryColor
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import com.sukasrana.peka.presentation.PendaftaranOnline.PendaftaranOnlineScreen
 import com.sukasrana.peka.presentation.addFormChild.AddFormChildScreen
 import com.sukasrana.peka.presentation.cekNoAntrian.CekNoAntrianScreen
 import com.sukasrana.peka.presentation.graphic.GraphicScreen
-import com.sukasrana.peka.ui.theme.bodyFontFamily
+import com.sukasrana.peka.presentation.mkia.MkiaScreen
+import com.sukasrana.peka.presentation.mkia.MkiaDetail
+import com.sukasrana.peka.presentation.profile.AboutScreen
+import com.sukasrana.peka.presentation.profile.FeedbackScreen
+import com.sukasrana.peka.presentation.profile.ProfileEditScreen
+import com.sukasrana.peka.presentation.profile.ProfileScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,6 +60,7 @@ fun Peka(
     navController: NavHostController = rememberNavController()
 ) {
     val context = LocalContext.current
+    val nav = remember { mutableStateOf("") }
     val title = remember { mutableStateOf("") }
     val navBackStack by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStack?.destination?.route
@@ -68,48 +68,25 @@ fun Peka(
 
     Scaffold(
         topBar = {
-            if (title.value == "Home" || title.value == "Article" || title.value == "MKIA" || title.value == "Profile" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup" || title.value == "Cek No Antrian") {
+            if (nav.value == "no_top" || nav.value == "no_top_no_bot") {
                 println("")
             } else {
                 TopAppBar(
                     title = {
-                        Column(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "Cek Tumbuh Kembang Anak") {
-                                Icon(
-                                    imageVector = Icons.Default.ArrowBack,
-                                    contentDescription = "Back",
-                                    modifier = Modifier
-                                        .clickable { navController.navigateUp() }
-                                        .padding(top = 16.dp,)
-                                )
-                                Spacer(modifier = Modifier.padding(top = 16.dp))
-                                Row(
-                                    horizontalArrangement = Arrangement.Center,
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(end = 16.dp)
-                                ) {
-                                    Text(
-                                        text = title.value,
-                                        fontFamily = bodyFontFamily,
-                                        style = MaterialTheme.typography.bodyLarge.copy(
-                                            fontSize = 19.sp,
-                                            fontWeight = FontWeight.Bold
-                                        ),
-                                        color = Color.Black,
-                                    )
-                                }
-                            }
-                        }
-                    },
-                    modifier = Modifier.height(100.dp)
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back",
+                            modifier = Modifier
+                                .clickable { navController.navigateUp() }
+                                .padding(16.dp)
+                        )
+                        Text(text = title.value)
+                    }
                 )
             }
         },
         bottomBar = {
-            if (title.value == "Notifikasi" || title.value == "Tambah Identitas Anak" || title.value == "Pantau Tumbuh Kembang Anak" || title.value == "Pendaftaran Online" || title.value == "splashscreen" || title.value == "onboarding" || title.value == "switch" || title.value == "login" || title.value == "signup" || title.value == "Cek No Antrian" || title.value == "Cek Tumbuh Kembang Anak") {
+            if (nav.value == "no_bot" || nav.value == "no_top_no_bot") {
                 println("")
             } else {
                 BottomBar(navController)
@@ -123,72 +100,125 @@ fun Peka(
             modifier = modifier.padding(contentPadding)
         ) {
             composable(Screen.Splash.route) {
-                title.value = "splashscreen"
+                nav.value = "no_top_no_bot"
                 SplashScreen(navController = navController)
             }
 
             composable(Screen.OnBoarding.route) {
-                title.value = "onboarding"
+                nav.value = "no_top_no_bot"
                 OnBoardingScreen(navController = navController)
             }
 
             composable(Screen.Switch.route) {
-                title.value = "switch"
+                nav.value = "no_top_no_bot"
                 SwitchScreen(navController = navController)
             }
 
             composable(Screen.Login.route) {
-                title.value = "login"
+                nav.value = "no_top_no_bot"
                 LoginScreen(navController = navController)
             }
 
             composable(Screen.Signup.route) {
-                title.value = "signup"
+                nav.value = "no_top_no_bot"
                 SignUpScreen(navController = navController)
             }
 
             composable(Screen.Home.route) {
-                title.value = "Home"
+                nav.value = "no_top"
                 HomeScreen(navController)
             }
 
             composable(Screen.Article.route) {
-                title.value = "Article"
+                nav.value = "no_top"
                 ArticleScreen(navController)
             }
 
+            composable(Screen.DetailArticle.route + "/{articleId}",
+                arguments = listOf(navArgument("articleId") { type = NavType.IntType })
+            ) { navBackStackEntry ->
+                DetailArticle(
+                    navController = navController,
+                    articleId = navBackStackEntry.arguments?.getInt("articleId")
+                )
+                nav.value = "no_bot"
+            }
+
+            composable(Screen.Mpasi.route) {
+                nav.value = "no_bot"
+                MpasiScreen(navController)
+            }
+
+            composable(Screen.DetailMpasi.route + "/{mpasiId}",
+                arguments = listOf(navArgument("mpasiId") { type = NavType.IntType })
+            ) { navBackStackEntry ->
+                DetailMpasi(
+                    navController = navController,
+                    mpasiId = navBackStackEntry.arguments?.getInt("mpasiId")
+                )
+                nav.value = "no_bot"
+            }
+
             composable(Screen.Balita.route) {
-                title.value = "Cek Tumbuh Kembang Anak"
+                nav.value = "no_bot"
                 GraphicScreen(navController)
             }
 
             composable(Screen.Mkia.route) {
-                title.value = "MKIA"
-                HomeScreen(navController)
+                nav.value = "no_top"
+                MkiaScreen(navController)
             }
+
+            composable(
+                Screen.MkiaDetail.route + "/{mkiaId}",
+                arguments = listOf(navArgument("mkiaId") { type = NavType.IntType })
+            ) { navBackStackEntry ->
+                MkiaDetail(
+                    navController = navController,
+                    mkiaId = navBackStackEntry.arguments?.getInt("mkiaId")
+                )
+                nav.value = "no_bot"
+            }
+
             composable(Screen.Profile.route) {
-                title.value = "Profile"
-                HomeScreen(navController)
+                nav.value = "no_top"
+                ProfileScreen(navController)
+            }
+            composable(Screen.About.route) {
+                nav.value = "no_bot"
+                title.value = "Tentang Alikasi"
+                AboutScreen(navController)
+            }
+            composable(Screen.ProEdit.route) {
+                nav.value = "no_bot"
+                title.value = "Atur Profil Anda"
+                ProfileEditScreen(navController)
+            }
+            composable(Screen.Feedback.route) {
+                nav.value = "no_bot"
+                title.value = "Bantuan dan Laporan "
+                FeedbackScreen(navController)
             }
             composable(Screen.Notification.route) {
-                title.value = "Notifikasi"
+                nav.value = "no_bot"
                 NotificationScreen(navController) { }
             }
             composable(Screen.TambahIdentitasAnak.route) {
-                title.value = "Tambah Identitas Anak"
+                nav.value = "no_bot"
                 AddFormChildScreen(navController)
             }
             composable(Screen.PendaftaranOnlineAnak.route) {
-                title.value = "Pendaftaran Online"
+                nav.value = "no_bot"
                 PendaftaranOnlineScreen(navController)
             }
             composable(Screen.CekNoAntrian.route) {
-                title.value = "Cek No Antrian"
+                nav.value = "no_bot"
                 CekNoAntrianScreen(navController)
             }
         }
     }
 }
+
 @Composable
 private fun BottomBar(
     navController: NavHostController,
