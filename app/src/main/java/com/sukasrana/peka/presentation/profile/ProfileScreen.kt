@@ -1,6 +1,7 @@
 package com.sukasrana.peka.presentation.profile
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,7 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForwardIos
+import androidx.compose.material.icons.automirrored.filled.ArrowForwardIos
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -26,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
+import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @Composable
@@ -72,14 +74,14 @@ fun ProfileScreen(
                 modifier = modifier
                     .fillMaxWidth()
                     .height(64.dp),
-                    //.clickable { onItemClicked(balita.id) }
-                    //.clickable { navController.navigate(Screen.Balita.route) }
                 color = MaterialTheme.colorScheme.surface,
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { navController.navigate(Screen.ProEdit.route) }
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically
@@ -101,7 +103,7 @@ fun ProfileScreen(
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Icon(
-                    imageVector = Icons.Default.ArrowForwardIos,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowForwardIos,
                     contentDescription = "Arrow",
                     modifier = Modifier
                 )
@@ -111,14 +113,14 @@ fun ProfileScreen(
             modifier = modifier
                 .fillMaxWidth()
                 .height(64.dp),
-            //.clickable { onItemClicked(balita.id) }
-            //.clickable { navController.navigate(Screen.Balita.route) }
             color = MaterialTheme.colorScheme.surface,
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { navController.navigate(Screen.About.route) }
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically
@@ -140,7 +142,7 @@ fun ProfileScreen(
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Icon(
-                    imageVector = Icons.Default.ArrowForwardIos,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowForwardIos,
                     contentDescription = "Arrow",
                     modifier = Modifier
                 )
@@ -150,14 +152,14 @@ fun ProfileScreen(
             modifier = modifier
                 .fillMaxWidth()
                 .height(64.dp),
-            //.clickable { onItemClicked(balita.id) }
-            //.clickable { navController.navigate(Screen.Balita.route) }
             color = MaterialTheme.colorScheme.surface,
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { navController.navigate(Screen.Feedback.route) }
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically
@@ -179,7 +181,7 @@ fun ProfileScreen(
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Icon(
-                    imageVector = Icons.Default.ArrowForwardIos,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowForwardIos,
                     contentDescription = "Arrow",
                     modifier = Modifier
                 )
@@ -189,14 +191,14 @@ fun ProfileScreen(
             modifier = modifier
                 .fillMaxWidth()
                 .height(64.dp),
-            //.clickable { onItemClicked(balita.id) }
-            //.clickable { navController.navigate(Screen.Balita.route) }
             color = MaterialTheme.colorScheme.surface,
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { navController.navigate(Screen.Login.route) }
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically

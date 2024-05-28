@@ -1,4 +1,4 @@
-package com.sukasrana.peka.presentation.login.component
+package com.sukasrana.peka.presentation.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
@@ -25,7 +25,7 @@ fun PasswordTextField(
     text: String,
     onValueChange: (String) -> Unit,
     label: String,
-){
+) {
     val passwordVisible = remember {
         mutableStateOf(false)
     }

@@ -18,8 +18,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -43,8 +41,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.navigation.Screen
-import com.sukasrana.peka.presentation.login.component.EmailTextField
-import com.sukasrana.peka.presentation.login.component.PasswordTextField
+import com.sukasrana.peka.presentation.component.EmailTextField
+import com.sukasrana.peka.presentation.component.PasswordTextField
 import com.sukasrana.peka.ui.theme.PekaTheme
 
 @Composable

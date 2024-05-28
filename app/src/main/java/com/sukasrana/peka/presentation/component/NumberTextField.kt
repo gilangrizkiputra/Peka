@@ -1,4 +1,4 @@
-package com.sukasrana.peka.presentation.login.component
+package com.sukasrana.peka.presentation.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,19 +12,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun EmailTextField(
+fun NumberTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    label: String,
     modifier: Modifier = Modifier
-){
+) {
     OutlinedTextField(
         value = value,
         shape = MaterialTheme.shapes.medium,
         onValueChange = onValueChange,
         singleLine = true,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-        label = { Text(text = label) },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         modifier = modifier
             .fillMaxWidth()
             .padding(bottom = 16.dp)

@@ -1,3 +1,4 @@
+
 package com.sukasrana.peka.presentation
 
 import androidx.compose.foundation.background
@@ -24,6 +25,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.data.ListData
 import com.sukasrana.peka.model.Article
+import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.presentation.component.RekomArtItem
 import com.sukasrana.peka.presentation.component.ArticleItem
 import com.sukasrana.peka.ui.theme.bodyFontFamily
@@ -38,7 +40,7 @@ fun ArticleScreen(
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = modifier.background(Color.White)
+        modifier = modifier.background(MaterialTheme.colorScheme.background)
     ) {
         item {
             Box(
@@ -63,8 +65,8 @@ fun ArticleScreen(
                 modifier = modifier.background(Color.White)
             ) {
                 items(recomArt, key = { it.id }) {
-                    RekomArtItem(rekomArt = it) { recomartId ->
-                        // navigate to detail screen
+                    RekomArtItem(rekomArt = it) { articleId ->
+                        navController.navigate(Screen.DetailArticle.route+"/$articleId")
                     }
                 }
             }
@@ -74,7 +76,6 @@ fun ArticleScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 8.dp, bottom = 8.dp, start = 16.dp)
-                    .background(color = Color(0xE4F3FD))
             ) {
                 Text(
                     text = "Baca Artikel lainnya",
@@ -86,7 +87,7 @@ fun ArticleScreen(
         }
         items(article, key = { it.id }) {
             ArticleItem(article = it) { articleId ->
-                // navigate to detail map screen
+                navController.navigate(Screen.DetailArticle.route+"/$articleId")
             }
         }
 

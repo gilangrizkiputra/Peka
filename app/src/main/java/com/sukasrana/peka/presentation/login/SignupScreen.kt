@@ -1,6 +1,5 @@
 package com.sukasrana.peka.presentation.login
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
@@ -41,8 +40,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.navigation.Screen
-import com.sukasrana.peka.presentation.login.component.EmailTextField
-import com.sukasrana.peka.presentation.login.component.PasswordTextField
+import com.sukasrana.peka.presentation.component.EmailTextField
+import com.sukasrana.peka.presentation.component.NameTextField
+import com.sukasrana.peka.presentation.component.PasswordTextField
 import com.sukasrana.peka.ui.theme.PekaTheme
 
 @Composable
@@ -110,7 +110,7 @@ fun SignupContent(
         painter = painterResource(id = R.drawable.image_onboarding_background),
         contentDescription = "OnBoarding BG",
         modifier = modifier
-            .offset(x = 150.dp, y = -50.dp)
+            .offset(x = 150.dp, y = (-50).dp)
             .graphicsLayer {
                 this.rotationZ = 120f
             })
@@ -129,7 +129,7 @@ fun SignupContent(
             )
             Spacer(modifier = Modifier.padding(20.dp))
             Text(text = "Nama")
-            EmailTextField(
+            NameTextField(
                 value = name,
                 onValueChange = onNameChange,
                 label = "Nama"

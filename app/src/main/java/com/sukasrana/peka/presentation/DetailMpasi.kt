@@ -10,10 +10,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,22 +40,7 @@ fun DetailMpasi(
     val newMpasi = ListData.TheMpasi.filter { mpasi ->
         mpasi.id == mpasiId
     }
-    Column(
-        modifier = modifier.verticalScroll(rememberScrollState())
-    ) {
-        IconButton(
-            onClick = { navController.popBackStack() },
-            modifier = Modifier
-                .align(Alignment.Start)
-                .padding(8.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Kembali"
-            )
-        }
-        DetailMpasiContent(newMpasiList = newMpasi)
-    }
+    DetailMpasiContent(newMpasiList = newMpasi)
 }
 
 @Composable
@@ -69,7 +50,7 @@ private fun DetailMpasiContent(
 ) {
     Column(
         modifier = modifier
-            .padding(start = 16.dp, end = 16.dp, top = 32.dp)
+            .padding(start = 16.dp, end = 16.dp)
             .verticalScroll(rememberScrollState())
     ) {
         Row(
@@ -91,25 +72,39 @@ private fun DetailMpasiContent(
 
         Column(modifier = Modifier.padding(top = 16.dp)) {
             Text(
-                text = "${stringResource(id = newMpasiList[0].nama)}",
+                text = stringResource(id = newMpasiList[0].nama),
                 fontFamily = bodyFontFamily,
-                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.SemiBold
+                )
             )
             Text(
-                text = "${stringResource(id = newMpasiList[0].gizi)}",
+                text = stringResource(id = newMpasiList[0].gizi),
                 fontFamily = bodyFontFamily,
-                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp, fontWeight = FontWeight.Normal)
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Normal
+                )
             )
             Text(
-                text = "${stringResource(id = newMpasiList[0].bahan)}",
+                text = stringResource(id = newMpasiList[0].bahan),
                 fontFamily = bodyFontFamily,
-                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 13.sp, fontWeight = FontWeight.Normal)
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Normal
+                )
             )
             Text(
-                text = "${stringResource(id = newMpasiList[0].caramemasak)}",
+                text = stringResource(id = newMpasiList[0].caramemasak),
                 fontFamily = bodyFontFamily,
-                style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp, fontWeight = FontWeight.Normal, textAlign = TextAlign.Justify),
-                modifier = Modifier.padding(top = 16.dp)          )
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Normal,
+                    textAlign = TextAlign.Justify
+                ),
+                modifier = Modifier.padding(top = 16.dp)
+            )
         }
     }
 }

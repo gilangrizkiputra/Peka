@@ -1,6 +1,7 @@
 package com.sukasrana.peka.presentation.home.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -29,11 +30,11 @@ import com.sukasrana.peka.ui.theme.bodyFontFamily
 fun MpasiItem(
     modifier: Modifier = Modifier,
     mpasi: Mpasi,
-    //onItemClicked: (Int) -> Unit
+    onItemClicked: (Int) -> Unit
 ) {
     Surface(
         modifier = modifier
-            //.clickable { onItemClicked(mpasi.id) }
+            .clickable { onItemClicked(mpasi.id) }
             .width(187.dp)
             .height(140.dp),
         color = MaterialTheme.colorScheme.surface,
@@ -82,9 +83,9 @@ private fun MpasiItemHorizontalPreview() {
             "15 Mei 24",
             R.drawable.image_bubur_brokoli_mpasi_beranda
         ),
-            //onItemClicked = { balitaId ->
-            //   println("Balita Id : $balitaId")
-            // }
+            onItemClicked = { balitaId ->
+                println("Balita Id : $balitaId")
+            }
         )
     }
 }

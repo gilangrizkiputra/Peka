@@ -1,6 +1,7 @@
 package com.sukasrana.peka.presentation.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sukasrana.peka.R
 import com.sukasrana.peka.model.Article
-import com.sukasrana.peka.model.Mpasi
 import com.sukasrana.peka.ui.theme.PekaTheme
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
@@ -38,7 +38,7 @@ fun ArtikelRekomendasiItem(
 ) {
     Surface(
         modifier = modifier
-            //.clickable { onItemClicked(mpasi.id) }
+            .clickable { onItemClicked(rekomArt.id) }
             .width(187.dp)
             .height(140.dp),
         color = MaterialTheme.colorScheme.surface,
@@ -51,7 +51,7 @@ fun ArtikelRekomendasiItem(
         ) {
             Image(
                 painter = painterResource(id = rekomArt.photo),
-                contentDescription = "Bubur Brokoli dan Wortel",
+                contentDescription = rekomArt.title.toString(),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.width(187.dp).height(90.dp)
                     .clip(RectangleShape)

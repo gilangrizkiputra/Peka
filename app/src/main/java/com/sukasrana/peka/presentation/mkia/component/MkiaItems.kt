@@ -2,6 +2,7 @@ package com.sukasrana.peka.presentation.mkia.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,18 +20,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sukasrana.peka.R
 import com.sukasrana.peka.model.Mkia
+import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.ui.theme.PekaTheme
 
 @Composable
 fun MkiaItem(
     mkia: Mkia,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onItemClicked: (Int) -> Unit
 ) {
     Column(
         modifier = modifier
             .clip(shape = RoundedCornerShape(10.dp))
             .width(360.dp)
             .background(MaterialTheme.colorScheme.primary)
+            .clickable {
+                onItemClicked(mkia.id)
+            }
     ) {
         Image(
             painter = painterResource(id = mkia.image),
@@ -54,7 +60,10 @@ private fun MkiaItemPreview() {
         MkiaItem(
             mkia = Mkia(
                 1, "Ttile Title Title", 1, "Description", R.drawable.image_kehamilansehat_mkia
-            )
+            ),
+            onItemClicked = { mkiaId ->
+                println("Id Mkia = $mkiaId")
+            }
         )
     }
 }
