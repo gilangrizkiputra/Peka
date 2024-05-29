@@ -8,7 +8,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,7 +36,6 @@ fun NotificationScreen(
     modifier: Modifier = Modifier,
     onItemClicked: (Int) -> Unit
 ) {
-
     LazyColumn(
         verticalArrangement = Arrangement.Center,
         modifier = modifier
@@ -60,6 +64,18 @@ fun NotificationScreen(
             }
         }
     }
+    IconButton(
+        onClick = { navController.navigateUp() },
+        modifier = modifier
+            .padding(7.dp)
+    ) {
+        Icon(
+            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+            contentDescription = "Back",
+            modifier = modifier
+                .size(30.dp)
+        )
+    }
     Box(
         contentAlignment = Alignment.TopCenter,
         modifier = modifier
@@ -75,9 +91,9 @@ fun NotificationScreen(
 
 @Preview
 @Composable
-private fun previewNotificationScreen() {
-    val navController = rememberNavController()
-    NotificationScreen(navController) {
-
-    }
+private fun PreviewNotificationScreen() {
+    NotificationScreen(
+        navController = rememberNavController(),
+        onItemClicked = { println("IdNot") }
+    )
 }

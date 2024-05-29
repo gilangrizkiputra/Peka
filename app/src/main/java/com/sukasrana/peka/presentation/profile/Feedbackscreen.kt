@@ -1,12 +1,19 @@
 package com.sukasrana.peka.presentation.profile
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,7 +21,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -42,6 +51,7 @@ fun FeedbackScreen(
         mutableStateOf("")
     }
     FeedbackContent(
+        navController = navController,
         name = name,
         number = number,
         email = email,
@@ -63,37 +73,66 @@ private fun FeedbackContent(
     onNumberChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,
     onMassageChange: (String) -> Unit,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .background(MaterialTheme.colorScheme.background)
     ) {
-        Text(
-            text = "Bantuan & Laporan",
-            style = MaterialTheme.typography.titleLarge,
-            modifier = modifier.padding(bottom = 20.dp))
-        Text(text = "Nama")
-        TextFieldCustom(value = name, onValueChange = onNameChange)
-        Text(text = "Nomor")
-        NumberTextField(value = number, onValueChange = onNumberChange)
-        Text(text = "Email")
-        TextFieldCustom(value = email, onValueChange = onEmailChange)
-        Text(text = "Catatan")
-        MassageTextField(value = massage, onValueChange = onMassageChange)
-        Button(
-            onClick = {},
-            shape = RoundedCornerShape(10.dp),
-            modifier = Modifier
-                .padding(top = 20.dp)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = modifier
                 .fillMaxWidth()
-                .height(44.dp)
+                .shadow(elevation = 1.dp)
+        ) {
+            IconButton(
+                onClick = { navController.navigateUp() },
+                modifier = modifier
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back",
+                    modifier = modifier
+                        .size(30.dp)
+                )
+            }
+            Text(
+                text = "Atur Profile Anda",
+                style = MaterialTheme.typography.titleMedium
+            )
+        }
+        Column(
+            modifier = modifier
+                .padding(16.dp)
         ) {
             Text(
-                text = "Kirim",
-                style = MaterialTheme.typography.bodyLarge
+                text = "Bantuan & Laporan",
+                style = MaterialTheme.typography.titleLarge,
+                modifier = modifier.padding(bottom = 20.dp)
             )
+            Text(text = "Nama")
+            TextFieldCustom(value = name, onValueChange = onNameChange)
+            Text(text = "Nomor")
+            NumberTextField(value = number, onValueChange = onNumberChange)
+            Text(text = "Email")
+            TextFieldCustom(value = email, onValueChange = onEmailChange)
+            Text(text = "Catatan")
+            MassageTextField(value = massage, onValueChange = onMassageChange)
+            Button(
+                onClick = {},
+                shape = RoundedCornerShape(10.dp),
+                modifier = Modifier
+                    .padding(top = 20.dp)
+                    .fillMaxWidth()
+                    .height(44.dp)
+            ) {
+                Text(
+                    text = "Kirim",
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
         }
     }
 }

@@ -3,17 +3,19 @@ package com.sukasrana.peka.presentation.PendaftaranOnline
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,12 +36,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.navigation.Screen
-import com.sukasrana.peka.presentation.addFormChild.AddFormChildContent
-import com.sukasrana.peka.presentation.addFormChild.AddFormChildScreen
-import com.sukasrana.peka.presentation.addFormChild.RadioButton
 import com.sukasrana.peka.presentation.addFormChild.component.TextFieldCustom
 import com.sukasrana.peka.ui.theme.PekaTheme
-import kotlinx.coroutines.joinAll
 
 @Composable
 fun PendaftaranOnlineScreen(
@@ -47,9 +45,6 @@ fun PendaftaranOnlineScreen(
     modifier: Modifier = Modifier
 
 ) {
-    val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
-
     var nama by remember {
         mutableStateOf("")
     }
@@ -64,9 +59,8 @@ fun PendaftaranOnlineScreen(
     var jam by remember {
         mutableStateOf("")
     }
-
-
     AddFormChildContent(
+        navController = navController,
         nama = nama,
         namaAnak = namaAnak,
         nikAnak = nikAnak,
@@ -92,76 +86,91 @@ fun  AddFormChildContent(
     onNikAnakChange: (String) -> Unit,
     onJamChange: (String) -> Unit,
     onDaftarClick: () -> Unit,
+    navController: NavController,
     modifier: Modifier = Modifier,
     scrollState: ScrollState = rememberScrollState(),
 ) {
-    Column(
-        modifier = Modifier
-            .verticalScroll(scrollState)
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Pendaftaran Online",
-            style = MaterialTheme.typography.titleLarge,
+    Column {
+        IconButton(
+            onClick = { navController.navigateUp() },
             modifier = modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(bottom = 16.dp))
-        Text(
-            text = "Isi data diri Bunda",
-            fontWeight = FontWeight.Bold,
-            fontSize = 19.sp
-        )
-        Spacer(modifier = Modifier.padding(32.dp))
-        Text(
-            text = "Nama Lengkap Bunda",
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-        TextFieldCustom(
-            value = nama,
-            onValueChange = onNamaChange,
-        )
-        Text(
-            text = "Nama Anak",
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-        TextFieldCustom(
-            value = namaAnak,
-            onValueChange = onNamaAnakChange,
-        )
-        Text(
-            text = "NIK Anak",
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-        TextFieldCustom(
-            value = nikAnak,
-            onValueChange = onNikAnakChange,
-        )
-        Text(
-            text = "Jam",
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-        TextFieldCustom(
-            value = jam,
-            onValueChange = onJamChange,
-            trailingIcon = {
-                Icon(painterResource(id = R.drawable.ic_tanggal), contentDescription = "")
-            }
-        )
-        Button(
-            onClick = onDaftarClick,
-            shape = RoundedCornerShape(10.dp),
+                .padding(7.dp)
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = "Back",
+                modifier = modifier
+                    .size(30.dp)
+            )
+        }
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 32.dp)
-                .height(48.dp)
-                .clickable {
-
-                }
+                .verticalScroll(scrollState)
+                .padding(16.dp)
         ) {
             Text(
-                text = "Daftar",
-                style = MaterialTheme.typography.bodyLarge
+                text = "Pendaftaran Online",
+                style = MaterialTheme.typography.titleLarge,
+                modifier = modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(bottom = 16.dp))
+            Text(
+                text = "Isi data diri Bunda",
+                fontWeight = FontWeight.Bold,
+                fontSize = 19.sp
             )
+            Spacer(modifier = Modifier.padding(32.dp))
+            Text(
+                text = "Nama Lengkap Bunda",
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            TextFieldCustom(
+                value = nama,
+                onValueChange = onNamaChange,
+            )
+            Text(
+                text = "Nama Anak",
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            TextFieldCustom(
+                value = namaAnak,
+                onValueChange = onNamaAnakChange,
+            )
+            Text(
+                text = "NIK Anak",
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            TextFieldCustom(
+                value = nikAnak,
+                onValueChange = onNikAnakChange,
+            )
+            Text(
+                text = "Jam",
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            TextFieldCustom(
+                value = jam,
+                onValueChange = onJamChange,
+                trailingIcon = {
+                    Icon(painterResource(id = R.drawable.ic_tanggal), contentDescription = "")
+                }
+            )
+            Button(
+                onClick = onDaftarClick,
+                shape = RoundedCornerShape(10.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 32.dp)
+                    .height(48.dp)
+                    .clickable {
+
+                    }
+            ) {
+                Text(
+                    text = "Daftar",
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
         }
     }
 }

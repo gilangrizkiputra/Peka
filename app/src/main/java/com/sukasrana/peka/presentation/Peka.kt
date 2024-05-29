@@ -67,24 +67,6 @@ fun Peka(
 
 
     Scaffold(
-        topBar = {
-            if (nav.value == "no_top" || nav.value == "no_top_no_bot") {
-                println("")
-            } else {
-                TopAppBar(
-                    title = {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
-                            modifier = Modifier
-                                .clickable { navController.navigateUp() }
-                                .padding(16.dp)
-                        )
-                        Text(text = title.value)
-                    }
-                )
-            }
-        },
         bottomBar = {
             if (nav.value == "no_bot" || nav.value == "no_top_no_bot") {
                 println("")

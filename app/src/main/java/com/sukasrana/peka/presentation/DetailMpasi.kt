@@ -10,6 +10,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.sukasrana.peka.data.ListData
@@ -40,11 +45,12 @@ fun DetailMpasi(
     val newMpasi = ListData.TheMpasi.filter { mpasi ->
         mpasi.id == mpasiId
     }
-    DetailMpasiContent(newMpasiList = newMpasi)
+    DetailMpasiContent(navController, newMpasiList = newMpasi)
 }
 
 @Composable
 private fun DetailMpasiContent(
+    navController: NavController,
     newMpasiList: List<MpasiModel>,
     modifier: Modifier = Modifier
 ) {
@@ -53,6 +59,18 @@ private fun DetailMpasiContent(
             .padding(start = 16.dp, end = 16.dp)
             .verticalScroll(rememberScrollState())
     ) {
+        IconButton(
+            onClick = { navController.navigateUp() },
+            modifier = modifier
+                .padding(top = 7.dp)
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = "Back",
+                modifier = modifier
+                    .size(30.dp)
+            )
+        }
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start,
@@ -112,5 +130,5 @@ private fun DetailMpasiContent(
 @Preview(showBackground = true)
 @Composable
 private fun DetailMapContentPreview() {
-    DetailMpasiContent(newMpasiList = ListData.TheMpasi)
+    DetailMpasiContent(navController = rememberNavController(),newMpasiList = ListData.TheMpasi)
 }

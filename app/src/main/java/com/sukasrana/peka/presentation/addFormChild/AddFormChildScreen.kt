@@ -1,19 +1,24 @@
 package com.sukasrana.peka.presentation.addFormChild
 
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -43,9 +48,6 @@ fun AddFormChildScreen(
     modifier: Modifier = Modifier
 
 ) {
-    val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
-
     var nomorKartuKeluarga by remember {
         mutableStateOf("")
     }
@@ -68,20 +70,20 @@ fun AddFormChildScreen(
     var golonganDarah by remember {
         mutableStateOf("")
     }
-
     AddFormChildContent(
+        navController = navController,
         nomorKartuKeluarga = nomorKartuKeluarga,
         nikAnak = nikAnak,
         namaAnak = namaAnak,
         tempatLahir = tempatLahir,
         tanggal = tanggal,
         golonganDarah = golonganDarah,
-        onNomorKartuKeluargaChange = {nomorKartuKeluarga = it},
-        onnikAnakChange = {nikAnak = it},
-        onnamaAnakChange = {namaAnak = it},
-        ontempatLahirChange = {tempatLahir = it},
-        ontanggalChange = {tanggal = it},
-        ongolonganDarahChange = {golonganDarah = it},
+        onNomorKartuKeluargaChange = { nomorKartuKeluarga = it },
+        onnikAnakChange = { nikAnak = it },
+        onnamaAnakChange = { namaAnak = it },
+        ontempatLahirChange = { tempatLahir = it },
+        ontanggalChange = { tanggal = it },
+        ongolonganDarahChange = { golonganDarah = it },
         onSimpanClick = {
             navController.navigate(Screen.Home.route)
         }
@@ -89,7 +91,7 @@ fun AddFormChildScreen(
 }
 
 @Composable
-fun  AddFormChildContent(
+fun AddFormChildContent(
     nomorKartuKeluarga: String,
     nikAnak: String,
     namaAnak: String,
@@ -103,102 +105,117 @@ fun  AddFormChildContent(
     ontanggalChange: (String) -> Unit,
     ongolonganDarahChange: (String) -> Unit,
     onSimpanClick: () -> Unit,
+    navController: NavController,
     modifier: Modifier = Modifier,
     scrollState: ScrollState = rememberScrollState(),
 ) {
-    Column(
-        modifier = Modifier
-            .verticalScroll(scrollState)
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Tambah Identitas Anak",
-            style = MaterialTheme.typography.titleLarge,
+    Column {
+        IconButton(
+            onClick = { navController.navigateUp() },
             modifier = modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(bottom = 16.dp))
-        Text(
-            text = "Nomor Kartu Keluarga",
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-        TextFieldCustom(
-            value = nomorKartuKeluarga,
-            onValueChange = onNomorKartuKeluargaChange,
-        )
-        Text(
-            text = "NIK Anak",
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-        TextFieldCustom(
-            value = nikAnak,
-            onValueChange = onnikAnakChange,
-        )
-        Text(
-            text = "Nama Anak",
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-        TextFieldCustom(
-            value = namaAnak,
-            onValueChange = onnamaAnakChange,
-        )
-        Row (
-        ){
-            Column (
-            ){
-                Text(
-                    text = "Tempat Lahir",
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
-                TextFieldCustom(
-                    value = tempatLahir,
-                    onValueChange = ontempatLahirChange,
-                    modifier = Modifier
-                        .width(215.dp)
-                )
-            }
-            Spacer(modifier = Modifier.padding(end = 16.dp))
-            Column (
-            ){
-                Row {
-                    Text(
-                        text = "Tanggal",
-                        modifier = Modifier.padding(bottom = 8.dp, end = 8.dp)
-                    )
-                    Icon(
-                        painterResource(id = R.drawable.ic_tanggal),
-                        contentDescription = "tanggal"
-                    )
-                }
-                TextFieldCustom(
-                    value = tanggal,
-                    onValueChange = ontanggalChange,
-                    modifier = Modifier
-                        .width(130.dp)
-                )
-            }
+                .padding(7.dp)
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = "Back",
+                modifier = modifier
+                    .size(30.dp)
+            )
         }
-        Text(
-            text = "Golongan Darah",
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-        TextFieldCustom(
-            value = golonganDarah,
-            onValueChange = ongolonganDarahChange,
-        )
-        RadioButton()
-
-        Button(
-            onClick = onSimpanClick,
-            shape = RoundedCornerShape(10.dp),
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 32.dp)
-                .height(48.dp)
+                .verticalScroll(scrollState)
+                .padding(16.dp)
         ) {
             Text(
-                text = "Simpan",
-                style = MaterialTheme.typography.bodyLarge
+                text = "Tambah Identitas Anak",
+                style = MaterialTheme.typography.titleLarge,
+                modifier = modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(bottom = 16.dp)
             )
+            Text(
+                text = "Nomor Kartu Keluarga",
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            TextFieldCustom(
+                value = nomorKartuKeluarga,
+                onValueChange = onNomorKartuKeluargaChange,
+            )
+            Text(
+                text = "NIK Anak",
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            TextFieldCustom(
+                value = nikAnak,
+                onValueChange = onnikAnakChange,
+            )
+            Text(
+                text = "Nama Anak",
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            TextFieldCustom(
+                value = namaAnak,
+                onValueChange = onnamaAnakChange,
+            )
+            Row {
+                Column(
+                ) {
+                    Text(
+                        text = "Tempat Lahir",
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                    TextFieldCustom(
+                        value = tempatLahir,
+                        onValueChange = ontempatLahirChange,
+                        modifier = Modifier
+                            .width(215.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.padding(end = 16.dp))
+                Column(
+                ) {
+                    Row {
+                        Text(
+                            text = "Tanggal",
+                            modifier = Modifier.padding(bottom = 8.dp, end = 8.dp)
+                        )
+                        Icon(
+                            painterResource(id = R.drawable.ic_tanggal),
+                            contentDescription = "tanggal"
+                        )
+                    }
+                    TextFieldCustom(
+                        value = tanggal,
+                        onValueChange = ontanggalChange,
+                        modifier = Modifier
+                            .width(130.dp)
+                    )
+                }
+            }
+            Text(
+                text = "Golongan Darah",
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            TextFieldCustom(
+                value = golonganDarah,
+                onValueChange = ongolonganDarahChange,
+            )
+            RadioButton()
+
+            Button(
+                onClick = onSimpanClick,
+                shape = RoundedCornerShape(10.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 32.dp)
+                    .height(48.dp)
+            ) {
+                Text(
+                    text = "Simpan",
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
         }
     }
 }
