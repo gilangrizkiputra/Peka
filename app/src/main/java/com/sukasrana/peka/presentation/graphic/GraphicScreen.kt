@@ -41,6 +41,8 @@ import com.sukasrana.peka.R
 import com.sukasrana.peka.data.ListData
 import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.presentation.component.ArtikelRekomendasiItem
+import com.sukasrana.peka.presentation.graphic.component.BeratChat
+import com.sukasrana.peka.presentation.graphic.component.TinggiBadan
 import com.sukasrana.peka.ui.theme.PekaTheme
 import com.sukasrana.peka.ui.theme.onPrimaryLight
 import com.sukasrana.peka.ui.theme.secondaryColor
@@ -235,14 +237,11 @@ fun GraphicScreen(
                             .padding(10.dp)
                     ) {
                         Text(
-                            text = "Kondisi Berat Badan",
+                            text = "Kondisi Berat Badan (Kg)",
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.onPrimary,
                             modifier = Modifier.padding(bottom = 5.dp))
-                        Image(
-                            painter = painterResource(id = R.drawable.grafik_berat_badan),
-                            contentDescription = "grafik berat badan",
-                            modifier = Modifier.fillMaxWidth())
+                        BeratChat()
                     }
                     Spacer(modifier = Modifier.padding(5.dp))
                     Column(
@@ -254,15 +253,11 @@ fun GraphicScreen(
                             .padding(10.dp)
                     ) {
                         Text(
-                            text = "Tinggi Badan",
+                            text = "Tinggi Badan (cm)",
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.onPrimary,
                             modifier = Modifier.padding(bottom = 5.dp))
-                        Image(
-                            painter = painterResource(id = R.drawable.grafik_tinggi_badan),
-                            contentDescription = "grafik tinggi badan",
-                            modifier = Modifier
-                                .fillMaxWidth())
+                        TinggiBadan()
                     }
                     Spacer(modifier = Modifier.padding(5.dp))
                     Column(
