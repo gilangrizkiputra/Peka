@@ -1,5 +1,6 @@
 package com.sukasrana.peka.data
 
+import co.yml.charts.common.model.Point
 import com.sukasrana.peka.R
 import com.sukasrana.peka.model.Balita
 import com.sukasrana.peka.model.Mpasi
@@ -44,42 +45,42 @@ object ListData {
         Article(
             id = 1,
             title = R.string.titleArticle1,
-            contentAr= R.string.contentArticle1,
+            contentAr = R.string.contentArticle1,
             date = "12 April 2024",
             photo = R.drawable.nutrisi
         ),
         Article(
             id = 2,
-            title =R.string.titleArticle2,
-            contentAr= R.string.contentArticle2,
+            title = R.string.titleArticle2,
+            contentAr = R.string.contentArticle2,
             date = "13 Januari 2024",
             photo = R.drawable.polaasuh
         ),
         Article(
             id = 3,
             title = R.string.titleArticle3,
-            contentAr= R.string.contentArticle3,
+            contentAr = R.string.contentArticle3,
             date = "12 Januari 2024",
             photo = R.drawable.anakmenelanasing
         ),
         Article(
             id = 4,
             title = R.string.titleArticle4,
-            contentAr= R.string.contentArtikel4,
+            contentAr = R.string.contentArtikel4,
             date = "12 Januari 2024",
             photo = R.drawable.anakpendiam
         ),
         Article(
             id = 5,
             title = R.string.titleArticle5,
-            contentAr= R.string.contentArticle5,
+            contentAr = R.string.contentArticle5,
             date = "12 Januari 2024",
             photo = R.drawable.anakmenelanasing
         ),
         Article(
             id = 6,
             title = R.string.titleArticle2,
-            contentAr= R.string.contentArticle2,
+            contentAr = R.string.contentArticle2,
             date = "12 Januari 2024",
             photo = R.drawable.polaasuh
         ),
@@ -90,10 +91,10 @@ object ListData {
             id = 1,
             desk = "Resep MPASI, 6 Bulan, Makan Pagi Makan Siang, Makan Malam",
             nama = R.string.menu_buburWortel,
-            gizi= R.string.gizi_buburWortel,
-            bahan =R.string.bahan_buburWortel,
+            gizi = R.string.gizi_buburWortel,
+            bahan = R.string.bahan_buburWortel,
             bulan = 6,
-            caramemasak=R.string.cara_buburWortel,
+            caramemasak = R.string.cara_buburWortel,
             tanggal = "12 Januari",
             photo = R.drawable.nutrisi,
             logo = R.drawable.ic_mpasi
@@ -102,10 +103,10 @@ object ListData {
             id = 2,
             desk = "Resep MPASI, 6 Bulan, Makan Pagi Makan Siang, Makan Malam",
             nama = R.string.menu_appleStew,
-            gizi= R.string.gizi_appleStew,
-            bahan =R.string.bahan_appleStew,
+            gizi = R.string.gizi_appleStew,
+            bahan = R.string.bahan_appleStew,
             bulan = 6,
-            caramemasak=R.string.cara_appleStew,
+            caramemasak = R.string.cara_appleStew,
             tanggal = "12 Januari",
             photo = R.drawable.nutrisi,
             logo = R.drawable.ic_mpasi
@@ -114,10 +115,10 @@ object ListData {
             id = 3,
             desk = "Resep MPASI, 8 Bulan, Makan Pagi Makan Siang, Makan Malam",
             nama = R.string.menu_buburTongseng,
-            gizi= R.string.gizi_buburTongseng,
-            bahan =R.string.bahan_buburTongseng,
+            gizi = R.string.gizi_buburTongseng,
+            bahan = R.string.bahan_buburTongseng,
             bulan = 8,
-            caramemasak=R.string.cara_buburTongseng,
+            caramemasak = R.string.cara_buburTongseng,
             tanggal = "12 Januari",
             photo = R.drawable.nutrisi,
             logo = R.drawable.ic_mpasi
@@ -126,10 +127,10 @@ object ListData {
             id = 4,
             desk = "Resep MPASI, 8 Bulan, Makan Pagi Makan Siang, Makan Malam",
             nama = R.string.menu_oatmeal,
-            gizi= R.string.gizi_oatmeal,
-            bahan =R.string.bahan_oatmeal,
+            gizi = R.string.gizi_oatmeal,
+            bahan = R.string.bahan_oatmeal,
             bulan = 8,
-            caramemasak=R.string.cara_oatmeal,
+            caramemasak = R.string.cara_oatmeal,
             tanggal = "12 Januari",
             photo = R.drawable.nutrisi,
             logo = R.drawable.ic_mpasi
@@ -138,10 +139,10 @@ object ListData {
             id = 5,
             desk = "Resep MPASI, 11 Bulan, Makan Pagi Makan Siang, Makan Malam",
             nama = R.string.menu_nasiTim,
-            gizi= R.string.gizi_nasiTim,
-            bahan =R.string.bahan_nasiTim,
+            gizi = R.string.gizi_nasiTim,
+            bahan = R.string.bahan_nasiTim,
             bulan = 11,
-            caramemasak=R.string.cara_nasiTim,
+            caramemasak = R.string.cara_nasiTim,
             tanggal = "12 Januari",
             photo = R.drawable.nutrisi,
             logo = R.drawable.ic_mpasi
@@ -150,10 +151,10 @@ object ListData {
             id = 6,
             desk = "Resep MPASI, 11 Bulan, Makan Pagi Makan Siang, Makan Malam",
             nama = R.string.menu_berasMerah,
-            gizi= R.string.gizi_berasMerah,
-            bahan =R.string.bahan_berasMerah,
+            gizi = R.string.gizi_berasMerah,
+            bahan = R.string.bahan_berasMerah,
             bulan = 11,
-            caramemasak=R.string.cara_berasMerah,
+            caramemasak = R.string.cara_berasMerah,
             tanggal = "12 Januari",
             photo = R.drawable.nutrisi,
             logo = R.drawable.ic_mpasi
@@ -162,16 +163,16 @@ object ListData {
             id = 7,
             desk = "Resep MPASI, 12 Bulan, Makan Pagi Makan Siang, Makan Malam",
             nama = R.string.menu_buburKentang,
-            gizi= R.string.gizi_buburKentang,
-            bahan =R.string.bahan_buburKentang,
+            gizi = R.string.gizi_buburKentang,
+            bahan = R.string.bahan_buburKentang,
             bulan = 12,
-            caramemasak=R.string.cara_buburKentang,
+            caramemasak = R.string.cara_buburKentang,
             tanggal = "12 Januari",
             photo = R.drawable.nutrisi,
             logo = R.drawable.ic_mpasi
         ),
 
-    )
+        )
 
     val listMkia = listOf(
         Mkia(
@@ -190,7 +191,7 @@ object ListData {
             name = "Kehamilan Sehat",
             category = 0,
             description =
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis lorem arcu, eget faucibus eros tincidunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec eros sit amet sem semper suscipit. Donec ut nisl erat. Morbi finibus sem ac ligula bibendum, quis ultrices massa ornare. Cras at tempor odio. Proin neque massa, porta vel turpis vel, elementum porta eros. Aenean vitae ante arcu. Donec bibendum dolor quis finibus ullamcorper.",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis lorem arcu, eget faucibus eros tincidunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec eros sit amet sem semper suscipit. Donec ut nisl erat. Morbi finibus sem ac ligula bibendum, quis ultrices massa ornare. Cras at tempor odio. Proin neque massa, porta vel turpis vel, elementum porta eros. Aenean vitae ante arcu. Donec bibendum dolor quis finibus ullamcorper.",
             image = R.drawable.image_kehamilansehat_mkia
         ),
         Mkia(
@@ -223,5 +224,21 @@ object ListData {
         )
     )
 
+    val DataBerat: List<Point> =
+        listOf(
+            Point(0f, 0f),
+            Point(1f, 8f),
+            Point(2f, 12f),
+            Point(3f, 16f),
+            Point(4f, 20f)
+        )
 
+    val DataTinggi: List<Point> =
+        listOf(
+            Point(0f, 0f),
+            Point(1f, 8f),
+            Point(2f, 12f),
+            Point(3f, 16f),
+            Point(4f, 20f)
+        )
 }
