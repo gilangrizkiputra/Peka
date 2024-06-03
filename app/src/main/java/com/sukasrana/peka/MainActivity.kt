@@ -8,6 +8,8 @@ import androidx.compose.material3.Surface
 import com.sukasrana.peka.presentation.Peka
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import com.sukasrana.peka.presentation.profile.ProfileEditScreen
 import com.sukasrana.peka.ui.theme.PekaTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +21,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Peka()
+                    ProfileEditScreen(navController = rememberNavController())
                 }
             }
         }
