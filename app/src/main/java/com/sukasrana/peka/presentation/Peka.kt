@@ -208,7 +208,7 @@ private fun BottomBar(
 ) {
     NavigationBar(
         modifier = modifier
-            .height(60.dp),
+            .height(80.dp),
         containerColor = Color.White
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -257,6 +257,12 @@ private fun BottomBar(
                         painter = item.icon,
                         contentDescription = item.title,
                         tint = if (currentRoute == item.screen.route) Color.White else Color.Gray
+                    )
+                },
+                label = {
+                    Text(
+                        text = item.title,
+                        color = Color.Gray
                     )
                 }
             )
