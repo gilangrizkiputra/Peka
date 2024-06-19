@@ -153,7 +153,7 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = modifier.padding(top = 8.dp)
                 ) {
-                    items(balita, key = { it.id }) {
+                    items(balita, key = { it.id_balita }) {
                         BalitaItem(balita = it, navController = navController, modifier = Modifier)
                     }
                     item {

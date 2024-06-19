@@ -12,15 +12,14 @@ import com.sukasrana.peka.model.MpasiModel
 object ListData {
     val dataBalita = listOf(
         Balita(
-            id = 1,
-            nomorKartuKeluarga = 321001001001,
-            nikAnak = 3211505240016,
-            nama = "Asep Knalpot",
-            tempatLahir = "Madiun",
-            tanggal = "15-05-24",
-            umur = 2,
-            golanganDarah = "A",
-            jenisKelamin = "Laki-laki"
+            id_balita = 1,
+            id_user = 1,
+            nama = "asep",
+            nik = 525424324234,
+            gender = "laki-laki",
+            birth_date = "2023-03-02",
+            birth_location = "Bandung",
+            blood_type = "A"
         ),
     )
 

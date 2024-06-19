@@ -113,37 +113,37 @@ fun BalitaItem(
                         .padding(top = 16.dp),
                     maxLines = 1
                 )
-                Text(
-                    text = "${balita.umur} Tahun",
-                    fontFamily = bodyFontFamily,
-                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 11.sp, fontWeight = FontWeight.Normal),
-                    color = Color.Black,
-                    modifier = Modifier.width(140.dp),
-                    maxLines = 1
-                )
+//                Text(
+//                    text = "${balita.umur} Tahun",
+//                    fontFamily = bodyFontFamily,
+//                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 11.sp, fontWeight = FontWeight.Normal),
+//                    color = Color.Black,
+//                    modifier = Modifier.width(140.dp),
+//                    maxLines = 1
+//                )
             }
         }
     }
 }
 
-@Preview
-@Composable
-private fun BalitaItemHorizontalPreview() {
-    PekaTheme {
-        BalitaItem(balita = Balita(
-            1,
-            321001001001,
-            3211505240016,
-            "Asep Knalpot",
-            "15-05-24",
-            "15-05-24",
-            2,
-            "A",
-            "Laki-laki",
-        ), navController = rememberNavController()
-//            onItemClicked = { balitaId ->
-//                println("Balita Id : $balitaId")
-//            }
-        )
-    }
-}
+//@Preview
+//@Composable
+//private fun BalitaItemHorizontalPreview() {
+//    PekaTheme {
+//        BalitaItem(balita = Balita(
+//            1,
+//            321001001001,
+//            3211505240016,
+//            "Asep Knalpot",
+//            "15-05-24",
+//            "15-05-24",
+//            2,
+//            "A",
+//            "Laki-laki",
+//        ), navController = rememberNavController()
+////            onItemClicked = { balitaId ->
+////                println("Balita Id : $balitaId")
+////            }
+//        )
+//    }
+//}
