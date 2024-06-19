@@ -1,6 +1,7 @@
 package com.sukasrana.peka.presentation.login
 
 import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
@@ -41,6 +42,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.navigation.Screen
+import com.sukasrana.peka.network.maps.LocationHelper
 import com.sukasrana.peka.presentation.component.EmailTextField
 import com.sukasrana.peka.presentation.component.PasswordTextField
 import com.sukasrana.peka.ui.theme.PekaTheme
@@ -48,6 +50,7 @@ import com.sukasrana.peka.ui.theme.PekaTheme
 @Composable
 fun LoginScreen(
     navController: NavController,
+    locationHelper: LocationHelper,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -69,7 +72,7 @@ fun LoginScreen(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = "Back",
             modifier = modifier
-                .size(50.dp)
+                .size(25.dp)
         )
     }
 
@@ -90,6 +93,7 @@ fun LoginScreen(
         },
         onLoginClick = {
             navController.navigate(Screen.Home.route)
+            locationHelper.checkPermissionsAndStartLocationUpdate()
         },
         modifier = modifier
     )
@@ -111,7 +115,7 @@ fun LoginContent(
         painter = painterResource(id = R.drawable.image_onboarding_background),
         contentDescription = "OnBoarding BG",
         modifier = modifier
-            .offset(x = 195.dp, y = (-50).dp)
+            .offset(x = 210.dp, y = (-90).dp)
             .graphicsLayer {
                 this.rotationZ = 120f
             })
@@ -201,7 +205,9 @@ fun LoginContent(
 @Preview(showBackground = true)
 @Composable
 private fun LoginScreenPreview() {
+    val activity = LocalContext.current as ComponentActivity
+    val locationHelper = remember { LocationHelper(activity) }
     PekaTheme {
-        LoginScreen(navController = rememberNavController())
+        LoginScreen(navController = rememberNavController(), locationHelper = locationHelper)
     }
 }

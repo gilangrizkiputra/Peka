@@ -1,5 +1,7 @@
 package com.sukasrana.peka.presentation.login
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
@@ -39,12 +41,17 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
+import com.sukasrana.peka.model.User
 import com.sukasrana.peka.navigation.Screen
+import com.sukasrana.peka.network.RetrofitInstance
 import com.sukasrana.peka.presentation.component.EmailTextField
 import com.sukasrana.peka.presentation.component.NameTextField
 import com.sukasrana.peka.presentation.component.NumberTextField
 import com.sukasrana.peka.presentation.component.PasswordTextField
 import com.sukasrana.peka.ui.theme.PekaTheme
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
 
 @Composable
 fun SignUpScreen(
@@ -60,26 +67,84 @@ fun SignUpScreen(
     var email by remember {
         mutableStateOf("")
     }
-    var nkk by remember {
+
+    var noKk by remember {
         mutableStateOf("")
     }
+
     var password by remember {
         mutableStateOf("")
     }
-    var pass by remember {
+
+    var konfirmPassword by remember {
         mutableStateOf("")
+    }
+
+    fun onDaftarClick() {
+        if (name.isEmpty() || email.isEmpty() || noKk.isEmpty() || password.isEmpty() || konfirmPassword.isEmpty()){
+            Toast.makeText(context, "Data belum lengkap", Toast.LENGTH_LONG).show()
+            return
+        }
+        if (password != konfirmPassword){
+            Toast.makeText(context, "Password dan Konfirmasi Password Berbeda", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        val user = User(
+            id_user = null,
+            nama = name,
+            email = email,
+            password = password,
+            nik = noKk.toLong(),
+            alamat = "",
+            authority = "user",
+            foto_profile = ""
+        )
+        Log.d("UserData", "Data yang dikirim: $user")
+
+        coroutineScope.launch {
+            try {
+                val response = RetrofitInstance.api.addUser(user)
+                if (response.isSuccessful) {
+                    Log.d("UserData", "Daftar berhasil")
+                    Toast.makeText(context, "Daftar Berhasil", Toast.LENGTH_LONG).show()
+                    navController.navigate(Screen.Login.route)
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Log.d("UserData", "Server Error: $errorBody")
+                    Toast.makeText(context, "Server Error: $errorBody", Toast.LENGTH_LONG).show()
+                }
+            } catch (e: Exception) {
+                when (e) {
+                    is IOException -> {
+                        Log.d("UserData", "Network Error: ${e.message}")
+                        Toast.makeText(context, "Network Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                    is HttpException -> {
+                        val code = e.code()
+                        val errorResponse = e.response()?.errorBody()?.string()
+                        Log.d("UserData", "HTTP Error: Code $code, $errorResponse")
+                        Toast.makeText(context, "HTTP Error: Code $code", Toast.LENGTH_LONG).show()
+                    }
+                    else -> {
+                        Log.d("UserData", "Unknown Error: ${e.message}")
+                        Toast.makeText(context, "Unknown Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
     }
 
     IconButton(
         onClick = { navController.navigateUp() },
         modifier = modifier
-            .padding(start = 10.dp, top = 40.dp)
+            .padding(start = 10.dp, top = 20.dp)
     ) {
         Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = "Back",
             modifier = modifier
-                .size(50.dp)
+                .size(25.dp)
         )
     }
 
@@ -90,38 +155,37 @@ fun SignUpScreen(
         isEnable = isEnable,
         name = name,
         email = email,
-        nkk = nkk,
+        noKk = noKk,
         password = password,
-        pass = pass,
+        konfirmPassword = konfirmPassword,
         onNameChange = {name = it},
         onEmailChange = {email = it},
-        onNkkChange = {nkk = it},
+        konfirmPassword = konfirmPassword,
         onPasswordChange = {password = it},
-        onPassChange = { pass = it },
+        onKonfirmPasswordChange = {konfirmPassword = it},
         moveToLogin = {
             navController.navigate(Screen.Login.route)
         },
-        onLoginClick = {
-            navController.navigate(Screen.Home.route)
-        })
+        onRegisterClick = {onDaftarClick()})
 
 }
+
 
 @Composable
 fun SignupContent(
     isEnable: Boolean,
     name: String,
     email: String,
-    nkk: String,
+    noKk: String,
     password: String,
-    pass: String,
+    konfirmPassword: String,
     onNameChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,
-    onNkkChange: (String) -> Unit,
+    onNoKkChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
-    onPassChange: (String) -> Unit,
+    onKonfirmPasswordChange: (String) -> Unit,
     moveToLogin: () -> Unit,
-    onLoginClick: () -> Unit,
+    onRegisterClick: () -> Unit,
     modifier: Modifier = Modifier,
     scrollState: ScrollState = rememberScrollState()
 ) {
@@ -129,10 +193,11 @@ fun SignupContent(
         painter = painterResource(id = R.drawable.image_onboarding_background),
         contentDescription = "OnBoarding BG",
         modifier = modifier
-            .offset(x = 150.dp, y = (-50).dp)
+            .offset(x = 210.dp, y = (-90).dp)
             .graphicsLayer {
                 this.rotationZ = 120f
-            })
+            }
+    )
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
@@ -146,7 +211,7 @@ fun SignupContent(
                 text = "Daftar",
                 style = MaterialTheme.typography.titleLarge
             )
-            Spacer(modifier = Modifier.padding(15.dp))
+            Spacer(modifier = Modifier.padding(top = 16.dp))
             Text(text = "Nama")
             NameTextField(
                 value = name,
@@ -159,10 +224,11 @@ fun SignupContent(
                 onValueChange = onEmailChange,
                 label = "Email"
             )
-            Text(text = "Nomor KK")
-            NumberTextField(
-                value = nkk,
-                onValueChange = onNkkChange
+            Text(text = "Nomor KK (Kartu Keluarga)")
+            EmailTextField(
+                value = noKk,
+                onValueChange = onNoKkChange,
+                label = "Nomor Kartu Keluarga"
             )
             Text(text = "Kata Sandi")
             PasswordTextField(
@@ -173,6 +239,13 @@ fun SignupContent(
             PasswordTextField(
                 text = pass,
                 onValueChange = onPassChange
+            )
+            Spacer(modifier = Modifier.padding(top = 8.dp))
+            Text(text = "Konfirmasi Kata Sandi")
+            PasswordTextField(
+                text = konfirmPassword,
+                onValueChange = onKonfirmPasswordChange,
+                label = "Konfirmasi Kata Sandi"
             )
             Row(
                 horizontalArrangement = Arrangement.End,
@@ -196,8 +269,7 @@ fun SignupContent(
                 }
             }
             Button(
-                onClick = onLoginClick,
-                enabled = isEnable,
+                onClick = onRegisterClick,
                 shape = MaterialTheme.shapes.large,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -205,7 +277,7 @@ fun SignupContent(
                     .height(48.dp)
             ) {
                 Text(
-                    text = "Masuk",
+                    text = "Daftar",
                     style = MaterialTheme.typography.bodyLarge
                 )
             }
