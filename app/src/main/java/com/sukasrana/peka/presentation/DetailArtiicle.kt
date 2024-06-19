@@ -1,6 +1,4 @@
-
 package com.sukasrana.peka.presentation
-
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,12 +17,14 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,7 +34,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.sukasrana.peka.data.ListData
+import com.sukasrana.peka.data.repository.fetchArticles
 import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
@@ -44,16 +44,32 @@ fun DetailArticle(
     navController: NavController,
     articleId: Int?
 ) {
-    val newArticle = ListData.TheArticel.filter { article ->
-        article.id == articleId
+    val article = remember { mutableStateOf<Article?>(null) }
+
+    // Pemanggilan data artikel berdasarkan ID
+    LaunchedEffect(articleId) {
+        article.value = fetchArticles()?.find { it.id_artikel == articleId }
     }
-    DetailArticleContent(navController, newArticleList = newArticle)
+
+    article.value?.let {
+        DetailArticleContent(navController, article = it)
+    } ?: run {
+        // Show loading or error state if needed
+        Text(
+            text = "Loading...",
+            style = MaterialTheme.typography.bodyLarge.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold
+            ),
+            modifier = modifier.padding(16.dp)
+        )
+    }
 }
 
 @Composable
 private fun DetailArticleContent(
     navController: NavController,
-    newArticleList: List<Article>,
+    article: Article,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -79,20 +95,20 @@ private fun DetailArticleContent(
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(data = newArticleList[0].photo)
+                    .data(data = article.image)
                     .build(),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(height = 250.dp, width = 366.dp)
                     .clip(RoundedCornerShape(10.dp)),
-                contentDescription = "Poster Movie"
+                contentDescription = "Poster Article"
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
 
         Column(modifier = Modifier.padding(top = 16.dp)) {
             Text(
-                text = stringResource(id = newArticleList[0].title),
+                text = article.title,
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontSize = 18.sp,
@@ -100,7 +116,17 @@ private fun DetailArticleContent(
                 )
             )
             Text(
-                text = stringResource(id = newArticleList[0].contentAr),
+                text = article.content,
+                fontFamily = bodyFontFamily,
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Normal,
+                    textAlign = TextAlign.Justify
+                ),
+                modifier = Modifier.padding(top = 16.dp)
+            )
+            Text(
+                text = "Sumber : ${article.sumber}",
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyMedium.copy(
                     fontSize = 14.sp,
@@ -113,9 +139,16 @@ private fun DetailArticleContent(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 private fun DetailMapContentPreview() {
-    DetailArticleContent(navController = rememberNavController(),newArticleList = ListData.TheArticel)
+    val navController = rememberNavController()
+    DetailArticleContent(navController, article = Article(
+        id_artikel = 1,
+        title = "Sample Title",
+        image = "https://via.placeholder.com/150",
+        content = "Sample content",
+        date = "12 Januari 2024",
+        sumber = "Sample sumber"
+    ))
 }
