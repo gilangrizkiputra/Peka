@@ -1,5 +1,6 @@
 package com.sukasrana.peka.presentation
 
+import androidx.activity.ComponentActivity
 import com.sukasrana.peka.presentation.login.LoginScreen
 import com.sukasrana.peka.presentation.login.SignUpScreen
 import com.sukasrana.peka.presentation.login.SwitchScreen
@@ -42,6 +43,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.sukasrana.peka.network.maps.LocationHelper
 import com.sukasrana.peka.presentation.PendaftaranOnline.PendaftaranOnlineScreen
 import com.sukasrana.peka.presentation.addFormChild.AddFormChildScreen
 import com.sukasrana.peka.presentation.cekNoAntrian.CekNoAntrianScreen
@@ -56,6 +58,7 @@ import com.sukasrana.peka.presentation.profile.ProfileScreen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Peka(
+    locationHelper: LocationHelper,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController()
 ) {
@@ -98,7 +101,7 @@ fun Peka(
 
             composable(Screen.Login.route) {
                 nav.value = "no_top_no_bot"
-                LoginScreen(navController = navController)
+                LoginScreen(navController = navController, locationHelper = locationHelper)
             }
 
             composable(Screen.Signup.route) {
@@ -273,5 +276,5 @@ private fun BottomBar(
 @Preview(showBackground = true)
 @Composable
 private fun PekaAppPrev() {
-    Peka()
+    Peka(locationHelper = LocationHelper(LocalContext.current as ComponentActivity))
 }
