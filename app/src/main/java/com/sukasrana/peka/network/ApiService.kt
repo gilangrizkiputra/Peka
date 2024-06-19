@@ -1,11 +1,17 @@
 package com.sukasrana.peka.network
 
+import com.sukasrana.peka.model.Article
+import com.sukasrana.peka.model.ArticleResponse
 import com.sukasrana.peka.model.User
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
     @POST("user")
     suspend fun addUser(@Body user: User): Response<Unit>
+
+    @GET("artikel")
+    suspend fun readArtikel(): Response<ArticleResponse>
 }

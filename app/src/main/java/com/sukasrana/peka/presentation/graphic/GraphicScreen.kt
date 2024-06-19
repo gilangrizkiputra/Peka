@@ -1,5 +1,6 @@
 package com.sukasrana.peka.presentation.graphic
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -27,6 +28,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,6 +43,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.data.ListData
+import com.sukasrana.peka.data.repository.fetchArticles
 import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.presentation.component.ArtikelRekomendasiItem
 import com.sukasrana.peka.presentation.graphic.component.BeratChat
@@ -47,13 +52,28 @@ import com.sukasrana.peka.ui.theme.PekaTheme
 import com.sukasrana.peka.ui.theme.onPrimaryLight
 import com.sukasrana.peka.ui.theme.secondaryColor
 import com.sukasrana.peka.ui.theme.secondaryTwoColor
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 fun GraphicScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    artikelRekomendasi: List<Article> = ListData.TheArticel
 ) {
+
+    val artikelRekomendasi = remember { mutableStateOf<List<Article>>(emptyList()) }
+
+    // Load data from API
+    LaunchedEffect(Unit) {
+        Log.d("GraphicScreen", "Fetching articles")
+        val articles = fetchArticles()
+        if (articles != null) {
+            Log.d("GraphicScreen", "Articles fetched: $articles")
+            artikelRekomendasi.value = articles
+        } else {
+            Log.e("GraphicScreen", "Failed to fetch articles")
+        }
+    }
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -330,9 +350,9 @@ fun GraphicScreen(
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         modifier = modifier.padding(top = 8.dp)
                     ) {
-                        items(artikelRekomendasi, key = { it.id }) {
-                            ArtikelRekomendasiItem(rekomArt = it, modifier = Modifier) {
-
+                        items(artikelRekomendasi.value, key = { it.id_artikel }) {
+                            ArtikelRekomendasiItem(rekomArt = it) { articleId ->
+                                navController.navigate("detail_article/$articleId")
                             }
                         }
                     }
@@ -342,10 +362,10 @@ fun GraphicScreen(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun GraphicScreenPreview() {
-    PekaTheme {
-        GraphicScreen(navController = rememberNavController())
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//private fun GraphicScreenPreview() {
+//    PekaTheme {
+//        GraphicScreen(navController = rememberNavController())
+//    }
+//}

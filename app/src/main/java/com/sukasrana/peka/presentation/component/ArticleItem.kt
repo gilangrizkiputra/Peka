@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberImagePainter
 import com.sukasrana.peka.R
 import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.ui.theme.PekaTheme
@@ -39,32 +40,31 @@ fun ArticleItem(
     modifier: Modifier = Modifier,
     onItemClicked: (Int) -> Unit
 ) {
-
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .clickable {
-                onItemClicked(article.id)
+                onItemClicked(article.id_artikel)
             }
             .fillMaxWidth()
-            .padding(start = 16.dp) // Menambahkan margin 16dp di sekeliling keseluruhan item
+            .padding(start = 16.dp)
             .width(360.dp)
             .height(104.dp)
     ) {
         Image(
-            painter = painterResource(id = article.photo),
-            contentDescription ="${stringResource(id = article.title)}",
+            painter = rememberImagePainter(article.image),
+            contentDescription = article.title,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(113.dp, 72.dp) // Mengatur ukuran gambar
+                .size(113.dp, 72.dp)
         )
 
-        Column (
+        Column(
             modifier = Modifier
-                .padding(start = 8.dp) // Margin yang diminta
-        ){
+                .padding(start = 8.dp)
+        ) {
             Text(
-                text = "${stringResource(id = article.title)}",
+                text = article.title,
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
             )
@@ -75,25 +75,24 @@ fun ArticleItem(
                 text = article.date,
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyMedium.copy(fontSize = 8.sp, fontWeight = FontWeight.Normal)
-
             )
-
-
         }
-
     }
-
-
-
 }
-
 
 @Preview(showBackground = true)
 @Composable
 private fun ArticleItemPreview() {
     PekaTheme {
         ArticleItem(
-            article = Article(1, R.string.titleArticle1, R.string.contentArticle1, "12 Januari 2024", R.drawable.image_artikel1),
+            article = Article(
+                1,
+                "Title Article 1",
+                "https://via.placeholder.com/150",
+                "12 Januari 2024",
+                "Content",
+                "Sumber"
+            ),
             onItemClicked = { articleId ->
                 println("Article Id : $articleId")
             }

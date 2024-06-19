@@ -13,6 +13,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,20 +27,34 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.data.ListData
+import com.sukasrana.peka.data.repository.fetchArticles
 import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.navigation.Screen
-import com.sukasrana.peka.presentation.component.RekomArtItem
 import com.sukasrana.peka.presentation.component.ArticleItem
+import com.sukasrana.peka.presentation.component.ArtikelRekomendasiItem
 import com.sukasrana.peka.ui.theme.bodyFontFamily
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 fun ArticleScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    recomArt: List<Article> = ListData.TheArticel,
-    article: List<Article> = ListData.TheArticel,
 ) {
+    val recomArt = remember { mutableStateOf<List<Article>>(emptyList()) }
+    val article = remember { mutableStateOf<List<Article>>(emptyList()) }
+
+    // Pemanggilan data menggunakan LaunchedEffect
+    LaunchedEffect(Unit) {
+        withContext(Dispatchers.IO) {
+            val articles = fetchArticles()
+            if (articles != null) {
+                recomArt.value = articles
+                article.value = articles
+            }
+        }
+    }
+
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier.background(MaterialTheme.colorScheme.background)
@@ -64,9 +81,9 @@ fun ArticleScreen(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = modifier.background(Color.White)
             ) {
-                items(recomArt, key = { it.id }) {
-                    RekomArtItem(rekomArt = it) { articleId ->
-                        navController.navigate(Screen.DetailArticle.route+"/$articleId")
+                items(recomArt.value, key = { it.id_artikel }) {
+                    ArtikelRekomendasiItem(rekomArt = it) { articleId ->
+                        navController.navigate("detail_article/$articleId")
                     }
                 }
             }
@@ -85,13 +102,11 @@ fun ArticleScreen(
                 )
             }
         }
-        items(article, key = { it.id }) {
+        items(article.value, key = { it.id_artikel }) {
             ArticleItem(article = it) { articleId ->
-                navController.navigate(Screen.DetailArticle.route+"/$articleId")
+                navController.navigate("detail_article/$articleId")
             }
         }
-
-
     }
 }
 
