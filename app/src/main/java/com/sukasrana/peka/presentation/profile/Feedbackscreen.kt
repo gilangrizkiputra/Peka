@@ -1,17 +1,24 @@
 package com.sukasrana.peka.presentation.profile
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -23,117 +30,154 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.sukasrana.peka.presentation.component.MassageTextField
-import com.sukasrana.peka.presentation.addFormChild.component.TextFieldCustom
-import com.sukasrana.peka.presentation.component.NumberTextField
+import androidx.wear.compose.material.ContentAlpha
 import com.sukasrana.peka.ui.theme.PekaTheme
+
+data class Card (
+        val title: String,
+        val Desc: String
+        )
 
 @Composable
 fun FeedbackScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    var name by remember {
-        mutableStateOf("")
-    }
-    var email by remember {
-        mutableStateOf("")
-    }
-    var number by remember {
-        mutableStateOf("")
-    }
-    var massage by remember {
-        mutableStateOf("")
-    }
-    FeedbackContent(
-        navController = navController,
-        name = name,
-        number = number,
-        email = email,
-        massage = massage,
-        onNameChange = { name = it },
-        onNumberChange = { number = it },
-        onEmailChange = { email = it },
-        onMassageChange = { massage = it }
+    val cardData1 = listOf(
+        Card("Bagaimana cara mendaftar di aplikasi ini?", "aaaaaaaaaaaaaa"),
+        Card("Apakah saya bisa mendaftarkan lebih dari satu anak ?", "Ya, Anda dapat mendaftarkan lebih dari satu anak di aplikasi ini. Untuk melakukannya, ikuti langkah-langkah berikut:\n" +
+                "Pilih Pendaftaran online pada menu Home\n" +
+                "Lalu pilih jam kunjungan anda ke posyandu"),
+        Card("Apakah pendaftaran online ini gratis?", "Ya, Anda dapat mendaftarkan lebih dari satu anak di aplikasi ini. Untuk melakukannya, ikuti langkah-langkah berikut:\n" +
+                "Pilih Pendaftaran online pada menu Home\n" +
+                "Lalu pilih jam kunjungan anda ke posyandu")
     )
-}
-
-@Composable
-private fun FeedbackContent(
-    name: String,
-    number: String,
-    email: String,
-    massage: String,
-    onNameChange: (String) -> Unit,
-    onNumberChange: (String) -> Unit,
-    onEmailChange: (String) -> Unit,
-    onMassageChange: (String) -> Unit,
-    navController: NavController,
-    modifier: Modifier = Modifier
-) {
-    Column(
+    val cardData2 = listOf(
+        Card("Bagaimana cara melihat grafik perkembangan anak saya?", "aaaaaaaaaaaaaa"),
+        Card("Apa saja parameter yang dilacak dalam fitur pantau tumbuh kembang anak?", "aaaaaaaaaaaaaa"),
+        Card("Bagaimana cara melihat grafik perkembangan anak saya?", "aaaaaaaaaaaaaa")
+    )
+    LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = modifier
-                .fillMaxWidth()
-                .shadow(elevation = 1.dp)
-        ) {
-            IconButton(
-                onClick = { navController.navigateUp() },
+        item{
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = modifier
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back",
-                    modifier = modifier
-                        .size(30.dp)
-                )
-            }
-            Text(
-                text = "Atur Profile Anda",
-                style = MaterialTheme.typography.titleMedium
-            )
-        }
-        Column(
-            modifier = modifier
-                .padding(16.dp)
-        ) {
-            Text(
-                text = "Bantuan & Laporan",
-                style = MaterialTheme.typography.titleLarge,
-                modifier = modifier.padding(bottom = 20.dp)
-            )
-            Text(text = "Nama")
-            TextFieldCustom(value = name, onValueChange = onNameChange)
-            Text(text = "Nomor")
-            NumberTextField(value = number, onValueChange = onNumberChange)
-            Text(text = "Email")
-            TextFieldCustom(value = email, onValueChange = onEmailChange)
-            Text(text = "Catatan")
-            MassageTextField(value = massage, onValueChange = onMassageChange)
-            Button(
-                onClick = {},
-                shape = RoundedCornerShape(10.dp),
-                modifier = Modifier
-                    .padding(top = 20.dp)
                     .fillMaxWidth()
-                    .height(44.dp)
+                    .shadow(elevation = 1.dp)
             ) {
+                IconButton(
+                    onClick = { navController.navigateUp() },
+                    modifier = modifier
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back",
+                        modifier = modifier
+                            .size(30.dp)
+                    )
+                }
                 Text(
-                    text = "Kirim",
-                    style = MaterialTheme.typography.bodyLarge
+                    text = "Bantuan",
+                    style = MaterialTheme.typography.titleMedium
                 )
             }
         }
+        item {
+            Text(
+                text = "Pendaftaran Online",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(16.dp))
+        }
+        items(cardData1) {cardData ->
+            CardContent(title = cardData.title, desc = cardData.Desc)
+        }
+        item {
+            Text(
+                text = "Pantau Tumbuh Kembang Anak",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(16.dp))
+        }
+        items(cardData2) {cardData1 ->
+            CardContent(title = cardData1.title, desc = cardData1.Desc)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun CardContent(
+    title: String,
+    desc: String
+) {
+    var expanded by remember {
+        mutableStateOf(false)
+    }
+    val rotateState by animateFloatAsState(
+        targetValue = if(expanded) 90f else -90f)
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .animateContentSize(
+                animationSpec = tween(
+                    durationMillis = 300,
+                    easing = LinearOutSlowInEasing
+                )
+            ),
+        shape = RoundedCornerShape(0.dp),
+        onClick = {
+            expanded = !expanded
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = MaterialTheme.colorScheme.background)
+                .padding(12.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    modifier = Modifier
+                        .weight(6f),
+                    text = title,
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Bold
+                )
+                IconButton(
+                    modifier = Modifier
+                        .weight(1f)
+                        .alpha(ContentAlpha.medium)
+                        .rotate(rotateState),
+                    onClick = {
+                        expanded = !expanded
+                    }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBackIosNew,
+                        contentDescription = "ArrDrop"
+                    )
+                }
+            }
+            if(expanded){
+                Text(
+                    text = desc,
+                    style = MaterialTheme.typography.bodySmall)
+            }
+        }
+
     }
 }
 
@@ -141,6 +185,6 @@ private fun FeedbackContent(
 @Composable
 private fun FeedbackScreenPreview() {
     PekaTheme {
-        FeedbackScreen(navController = rememberNavController())
+        FeedbackScreen(rememberNavController())
     }
 }

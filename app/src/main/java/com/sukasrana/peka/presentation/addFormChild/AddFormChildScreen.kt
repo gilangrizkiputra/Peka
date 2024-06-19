@@ -23,24 +23,29 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.presentation.addFormChild.component.TextFieldCustom
 import com.sukasrana.peka.ui.theme.PekaTheme
+import com.vanpra.composematerialdialogs.MaterialDialog
+import com.vanpra.composematerialdialogs.datetime.date.datepicker
+import com.vanpra.composematerialdialogs.rememberMaterialDialogState
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun AddFormChildScreen(
@@ -109,6 +114,17 @@ fun AddFormChildContent(
     modifier: Modifier = Modifier,
     scrollState: ScrollState = rememberScrollState(),
 ) {
+    var picekdDate by remember {
+        mutableStateOf(LocalDate.now())
+    }
+    val formattedDate by remember {
+        derivedStateOf {
+            DateTimeFormatter
+                .ofPattern("dd mm yyyy")
+                .format(picekdDate)
+        }
+    }
+    val dateDialogState = rememberMaterialDialogState()
     Column {
         IconButton(
             onClick = { navController.navigateUp() },
@@ -185,12 +201,18 @@ fun AddFormChildContent(
                             contentDescription = "tanggal"
                         )
                     }
-                    TextFieldCustom(
-                        value = tanggal,
-                        onValueChange = ontanggalChange,
-                        modifier = Modifier
-                            .width(130.dp)
-                    )
+                    //TextFieldCustom(
+                    //    value = tanggal,
+                    //    onValueChange = ontanggalChange,
+                    //    modifier = Modifier
+                    //        .width(130.dp)
+                    //        .clickable {
+                    //            dateDialogState.show()
+                    //        }
+                    //)
+                    Button(onClick = { dateDialogState.show() }) {
+                        Text(text = "Pilih Tanggal")
+                    }
                 }
             }
             Text(
@@ -217,6 +239,21 @@ fun AddFormChildContent(
                 )
             }
         }
+    }
+    MaterialDialog(
+        dialogState = dateDialogState,
+        properties = DialogProperties(
+            dismissOnBackPress = true
+        ),
+        buttons = {
+            positiveButton(text = "Ok")
+            negativeButton(text = "Batal")
+        }
+    ) {
+        datepicker(
+            initialDate = LocalDate.now(),
+            title = "Pilih Tanggal"
+        )
     }
 }
 

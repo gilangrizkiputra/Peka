@@ -142,8 +142,7 @@ fun LoginContent(
             Text(text = "Kata Sandi")
             PasswordTextField(
                 text = password,
-                onValueChange = onPasswordChange,
-                label = "Password"
+                onValueChange = onPasswordChange
             )
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,

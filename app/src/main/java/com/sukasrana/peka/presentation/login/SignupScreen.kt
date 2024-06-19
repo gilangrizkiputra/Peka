@@ -46,6 +46,7 @@ import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.network.RetrofitInstance
 import com.sukasrana.peka.presentation.component.EmailTextField
 import com.sukasrana.peka.presentation.component.NameTextField
+import com.sukasrana.peka.presentation.component.NumberTextField
 import com.sukasrana.peka.presentation.component.PasswordTextField
 import com.sukasrana.peka.ui.theme.PekaTheme
 import kotlinx.coroutines.launch
@@ -147,7 +148,11 @@ fun SignUpScreen(
         )
     }
 
+    var isEnable = false
+    if (password == pass) isEnable = true
+
     SignupContent(
+        isEnable = isEnable,
         name = name,
         email = email,
         noKk = noKk,
@@ -155,7 +160,7 @@ fun SignUpScreen(
         konfirmPassword = konfirmPassword,
         onNameChange = {name = it},
         onEmailChange = {email = it},
-        onNoKkChange = {noKk = it},
+        konfirmPassword = konfirmPassword,
         onPasswordChange = {password = it},
         onKonfirmPasswordChange = {konfirmPassword = it},
         moveToLogin = {
@@ -168,6 +173,7 @@ fun SignUpScreen(
 
 @Composable
 fun SignupContent(
+    isEnable: Boolean,
     name: String,
     email: String,
     noKk: String,
@@ -227,8 +233,12 @@ fun SignupContent(
             Text(text = "Kata Sandi")
             PasswordTextField(
                 text = password,
-                onValueChange = onPasswordChange,
-                label = "Kata Sandi"
+                onValueChange = onPasswordChange
+            )
+            Text(text = "Masukan Ulang Kata Sandi")
+            PasswordTextField(
+                text = pass,
+                onValueChange = onPassChange
             )
             Spacer(modifier = Modifier.padding(top = 8.dp))
             Text(text = "Konfirmasi Kata Sandi")
@@ -253,7 +263,7 @@ fun SignupContent(
                         .padding(bottom = 1.dp)
                 ) {
                     Text(
-                        text = "Daftar",
+                        text = "Masuk",
                         style = MaterialTheme.typography.bodySmall
                     )
                 }

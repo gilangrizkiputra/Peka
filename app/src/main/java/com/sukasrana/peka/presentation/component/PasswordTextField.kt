@@ -19,13 +19,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun PasswordTextField(
     modifier: Modifier = Modifier,
     text: String,
     onValueChange: (String) -> Unit,
-    label: String,
 ) {
     val passwordVisible = remember {
         mutableStateOf(false)
@@ -56,7 +56,6 @@ fun PasswordTextField(
         },
         singleLine = true,
         visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
-        label = { Text(text = label) },
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth().padding(bottom = 16.dp)
     )
 }
