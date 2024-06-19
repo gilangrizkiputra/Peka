@@ -40,6 +40,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.presentation.addFormChild.component.TextFieldCustom
+import com.sukasrana.peka.presentation.component.NumberTextField
+import com.sukasrana.peka.presentation.component.PasswordTextField
 import com.sukasrana.peka.ui.theme.PekaTheme
 
 @Composable
@@ -53,50 +55,55 @@ fun ProfileEditScreen(
     var email by remember {
         mutableStateOf("")
     }
-    var provinsi by remember {
+    var number by remember {
         mutableStateOf("")
     }
-    var kabupaten by remember {
+    var nkk by remember {
         mutableStateOf("")
     }
-    var kecamatan by remember {
+    var password by remember {
         mutableStateOf("")
     }
-    var adress by remember {
+    var pass by remember {
         mutableStateOf("")
     }
 
+    var isEnable = false
+    if (password == pass) isEnable = true
+
     ProfileEditContent(
+        isEnable = isEnable,
         navController = navController,
         name = name,
         email = email,
-        provinsi = provinsi,
-        kabupaten = kabupaten,
-        kecamatan = kecamatan,
-        adress = adress,
+        number = number,
+        nkk = nkk,
+        password = password,
+        pass = pass,
         onNameChange = { name = it },
         onEmailChange = { email = it },
-        onProvChange = { provinsi = it },
-        onKabChange = { kabupaten = it },
-        onKecChange = { kecamatan = it },
-        onAdressChange = { adress = it }
+        onNumbChange = { number = it },
+        onNkkChange = { nkk = it },
+        onPasswordChange = { password = it },
+        onPassChange = { pass = it }
     )
 }
 
 @Composable
 fun ProfileEditContent(
+    isEnable: Boolean,
     name: String,
     email: String,
-    provinsi: String,
-    kabupaten: String,
-    kecamatan: String,
-    adress: String,
+    number: String,
+    nkk: String,
+    password: String,
+    pass: String,
     onNameChange: (String) -> Unit,
-    onProvChange: (String) -> Unit,
+    onNumbChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,
-    onKabChange: (String) -> Unit,
-    onKecChange: (String) -> Unit,
-    onAdressChange: (String) -> Unit,
+    onNkkChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onPassChange: (String) -> Unit,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
@@ -163,28 +170,30 @@ fun ProfileEditContent(
                 value = email,
                 onValueChange = onEmailChange
             )
-            Text(text = "Provinsi")
-            TextFieldCustom(
-                value = provinsi,
-                onValueChange = onProvChange
+            Text(text = "Nomor")
+            NumberTextField(
+                value = number,
+                onValueChange = onNumbChange
             )
-            Text(text = "Kabupaten/Kota")
-            TextFieldCustom(
-                value = kabupaten,
-                onValueChange = onKabChange
+            Text(text = "Nomor Kartu Keluarga")
+            NumberTextField(
+                value = nkk,
+                onValueChange = onNkkChange
             )
-            Text(text = "Kecamatan")
-            TextFieldCustom(
-                value = kecamatan,
-                onValueChange = onKecChange
+            Text(text = "Kata Sandi")
+            PasswordTextField(
+                text = password,
+                onValueChange = onPasswordChange
             )
-            Text(text = "Alamat")
-            TextFieldCustom(
-                value = adress,
-                onValueChange = onAdressChange
+            Text(text = "Masukan Ulang Kata Sandi")
+            PasswordTextField(
+                text = pass,
+                onValueChange = onPassChange
             )
+
             Button(
-                onClick = {},
+                onClick = { },
+                enabled = isEnable,
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier
                     .padding(top = 16.dp)
@@ -207,13 +216,14 @@ fun ProfileEditContent(
             Column(modifier = modifier.padding(bottom = 16.dp, start = 16.dp, end = 16.dp)) {
                 Text(
                     text = "Pilih Foto Profile",
-                    style = MaterialTheme.typography.titleMedium)
+                    style = MaterialTheme.typography.titleMedium
+                )
                 Spacer(modifier = modifier.padding(10.dp))
                 Row(
                     modifier = modifier
                         .fillMaxWidth()
                         .padding(bottom = 30.dp)
-                ){
+                ) {
                     Image(
                         painter = painterResource(id = R.drawable.icon_camera),
                         contentDescription = null,

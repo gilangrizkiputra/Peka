@@ -111,7 +111,7 @@ fun LoginContent(
         painter = painterResource(id = R.drawable.image_onboarding_background),
         contentDescription = "OnBoarding BG",
         modifier = modifier
-            .offset(x = 195.dp, y = -50.dp)
+            .offset(x = 195.dp, y = (-50).dp)
             .graphicsLayer {
                 this.rotationZ = 120f
             })
@@ -138,8 +138,7 @@ fun LoginContent(
             Text(text = "Kata Sandi")
             PasswordTextField(
                 text = password,
-                onValueChange = onPasswordChange,
-                label = "Password"
+                onValueChange = onPasswordChange
             )
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,

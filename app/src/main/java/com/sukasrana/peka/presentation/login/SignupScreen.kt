@@ -42,6 +42,7 @@ import com.sukasrana.peka.R
 import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.presentation.component.EmailTextField
 import com.sukasrana.peka.presentation.component.NameTextField
+import com.sukasrana.peka.presentation.component.NumberTextField
 import com.sukasrana.peka.presentation.component.PasswordTextField
 import com.sukasrana.peka.ui.theme.PekaTheme
 
@@ -59,15 +60,20 @@ fun SignUpScreen(
     var email by remember {
         mutableStateOf("")
     }
-
+    var nkk by remember {
+        mutableStateOf("")
+    }
     var password by remember {
+        mutableStateOf("")
+    }
+    var pass by remember {
         mutableStateOf("")
     }
 
     IconButton(
         onClick = { navController.navigateUp() },
         modifier = modifier
-            .padding(start = 10.dp, top = 70.dp)
+            .padding(start = 10.dp, top = 40.dp)
     ) {
         Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -77,13 +83,21 @@ fun SignUpScreen(
         )
     }
 
+    var isEnable = false
+    if (password == pass) isEnable = true
+
     SignupContent(
+        isEnable = isEnable,
         name = name,
         email = email,
+        nkk = nkk,
         password = password,
+        pass = pass,
         onNameChange = {name = it},
         onEmailChange = {email = it},
+        onNkkChange = {nkk = it},
         onPasswordChange = {password = it},
+        onPassChange = { pass = it },
         moveToLogin = {
             navController.navigate(Screen.Login.route)
         },
@@ -95,12 +109,17 @@ fun SignUpScreen(
 
 @Composable
 fun SignupContent(
+    isEnable: Boolean,
     name: String,
     email: String,
+    nkk: String,
     password: String,
+    pass: String,
     onNameChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,
+    onNkkChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
+    onPassChange: (String) -> Unit,
     moveToLogin: () -> Unit,
     onLoginClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -127,7 +146,7 @@ fun SignupContent(
                 text = "Daftar",
                 style = MaterialTheme.typography.titleLarge
             )
-            Spacer(modifier = Modifier.padding(20.dp))
+            Spacer(modifier = Modifier.padding(15.dp))
             Text(text = "Nama")
             NameTextField(
                 value = name,
@@ -140,11 +159,20 @@ fun SignupContent(
                 onValueChange = onEmailChange,
                 label = "Email"
             )
+            Text(text = "Nomor KK")
+            NumberTextField(
+                value = nkk,
+                onValueChange = onNkkChange
+            )
             Text(text = "Kata Sandi")
             PasswordTextField(
                 text = password,
-                onValueChange = onPasswordChange,
-                label = "Kata Sandi"
+                onValueChange = onPasswordChange
+            )
+            Text(text = "Masukan Ulang Kata Sandi")
+            PasswordTextField(
+                text = pass,
+                onValueChange = onPassChange
             )
             Row(
                 horizontalArrangement = Arrangement.End,
@@ -162,13 +190,14 @@ fun SignupContent(
                         .padding(bottom = 1.dp)
                 ) {
                     Text(
-                        text = "Daftar",
+                        text = "Masuk",
                         style = MaterialTheme.typography.bodySmall
                     )
                 }
             }
             Button(
                 onClick = onLoginClick,
+                enabled = isEnable,
                 shape = MaterialTheme.shapes.large,
                 modifier = Modifier
                     .fillMaxWidth()

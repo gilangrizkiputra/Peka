@@ -57,7 +57,7 @@ fun AboutScreen(
                 )
             }
             Text(
-                text = "Atur Profile Anda",
+                text = "Tentang Aplikasi",
                 style = MaterialTheme.typography.titleMedium
             )
         }
