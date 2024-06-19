@@ -183,12 +183,14 @@ fun ProfileEditContent(
             Text(text = "Kata Sandi")
             PasswordTextField(
                 text = password,
-                onValueChange = onPasswordChange
+                onValueChange = onPasswordChange,
+                label = "Kata sandi"
             )
             Text(text = "Masukan Ulang Kata Sandi")
             PasswordTextField(
                 text = pass,
-                onValueChange = onPassChange
+                onValueChange = onPassChange,
+                label = "Konfirmasi Kata Sandi"
             )
 
             Button(
