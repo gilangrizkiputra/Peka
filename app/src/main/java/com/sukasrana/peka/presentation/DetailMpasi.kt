@@ -25,22 +25,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.sukasrana.peka.data.ListData
-import com.sukasrana.peka.data.repository.fetchArticles
 import com.sukasrana.peka.data.repository.fetchMpasi
-import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.model.Mpasi
-import com.sukasrana.peka.model.MpasiModel
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @Composable
@@ -52,7 +44,6 @@ fun DetailMpasi(
 
     val mpasi = remember { mutableStateOf<Mpasi?>(null) }
 
-    // Pemanggilan data mpasi berdasarkan ID
     LaunchedEffect(mpasiId) {
         mpasi.value = fetchMpasi()?.find { it.id_mpasi == mpasiId }
     }
@@ -60,7 +51,6 @@ fun DetailMpasi(
     mpasi.value?.let {
         DetailMpasiContent(navController, newMpasiList = it)
     } ?: run {
-        // Show loading or error state if needed
         Text(
             text = "Loading...",
             style = MaterialTheme.typography.bodyLarge.copy(

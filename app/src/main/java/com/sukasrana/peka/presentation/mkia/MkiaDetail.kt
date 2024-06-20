@@ -1,9 +1,7 @@
 package com.sukasrana.peka.presentation.mkia
 
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,23 +19,22 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.sukasrana.peka.R
-import com.sukasrana.peka.data.ListData
+import com.sukasrana.peka.data.repository.fetchMkia
 import com.sukasrana.peka.model.Mkia
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
@@ -47,17 +44,31 @@ fun MkiaDetail(
     modifier: Modifier = Modifier,
     mkiaId: Int?
 ) {
-    val newMkia = ListData.listMkia.filter { mkia ->
-        mkia.id == mkiaId
+    val mkia = remember { mutableStateOf<Mkia?>(null) }
+
+    LaunchedEffect(mkiaId) {
+        mkia.value = fetchMkia()?.find { it.id_mkia == mkiaId }
     }
-    MkiaContent(navController,newMkiaList = newMkia)
+
+    mkia.value?.let {
+        MkiaContent(navController, newMkiaList = it)
+    } ?: run {
+        Text(
+            text = "Loading...",
+            style = MaterialTheme.typography.bodyLarge.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold
+            ),
+            modifier = modifier.padding(16.dp)
+        )
+    }
 }
 
 @Composable
 private fun MkiaContent(
     navController: NavController,
     modifier: Modifier = Modifier,
-    newMkiaList: List<Mkia>
+    newMkiaList: Mkia
 ) {
     Column(
         modifier = modifier
@@ -83,7 +94,7 @@ private fun MkiaContent(
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(data = newMkiaList[0].image)
+                    .data(data = newMkiaList.image)
                     .build(),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -96,7 +107,7 @@ private fun MkiaContent(
 
         Column(modifier = Modifier.padding(top = 16.dp)) {
             Text(
-                text = newMkiaList[0].name,
+                text = newMkiaList.title,
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontSize = 18.sp,
@@ -104,7 +115,7 @@ private fun MkiaContent(
                 )
             )
             Text(
-                text = newMkiaList[0].description,
+                text = newMkiaList.content,
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyMedium.copy(
                     fontSize = 14.sp,
@@ -113,21 +124,22 @@ private fun MkiaContent(
                 ),
                 modifier = Modifier.padding(top = 16.dp)
             )
+            Text(
+                text = "Sumber : ${newMkiaList.sumber}",
+                fontFamily = bodyFontFamily,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Normal
+                ),
+                modifier = Modifier.padding(top = 16.dp)
+
+            )
         }
     }
-    Box(
-        contentAlignment = Alignment.BottomCenter,
-        modifier = modifier.fillMaxSize()
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.logo_peka_gry),
-            contentDescription = "logo peka",
-            modifier = modifier.padding(bottom = 16.dp))
-    }
 }
-
-@Preview(showBackground = true)
-@Composable
-private fun DetailMapContentPreview() {
-    MkiaContent(navController = rememberNavController(),newMkiaList = ListData.listMkia)
-}
+//
+//@Preview(showBackground = true)
+//@Composable
+//private fun DetailMapContentPreview() {
+//    MkiaContent(navController = rememberNavController(),newMkiaList = ListData.listMkia)
+//}

@@ -4,7 +4,9 @@ package com.sukasrana.peka.presentation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,10 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.sukasrana.peka.data.ListData
 import com.sukasrana.peka.data.repository.fetchArticles
 import com.sukasrana.peka.model.Article
-import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.presentation.component.ArticleItem
 import com.sukasrana.peka.presentation.component.ArtikelRekomendasiItem
 import com.sukasrana.peka.ui.theme.bodyFontFamily
@@ -44,7 +44,6 @@ fun ArticleScreen(
     val recomArt = remember { mutableStateOf<List<Article>>(emptyList()) }
     val article = remember { mutableStateOf<List<Article>>(emptyList()) }
 
-    // Pemanggilan data menggunakan LaunchedEffect
     LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
             val articles = fetchArticles()
@@ -55,56 +54,83 @@ fun ArticleScreen(
         }
     }
 
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = modifier.background(MaterialTheme.colorScheme.background)
-    ) {
-        item {
+    if (article.value.isEmpty()){
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+        ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp, bottom = 8.dp)
-                    .background(Color.White)
+                    .padding(16.dp)
             ) {
                 Text(
-                    text = "Artikel Kesehatan",
+                    text = "No article available",
                     fontFamily = bodyFontFamily,
                     style = MaterialTheme.typography.bodyLarge.copy(
                         fontSize = 19.sp,
-                        fontWeight = FontWeight.SemiBold),
+                        fontWeight = FontWeight.Normal
+                    ),
+                    color = Color.Gray,
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
-
-            LazyRow(
-                contentPadding = PaddingValues(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = modifier.background(Color.White)
-            ) {
-                items(recomArt.value, key = { it.id_artikel }) {
-                    ArtikelRekomendasiItem(rekomArt = it) { articleId ->
-                        navController.navigate("detail_article/$articleId")
+        }
+    }else {
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = modifier.background(MaterialTheme.colorScheme.background)
+        ) {
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp, bottom = 8.dp)
+                        .background(Color.White)
+                ) {
+                    Text(
+                        text = "Artikel Kesehatan",
+                        fontFamily = bodyFontFamily,
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontSize = 19.sp,
+                            fontWeight = FontWeight.SemiBold),
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+                LazyRow(
+                    contentPadding = PaddingValues(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = modifier.background(Color.White)
+                ) {
+                    items(recomArt.value, key = { it.id_artikel }) {
+                        ArtikelRekomendasiItem(rekomArt = it) { articleId ->
+                            navController.navigate("detail_article/$articleId")
+                        }
                     }
                 }
+
             }
-        }
-        item {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp, bottom = 8.dp, start = 16.dp)
-            ) {
-                Text(
-                    text = "Baca Artikel lainnya",
-                    fontFamily = bodyFontFamily,
-                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 14.sp, fontWeight = FontWeight.SemiBold),
-                    textAlign = TextAlign.Left
-                )
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp, bottom = 8.dp, start = 16.dp)
+                ) {
+                    Text(
+                        text = "Baca Artikel lainnya",
+                        fontFamily = bodyFontFamily,
+                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 14.sp, fontWeight = FontWeight.SemiBold),
+                        textAlign = TextAlign.Left
+                    )
+                }
             }
-        }
-        items(article.value, key = { it.id_artikel }) {
-            ArticleItem(article = it) { articleId ->
-                navController.navigate("detail_article/$articleId")
+            items(article.value, key = { it.id_artikel }) {
+                ArticleItem(article = it) { articleId ->
+                    navController.navigate("detail_article/$articleId")
+                }
             }
         }
     }

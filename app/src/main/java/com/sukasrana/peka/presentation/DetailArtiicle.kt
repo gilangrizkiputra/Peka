@@ -46,7 +46,6 @@ fun DetailArticle(
 ) {
     val article = remember { mutableStateOf<Article?>(null) }
 
-    // Pemanggilan data artikel berdasarkan ID
     LaunchedEffect(articleId) {
         article.value = fetchArticles()?.find { it.id_artikel == articleId }
     }
@@ -54,7 +53,6 @@ fun DetailArticle(
     article.value?.let {
         DetailArticleContent(navController, article = it)
     } ?: run {
-        // Show loading or error state if needed
         Text(
             text = "Loading...",
             style = MaterialTheme.typography.bodyLarge.copy(

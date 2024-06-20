@@ -253,7 +253,7 @@ fun SignupContent(
                         .padding(bottom = 1.dp)
                 ) {
                     Text(
-                        text = "Daftar",
+                        text = "Klik Disini",
                         style = MaterialTheme.typography.bodySmall
                     )
                 }

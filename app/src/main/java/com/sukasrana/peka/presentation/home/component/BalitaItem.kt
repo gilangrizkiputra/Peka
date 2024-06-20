@@ -66,7 +66,8 @@ fun BalitaItem(
         shape = RoundedCornerShape(size = 10.dp)
     ) {
         Box(
-            modifier = Modifier){
+            modifier = Modifier
+        ){
             Surface(
                 modifier = modifier
                     .padding(0.dp)
@@ -88,7 +89,7 @@ fun BalitaItem(
                     modifier = modifier
                         .padding(0.dp)
                         .width(82.dp)
-                        .height(89.dp),
+                        .height(93.dp),
                     color = secondaryTwoColor,
                     shape = RoundedCornerShape(size = 10.dp)
                 ) {
