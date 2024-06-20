@@ -2,6 +2,7 @@ package com.sukasrana.peka.presentation.home
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -60,6 +61,7 @@ import com.sukasrana.peka.data.repository.fetchArticles
 import com.sukasrana.peka.data.repository.fetchMpasi
 import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.ui.theme.PekaTheme
+import com.sukasrana.peka.ui.theme.primaryColor
 
 @Composable
 fun HomeScreen(
@@ -106,11 +108,27 @@ fun HomeScreen(
             Box(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.background_home),
-                    contentDescription = "background beranda",
-                    modifier = Modifier.fillMaxWidth()
-                )
+                Box(
+
+                ) {
+                    Surface(
+                        modifier = modifier
+                            .padding(0.dp)
+                            .fillMaxWidth()
+                            .height(142.dp)
+                            .clip(RoundedCornerShape(bottomEnd = 20.dp, bottomStart = 20.dp)),
+                        color = primaryColor,
+                    ) {
+
+                    }
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_home_background),
+                        contentDescription = "background beranda",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 32.dp)
+                    )
+                }
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
@@ -179,7 +197,7 @@ fun HomeScreen(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold
                     ),
-                    color = Color.Gray,
+                    color = Color.Black,
                     modifier = Modifier
                 )
                 LazyRow(
@@ -318,7 +336,7 @@ fun HomeScreen(
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Normal
                             ),
-                            color = Color.Black,
+                            color = Color.Gray,
                             modifier = Modifier.padding(top = 8.dp)
                         )
                     } else if (mpasi.value.isEmpty()) {
@@ -329,7 +347,7 @@ fun HomeScreen(
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Normal
                             ),
-                            color = Color.Black,
+                            color = Color.Gray,
                             modifier = Modifier.padding(top = 8.dp)
                         )
                     } else {
@@ -363,7 +381,7 @@ fun HomeScreen(
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Normal
                             ),
-                            color = Color.Black,
+                            color = Color.Gray,
                             modifier = Modifier.padding(top = 8.dp)
                         )
                     } else if (artikelRekomendasi.value.isEmpty()) {
@@ -374,7 +392,7 @@ fun HomeScreen(
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Normal
                             ),
-                            color = Color.Black,
+                            color = Color.Gray,
                             modifier = Modifier.padding(top = 8.dp)
                         )
                     } else {

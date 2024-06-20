@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -32,18 +33,41 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.data.ListData
+import com.sukasrana.peka.data.repository.fetchArticles
+import com.sukasrana.peka.data.repository.fetchMkia
+import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.model.Mkia
 import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.presentation.mkia.component.MkiaItem
 import com.sukasrana.peka.ui.theme.PekaTheme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MkiaScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    mkia: List<Mkia> = ListData.listMkia
 ) {
+
+    val mkia = remember { mutableStateOf<List<Mkia>>(emptyList()) }
+    var errorMessage by remember { mutableStateOf("") }
+
+    LaunchedEffect(Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                val mkiaModel = fetchMkia()
+                if (mkiaModel != null) {
+                    mkia.value = mkiaModel
+                } else {
+                    errorMessage = "MKIA not available"
+                }
+            } catch (e: Exception) {
+                errorMessage = "Failed to fetch data. Please check your connection."
+            }
+        }
+    }
+
     val tabItems = listOf(
         TabItems("Kesehatan Ibu", "ibu"),
         TabItems("Kesehatan Anak", "anak")
@@ -61,7 +85,6 @@ fun MkiaScreen(
         selectedTabIndex = pagerState.currentPage
     }
 
-    val filterdMkia = mkia.filter { it.category == pagerState.currentPage }
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier.fillMaxSize()
@@ -98,24 +121,43 @@ fun MkiaScreen(
             }
         }
 
-        HorizontalPager(
-            state = pagerState,
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            LazyColumn(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = modifier
-                    .fillMaxWidth()
-                    .padding(10.dp)
+        if (errorMessage.isNotEmpty()) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.fillMaxSize()
             ) {
-                items(filterdMkia, key = { it.id }) {
-                    MkiaItem(
-                        mkia = it,
+                Text(text = errorMessage, color = Color.Gray)
+            }
+        } else {
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier
+                    .fillMaxSize()
+            ) { page ->
+                val filteredMkia = mkia.value.filter { it.category == tabItems[page].category }
+                if (filteredMkia.isEmpty()) {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Text(text = "No data available", color = Color.Gray)
+                    }
+                } else {
+                    LazyColumn(
+                        horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = modifier
-                            .padding(bottom = 10.dp)
-                    ) { mkiaId ->
-                        navController.navigate(Screen.MkiaDetail.route + "/$mkiaId")
+                            .fillMaxWidth()
+                            .padding(10.dp)
+                    ) {
+                        items(filteredMkia, key = { it.id_mkia }) {
+                            MkiaItem(
+                                mkia = it,
+                                modifier = modifier
+                                    .padding(bottom = 10.dp)
+                            ) { mkiaId ->
+                                navController.navigate(Screen.MkiaDetail.route + "/$mkiaId")
+                            }
+                        }
                     }
                 }
             }
@@ -125,7 +167,7 @@ fun MkiaScreen(
 
 data class TabItems(
     val title: String,
-    val kategori: String
+    val category: String
 )
 
 @Preview(showBackground = true)

@@ -59,7 +59,6 @@ fun MpasiScreen(
     val filteredMpasi = remember { mutableStateOf<List<Mpasi>>(emptyList()) }
     val selectedCategory = remember { mutableStateOf("Semua") }
 
-    // Pemanggilan data menggunakan LaunchedEffect
     LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
             val mpasiModel = fetchMpasi()

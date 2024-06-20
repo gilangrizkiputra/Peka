@@ -1,9 +1,11 @@
 package com.sukasrana.peka.model
 
 data class Mkia(
-    var id: Int,
-    var name: String,
-    var category: Int,
-    var description: String,
-    var image: Int
+    val id_mkia: Int,
+    val title: String,
+    val category: String,
+    val image: String,
+    val content: String,
+    val date: String,
+    val sumber: String
 )

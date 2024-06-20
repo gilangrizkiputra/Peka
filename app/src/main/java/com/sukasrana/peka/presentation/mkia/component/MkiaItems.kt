@@ -18,6 +18,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
 import com.sukasrana.peka.R
 import com.sukasrana.peka.model.Mkia
 import com.sukasrana.peka.navigation.Screen
@@ -35,35 +36,35 @@ fun MkiaItem(
             .width(360.dp)
             .background(MaterialTheme.colorScheme.primary)
             .clickable {
-                onItemClicked(mkia.id)
+                onItemClicked(mkia.id_mkia)
             }
     ) {
         Image(
-            painter = painterResource(id = mkia.image),
+            painter = rememberImagePainter(mkia.image),
             contentScale = ContentScale.Crop,
-            contentDescription = mkia.name,
+            contentDescription = mkia.title,
             modifier = modifier
                 .fillMaxWidth()
                 .height(200.dp))
         Text(
-            text = mkia.name,
+            text = mkia.title,
             color = MaterialTheme.colorScheme.onPrimary,
             style = MaterialTheme.typography.titleMedium,
             modifier = modifier.padding(start = 10.dp))
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun MkiaItemPreview() {
-    PekaTheme {
-        MkiaItem(
-            mkia = Mkia(
-                1, "Ttile Title Title", 1, "Description", R.drawable.image_kehamilansehat_mkia
-            ),
-            onItemClicked = { mkiaId ->
-                println("Id Mkia = $mkiaId")
-            }
-        )
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//private fun MkiaItemPreview() {
+//    PekaTheme {
+//        MkiaItem(
+//            mkia = Mkia(
+//                1, "Ttile Title Title", 1, "Description", R.drawable.image_kehamilansehat_mkia
+//            ),
+//            onItemClicked = { mkiaId ->
+//                println("Id Mkia = $mkiaId")
+//            }
+//        )
+//    }
+//}

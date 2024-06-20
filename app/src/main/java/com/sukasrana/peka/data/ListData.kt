@@ -174,55 +174,55 @@ object ListData {
 //
 //        )
 
-    val listMkia = listOf(
-        Mkia(
-            id = 1,
-            name = "Nutrisi pada Masa Laktasi",
-            category = 0,
-            description = "Selama masa laktasi (menyusui), penting bagi ibu untuk memperhatikan asupan nutrisinya agar dapat memberikan nutrisi yang cukup bagi bayi serta menjaga kesehatan dirinya sendiri. \n" +
-                    "Protein diperlukan untuk pertumbuhan dan perkembangan bayi\n" +
-                    "Karbohidrat merupakan sumber energi utama.\n" +
-                    "Lemak penting untuk produksi ASI yang baik.\n" +
-                    "Kalsium penting untuk kesehatan tulang dan gigi, baik untuk ibu maupun bayi.",
-            image = R.drawable.image_detail_nutrisimasalaktasi_ibu_mkia
-        ),
-        Mkia(
-            id = 2,
-            name = "Kehamilan Sehat",
-            category = 0,
-            description =
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis lorem arcu, eget faucibus eros tincidunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec eros sit amet sem semper suscipit. Donec ut nisl erat. Morbi finibus sem ac ligula bibendum, quis ultrices massa ornare. Cras at tempor odio. Proin neque massa, porta vel turpis vel, elementum porta eros. Aenean vitae ante arcu. Donec bibendum dolor quis finibus ullamcorper.",
-            image = R.drawable.image_kehamilansehat_mkia
-        ),
-        Mkia(
-            id = 3,
-            name = "Kesehatan Lingkungan",
-            category = 0,
-            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis lorem arcu, eget faucibus eros tincidunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec eros sit amet sem semper suscipit. Donec ut nisl erat. Morbi finibus sem ac ligula bibendum, quis ultrices massa ornare. Cras at tempor odio. Proin neque massa, porta vel turpis vel, elementum porta eros. Aenean vitae ante arcu. Donec bibendum dolor quis finibus ullamcorper.",
-            image = R.drawable.image_kesehatanlingkungan_mkia
-        ),
-        Mkia(
-            id = 4,
-            name = "Perawatan Anak Sakit",
-            category = 1,
-            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis lorem arcu, eget faucibus eros tincidunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec eros sit amet sem semper suscipit. Donec ut nisl erat. Morbi finibus sem ac ligula bibendum, quis ultrices massa ornare. Cras at tempor odio. Proin neque massa, porta vel turpis vel, elementum porta eros. Aenean vitae ante arcu. Donec bibendum dolor quis finibus ullamcorper.",
-            image = R.drawable.image_anak_rawatanaksakit_mkia
-        ),
-        Mkia(
-            id = 5,
-            name = "Warna Tinja dan Air Kencing",
-            category = 1,
-            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis lorem arcu, eget faucibus eros tincidunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec eros sit amet sem semper suscipit. Donec ut nisl erat. Morbi finibus sem ac ligula bibendum, quis ultrices massa ornare. Cras at tempor odio. Proin neque massa, porta vel turpis vel, elementum porta eros. Aenean vitae ante arcu. Donec bibendum dolor quis finibus ullamcorper.",
-            image = R.drawable.image_anak_warnatinjadanairkencing_mkia
-        ),
-        Mkia(
-            id = 6,
-            name = "Cek Kesahatan Balita",
-            category = 1,
-            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis lorem arcu, eget faucibus eros tincidunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec eros sit amet sem semper suscipit. Donec ut nisl erat. Morbi finibus sem ac ligula bibendum, quis ultrices massa ornare. Cras at tempor odio. Proin neque massa, porta vel turpis vel, elementum porta eros. Aenean vitae ante arcu. Donec bibendum dolor quis finibus ullamcorper.",
-            image = R.drawable.image_anak_nutrisipadamasalaktasi_mkia
-        )
-    )
+//    val listMkia = listOf(
+//        Mkia(
+//            id = 1,
+//            name = "Nutrisi pada Masa Laktasi",
+//            category = 0,
+//            description = "Selama masa laktasi (menyusui), penting bagi ibu untuk memperhatikan asupan nutrisinya agar dapat memberikan nutrisi yang cukup bagi bayi serta menjaga kesehatan dirinya sendiri. \n" +
+//                    "Protein diperlukan untuk pertumbuhan dan perkembangan bayi\n" +
+//                    "Karbohidrat merupakan sumber energi utama.\n" +
+//                    "Lemak penting untuk produksi ASI yang baik.\n" +
+//                    "Kalsium penting untuk kesehatan tulang dan gigi, baik untuk ibu maupun bayi.",
+//            image = R.drawable.image_detail_nutrisimasalaktasi_ibu_mkia
+//        ),
+//        Mkia(
+//            id = 2,
+//            name = "Kehamilan Sehat",
+//            category = 0,
+//            description =
+//            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis lorem arcu, eget faucibus eros tincidunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec eros sit amet sem semper suscipit. Donec ut nisl erat. Morbi finibus sem ac ligula bibendum, quis ultrices massa ornare. Cras at tempor odio. Proin neque massa, porta vel turpis vel, elementum porta eros. Aenean vitae ante arcu. Donec bibendum dolor quis finibus ullamcorper.",
+//            image = R.drawable.image_kehamilansehat_mkia
+//        ),
+//        Mkia(
+//            id = 3,
+//            name = "Kesehatan Lingkungan",
+//            category = 0,
+//            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis lorem arcu, eget faucibus eros tincidunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec eros sit amet sem semper suscipit. Donec ut nisl erat. Morbi finibus sem ac ligula bibendum, quis ultrices massa ornare. Cras at tempor odio. Proin neque massa, porta vel turpis vel, elementum porta eros. Aenean vitae ante arcu. Donec bibendum dolor quis finibus ullamcorper.",
+//            image = R.drawable.image_kesehatanlingkungan_mkia
+//        ),
+//        Mkia(
+//            id = 4,
+//            name = "Perawatan Anak Sakit",
+//            category = 1,
+//            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis lorem arcu, eget faucibus eros tincidunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec eros sit amet sem semper suscipit. Donec ut nisl erat. Morbi finibus sem ac ligula bibendum, quis ultrices massa ornare. Cras at tempor odio. Proin neque massa, porta vel turpis vel, elementum porta eros. Aenean vitae ante arcu. Donec bibendum dolor quis finibus ullamcorper.",
+//            image = R.drawable.image_anak_rawatanaksakit_mkia
+//        ),
+//        Mkia(
+//            id = 5,
+//            name = "Warna Tinja dan Air Kencing",
+//            category = 1,
+//            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis lorem arcu, eget faucibus eros tincidunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec eros sit amet sem semper suscipit. Donec ut nisl erat. Morbi finibus sem ac ligula bibendum, quis ultrices massa ornare. Cras at tempor odio. Proin neque massa, porta vel turpis vel, elementum porta eros. Aenean vitae ante arcu. Donec bibendum dolor quis finibus ullamcorper.",
+//            image = R.drawable.image_anak_warnatinjadanairkencing_mkia
+//        ),
+//        Mkia(
+//            id = 6,
+//            name = "Cek Kesahatan Balita",
+//            category = 1,
+//            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis lorem arcu, eget faucibus eros tincidunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec eros sit amet sem semper suscipit. Donec ut nisl erat. Morbi finibus sem ac ligula bibendum, quis ultrices massa ornare. Cras at tempor odio. Proin neque massa, porta vel turpis vel, elementum porta eros. Aenean vitae ante arcu. Donec bibendum dolor quis finibus ullamcorper.",
+//            image = R.drawable.image_anak_nutrisipadamasalaktasi_mkia
+//        )
+//    )
 
     val DataBerat: List<Point> =
         listOf(
