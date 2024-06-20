@@ -1,6 +1,5 @@
 package com.sukasrana.peka.presentation.graphic
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -29,26 +28,26 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.data.ListData
-import com.sukasrana.peka.data.repository.fetchArticles
+import com.sukasrana.peka.data.repository.fetchBaliatById
 import com.sukasrana.peka.model.Article
+import com.sukasrana.peka.model.Balita
 import com.sukasrana.peka.presentation.component.ArtikelRekomendasiItem
 import com.sukasrana.peka.presentation.graphic.component.BeratChat
 import com.sukasrana.peka.presentation.graphic.component.TinggiBadan
-import com.sukasrana.peka.ui.theme.PekaTheme
 import com.sukasrana.peka.ui.theme.onPrimaryLight
 import com.sukasrana.peka.ui.theme.secondaryColor
 import com.sukasrana.peka.ui.theme.secondaryTwoColor
@@ -59,20 +58,19 @@ import kotlinx.coroutines.withContext
 fun GraphicScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
+    artikelRekomendasi: List<Article> = ListData.TheArticel,
+    balitaId: Int?
 ) {
-
-    val artikelRekomendasi = remember { mutableStateOf<List<Article>>(emptyList()) }
-
+    var balita by remember { mutableStateOf<List<Balita>>(emptyList()) }
     LaunchedEffect(Unit) {
-        Log.d("GraphicScreen", "Fetching articles")
-        val articles = fetchArticles()
-        if (articles != null) {
-            Log.d("GraphicScreen", "Articles fetched: $articles")
-            artikelRekomendasi.value = articles
-        } else {
-            Log.e("GraphicScreen", "Failed to fetch articles")
+        withContext(Dispatchers.IO) {
+            val data = balitaId?.let { fetchBaliatById(it) }
+            if (data != null) {
+                balita = data
+            }
         }
     }
+
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -96,7 +94,8 @@ fun GraphicScreen(
                     style = MaterialTheme.typography.titleLarge,
                     modifier = modifier
                         .align(Alignment.CenterHorizontally)
-                        .padding(bottom = 16.dp))
+                        .padding(bottom = 16.dp)
+                )
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
@@ -104,12 +103,15 @@ fun GraphicScreen(
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.image_balita_beranda),
-                        contentDescription = "Balita",)
+                        contentDescription = "Balita",
+                    )
+
                     Text(
-                        text = "Asep knalpot",
+                        text = "Nama Balita",
                         style = MaterialTheme.typography.titleLarge,
                         modifier = Modifier
-                            .padding(10.dp))
+                            .padding(10.dp)
+                    )
                 }
                 Row(
                     horizontalArrangement = Arrangement.SpaceEvenly,
@@ -131,19 +133,25 @@ fun GraphicScreen(
                                 .height(37.dp)
                                 .clip(shape = RoundedCornerShape(5.dp))
                                 .background(secondaryColor)
-                        ){
+                        ) {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_berat_badan),
                                 contentDescription = "icon berat badan",
-                                modifier = Modifier.padding(9.dp))
+                                modifier = Modifier.padding(9.dp)
+                            )
                         }
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center,
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(3.dp)) {
-                            Text(text = "Berat Badan", style = MaterialTheme.typography.bodySmall, textAlign = TextAlign.Center)
+                                .padding(3.dp)
+                        ) {
+                            Text(
+                                text = "Berat Badan",
+                                style = MaterialTheme.typography.bodySmall,
+                                textAlign = TextAlign.Center
+                            )
                             Text(text = "15 Kg", style = MaterialTheme.typography.bodyLarge)
                         }
                     }
@@ -161,19 +169,25 @@ fun GraphicScreen(
                                 .height(37.dp)
                                 .clip(shape = RoundedCornerShape(5.dp))
                                 .background(secondaryColor)
-                        ){
+                        ) {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_tinggi_badan),
                                 contentDescription = "icon tinggi badan",
-                                modifier = Modifier.padding(9.dp))
+                                modifier = Modifier.padding(9.dp)
+                            )
                         }
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center,
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(3.dp)) {
-                            Text(text = "Tinggi Badan", style = MaterialTheme.typography.bodySmall, textAlign = TextAlign.Center)
+                                .padding(3.dp)
+                        ) {
+                            Text(
+                                text = "Tinggi Badan",
+                                style = MaterialTheme.typography.bodySmall,
+                                textAlign = TextAlign.Center
+                            )
                             Text(text = "75 cm", style = MaterialTheme.typography.bodyLarge)
                         }
                     }
@@ -191,19 +205,25 @@ fun GraphicScreen(
                                 .height(37.dp)
                                 .clip(shape = RoundedCornerShape(5.dp))
                                 .background(secondaryColor)
-                        ){
+                        ) {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_umur),
                                 contentDescription = "icon umur",
-                                modifier = Modifier.padding(9.dp))
+                                modifier = Modifier.padding(9.dp)
+                            )
                         }
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center,
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(3.dp)) {
-                            Text(text = "Umur", style = MaterialTheme.typography.bodySmall, textAlign = TextAlign.Center)
+                                .padding(3.dp)
+                        ) {
+                            Text(
+                                text = "Umur",
+                                style = MaterialTheme.typography.bodySmall,
+                                textAlign = TextAlign.Center
+                            )
                             Text(text = "10 Bulan", style = MaterialTheme.typography.bodyLarge)
                         }
                     }
@@ -221,20 +241,29 @@ fun GraphicScreen(
                                 .height(37.dp)
                                 .clip(shape = RoundedCornerShape(5.dp))
                                 .background(secondaryColor)
-                        ){
+                        ) {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_jenis_kelamin),
                                 contentDescription = "icon timbangan",
-                                modifier = Modifier.padding(9.dp))
+                                modifier = Modifier.padding(9.dp)
+                            )
                         }
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center,
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(3.dp)) {
-                            Text(text = "Jenis kelamin", style = MaterialTheme.typography.bodySmall, textAlign = TextAlign.Center)
-                            Icon(imageVector = Icons.Default.Male, contentDescription = "Gender icon")
+                                .padding(3.dp)
+                        ) {
+                            Text(
+                                text = "Jenis kelamin",
+                                style = MaterialTheme.typography.bodySmall,
+                                textAlign = TextAlign.Center
+                            )
+                            Icon(
+                                imageVector = Icons.Default.Male,
+                                contentDescription = "Gender icon"
+                            )
                         }
                     }
                 }
@@ -259,7 +288,8 @@ fun GraphicScreen(
                             text = "Kondisi Berat Badan (Kg)",
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.onPrimary,
-                            modifier = Modifier.padding(bottom = 5.dp))
+                            modifier = Modifier.padding(bottom = 5.dp)
+                        )
                         BeratChat()
                     }
                     Spacer(modifier = Modifier.padding(5.dp))
@@ -275,7 +305,8 @@ fun GraphicScreen(
                             text = "Tinggi Badan (cm)",
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.onPrimary,
-                            modifier = Modifier.padding(bottom = 5.dp))
+                            modifier = Modifier.padding(bottom = 5.dp)
+                        )
                         TinggiBadan()
                     }
                     Spacer(modifier = Modifier.padding(5.dp))
@@ -287,11 +318,12 @@ fun GraphicScreen(
                             .background(onPrimaryLight)
                             .padding(10.dp)
                     ) {
-                        Row{
+                        Row {
                             Text(
                                 text = "Interpetrasi :",
                                 style = MaterialTheme.typography.bodyMedium,
-                                modifier = Modifier.padding(2.dp))
+                                modifier = Modifier.padding(2.dp)
+                            )
                             Text(
                                 text = "Kekurangan Berat Badan",
                                 style = MaterialTheme.typography.bodyMedium,
@@ -315,7 +347,10 @@ fun GraphicScreen(
                                     .clip(shape = RoundedCornerShape(10.dp))
                                     .background(secondaryTwoColor)
                             ) {
-                                Text(text = "Berat : 15 kg", style = MaterialTheme.typography.bodyLarge)
+                                Text(
+                                    text = "Berat : 15 kg",
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
                             }
                             Box(
                                 contentAlignment = Alignment.Center,
@@ -325,13 +360,17 @@ fun GraphicScreen(
                                     .clip(shape = RoundedCornerShape(10.dp))
                                     .background(secondaryTwoColor)
                             ) {
-                                Text(text = "Tinggi : 75 cm", style = MaterialTheme.typography.bodyLarge)
+                                Text(
+                                    text = "Tinggi : 75 cm",
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
                             }
                         }
                         Text(
                             text = "Anak Anda Mengalami Kekurangan berat badan, Jadwalkan kunjuangan ke dokter atau fasilitas kesehatan terdekat untuk informasi lebih lanjut ",
                             style = MaterialTheme.typography.bodyMedium,
-                            textAlign = TextAlign.Justify)
+                            textAlign = TextAlign.Justify
+                        )
                     }
                 }
             }
@@ -343,15 +382,18 @@ fun GraphicScreen(
                 color = MaterialTheme.colorScheme.onPrimary
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    Text(text = "Rekomendasi Makanan Untuk Asupan Gizi", style = MaterialTheme.typography.labelLarge)
+                    Text(
+                        text = "Rekomendasi Makanan Untuk Asupan Gizi",
+                        style = MaterialTheme.typography.labelLarge
+                    )
                     LazyRow(
                         contentPadding = PaddingValues(2.dp),
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         modifier = modifier.padding(top = 8.dp)
                     ) {
-                        items(artikelRekomendasi.value, key = { it.id_artikel }) {
-                            ArtikelRekomendasiItem(rekomArt = it) { articleId ->
-                                navController.navigate("detail_article/$articleId")
+                        items(artikelRekomendasi, key = { it.id }) {
+                            ArtikelRekomendasiItem(rekomArt = it, modifier = Modifier) {
+
                             }
                         }
                     }

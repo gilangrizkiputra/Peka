@@ -25,7 +25,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -49,14 +48,15 @@ import com.sukasrana.peka.ui.theme.bodyFontFamily
 import com.sukasrana.peka.ui.theme.secondaryColor
 import com.sukasrana.peka.ui.theme.secondaryTwoColor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import com.sukasrana.peka.data.repository.fetchBaliat
 import com.sukasrana.peka.model.Article
-import com.sukasrana.peka.ui.theme.PekaTheme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 fun HomeScreen(
@@ -64,9 +64,18 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     mpasi: List<Mpasi> = ListData.mpasi,
     artikelRekomendasi: List<Article> = ListData.TheArticel,
-    viewModel: HomeViewModel
     ) {
-    val balita by viewModel.data.observeAsState(emptyList())
+
+    val balita = remember { mutableStateOf<List<Balita>>(emptyList()) }
+
+    LaunchedEffect(Unit) {
+        withContext(Dispatchers.IO) {
+            val data = fetchBaliat()
+            if (data != null) {
+                balita.value = data
+            }
+        }
+    }
     LazyColumn(
         modifier = modifier.fillMaxSize(),
     ) {
@@ -155,8 +164,8 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = modifier.padding(top = 8.dp)
                 ) {
-                    items(balita, key = { it.id_balita }) {
-                        BalitaItem(balita = it, navController = navController, modifier = Modifier)
+                    items(balita.value, key = { it.id_balita }) {
+                        BalitaItem(balita = it, balitaId = it.id_balita, navController = navController, modifier = Modifier)
                     }
                     item {
                         AddBalitaItem(navController = navController)
