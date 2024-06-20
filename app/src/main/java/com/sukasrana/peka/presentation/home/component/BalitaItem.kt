@@ -22,7 +22,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -56,6 +55,8 @@ fun BalitaItem(
             style = FontStyle.Italic
         )
     )
+    val dob = balita.birth_date
+    val age = AgeCalculator(dob)
     Surface(
         modifier = modifier
             //.clickable { onItemClicked(balita.id) }
@@ -114,7 +115,7 @@ fun BalitaItem(
                     maxLines = 1
                 )
                 Text(
-                    text = "${balita.umur} Tahun",
+                    text = "${age} Tahun",
                     fontFamily = bodyFontFamily,
                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 11.sp, fontWeight = FontWeight.Normal),
                     color = Color.Black,
@@ -132,14 +133,13 @@ private fun BalitaItemHorizontalPreview() {
     PekaTheme {
         BalitaItem(balita = Balita(
             1,
-            321001001001,
-            3211505240016,
-            "Asep Knalpot",
-            "15-05-24",
-            "15-05-24",
-            2,
-            "A",
-            "Laki-laki",
+            1,
+            "Asep",
+            222000,
+            "Laki - Laki",
+            "2021-05-24",
+            "medan",
+            "A"
         ), navController = rememberNavController()
 //            onItemClicked = { balitaId ->
 //                println("Balita Id : $balitaId")

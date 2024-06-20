@@ -49,6 +49,8 @@ import com.sukasrana.peka.ui.theme.bodyFontFamily
 import com.sukasrana.peka.ui.theme.secondaryColor
 import com.sukasrana.peka.ui.theme.secondaryTwoColor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
@@ -60,11 +62,11 @@ import com.sukasrana.peka.ui.theme.PekaTheme
 fun HomeScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    balita: List<Balita> = ListData.dataBalita,
     mpasi: List<Mpasi> = ListData.mpasi,
     artikelRekomendasi: List<Article> = ListData.TheArticel,
-
+    viewModel: HomeViewModel
     ) {
+    val balita by viewModel.data.observeAsState(emptyList())
     LazyColumn(
         modifier = modifier.fillMaxSize(),
     ) {
@@ -153,7 +155,7 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = modifier.padding(top = 8.dp)
                 ) {
-                    items(balita, key = { it.id }) {
+                    items(balita, key = { it.id_balita }) {
                         BalitaItem(balita = it, navController = navController, modifier = Modifier)
                     }
                     item {
@@ -311,13 +313,5 @@ fun HomeScreen(
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun HomeScreenPreview(){
-    PekaTheme {
-        HomeScreen(navController = rememberNavController())
     }
 }
