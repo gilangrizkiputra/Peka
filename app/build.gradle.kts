@@ -63,8 +63,8 @@ dependencies {
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
+    implementation("androidx.compose.material3:material3:1.2.1")
     implementation(libs.androidx.compose.material)
-    implementation(libs.androidx.runtime.livedata)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -80,19 +80,16 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("com.airbnb.android:lottie-compose:5.2.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.2")
 
 
     //nabil menambahkan depencies
     implementation("androidx.navigation:navigation-compose:2.5.3")
-    implementation("androidx.compose.material:material-icons-extended:1.1.0-alpha05")
-    implementation("io.coil-kt:coil-compose:2.4.0")
 
     //chart
     implementation("co.yml:ycharts:2.1.0")
 
     //Date Picker
-    implementation(libs.datetime)
+    implementation("io.github.vanpra.compose-material-dialogs:datetime:0.8.1-rc")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 
     //maps
@@ -107,5 +104,6 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.12")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+    implementation ("androidx.compose.ui:ui-tooling:1.0.0-beta01")
 
 }

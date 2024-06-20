@@ -27,9 +27,11 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -53,9 +55,9 @@ fun AddFormChildScreen(
     modifier: Modifier = Modifier
 
 ) {
-    var nomorKartuKeluarga by remember {
-        mutableStateOf("")
-    }
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+
     var nikAnak by remember {
         mutableStateOf("")
     }
@@ -77,13 +79,11 @@ fun AddFormChildScreen(
     }
     AddFormChildContent(
         navController = navController,
-        nomorKartuKeluarga = nomorKartuKeluarga,
         nikAnak = nikAnak,
         namaAnak = namaAnak,
         tempatLahir = tempatLahir,
         tanggal = tanggal,
         golonganDarah = golonganDarah,
-        onNomorKartuKeluargaChange = { nomorKartuKeluarga = it },
         onnikAnakChange = { nikAnak = it },
         onnamaAnakChange = { namaAnak = it },
         ontempatLahirChange = { tempatLahir = it },
@@ -97,13 +97,11 @@ fun AddFormChildScreen(
 
 @Composable
 fun AddFormChildContent(
-    nomorKartuKeluarga: String,
     nikAnak: String,
     namaAnak: String,
     tempatLahir: String,
     tanggal: String,
     golonganDarah: String,
-    onNomorKartuKeluargaChange: (String) -> Unit,
     onnikAnakChange: (String) -> Unit,
     onnamaAnakChange: (String) -> Unit,
     ontempatLahirChange: (String) -> Unit,
@@ -151,14 +149,6 @@ fun AddFormChildContent(
                     .padding(bottom = 16.dp)
             )
             Text(
-                text = "Nomor Kartu Keluarga",
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
-            TextFieldCustom(
-                value = nomorKartuKeluarga,
-                onValueChange = onNomorKartuKeluargaChange,
-            )
-            Text(
                 text = "NIK Anak",
                 modifier = Modifier.padding(bottom = 8.dp)
             )
@@ -174,7 +164,7 @@ fun AddFormChildContent(
                 value = namaAnak,
                 onValueChange = onnamaAnakChange,
             )
-            Row {
+            Row{
                 Column(
                 ) {
                     Text(
@@ -210,7 +200,10 @@ fun AddFormChildContent(
                     //            dateDialogState.show()
                     //        }
                     //)
-                    Button(onClick = { dateDialogState.show() }) {
+                    Button(
+                        onClick = { dateDialogState.show() },
+                        modifier = modifier
+                            .height(55.dp)) {
                         Text(text = "Pilih Tanggal")
                     }
                 }
