@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation("androidx.compose.material3:material3:1.2.1")
     implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.runtime.livedata)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -80,6 +81,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("com.airbnb.android:lottie-compose:5.2.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.2")
 
 
     //nabil menambahkan depencies

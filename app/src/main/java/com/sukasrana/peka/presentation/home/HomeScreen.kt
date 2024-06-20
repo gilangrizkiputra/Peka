@@ -1,8 +1,6 @@
 package com.sukasrana.peka.presentation.home
 
-import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,6 +25,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -50,50 +49,24 @@ import com.sukasrana.peka.ui.theme.bodyFontFamily
 import com.sukasrana.peka.ui.theme.secondaryColor
 import com.sukasrana.peka.ui.theme.secondaryTwoColor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.sukasrana.peka.data.repository.fetchArticles
-import com.sukasrana.peka.data.repository.fetchMpasi
 import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.ui.theme.PekaTheme
-import com.sukasrana.peka.ui.theme.primaryColor
 
 @Composable
 fun HomeScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    balita: List<Balita> = ListData.dataBalita
-) {
-
-    val artikelRekomendasi = remember { mutableStateOf<List<Article>>(emptyList()) }
-    val mpasi = remember { mutableStateOf<List<Mpasi>>(emptyList()) }
-    val isLoading = remember { mutableStateOf(true) }
-
-    LaunchedEffect(Unit) {
-        Log.d("HomeScreen", "Fetching articles")
-        Log.d("HomeScreen", "Fetching Mpasi")
-        val mpasiModel = fetchMpasi()
-        val articles = fetchArticles()
-        if (articles != null) {
-            Log.d("HomeScreen", "Articles fetched: $articles")
-            artikelRekomendasi.value = articles
-        } else {
-            Log.e("HomeScreen", "Failed to fetch articles")
-        }
-        if (mpasiModel != null) {
-            Log.d("HomeScreen", "Mpasi fetched: $mpasiModel")
-            mpasi.value = mpasiModel
-        } else {
-            Log.e("HomeScreen", "Failed to fetch Mpasi")
-        }
-        isLoading.value = false
-    }
-
+    mpasi: List<Mpasi> = ListData.mpasi,
+    artikelRekomendasi: List<Article> = ListData.TheArticel,
+    viewModel: HomeViewModel
+    ) {
+    val balita by viewModel.data.observeAsState(emptyList())
     LazyColumn(
         modifier = modifier.fillMaxSize(),
     ) {
@@ -101,27 +74,11 @@ fun HomeScreen(
             Box(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Box(
-
-                ) {
-                    Surface(
-                        modifier = modifier
-                            .padding(0.dp)
-                            .fillMaxWidth()
-                            .height(142.dp)
-                            .clip(RoundedCornerShape(bottomEnd = 20.dp, bottomStart = 20.dp)),
-                        color = primaryColor,
-                    ) {
-
-                    }
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_home_background),
-                        contentDescription = "background beranda",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 32.dp)
-                    )
-                }
+                Image(
+                    painter = painterResource(id = R.drawable.background_home),
+                    contentDescription = "background beranda",
+                    modifier = Modifier.fillMaxWidth()
+                )
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
@@ -190,7 +147,7 @@ fun HomeScreen(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold
                     ),
-                    color = Color.Black,
+                    color = Color.Gray,
                     modifier = Modifier
                 )
                 LazyRow(
@@ -198,7 +155,7 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = modifier.padding(top = 8.dp)
                 ) {
-                    items(balita, key = { it.id }) {
+                    items(balita, key = { it.id_balita }) {
                         BalitaItem(balita = it, navController = navController, modifier = Modifier)
                     }
                     item {
@@ -321,38 +278,14 @@ fun HomeScreen(
                                 .clickable { navController.navigate(Screen.Mpasi.route) }
                         )
                     }
-                    if (isLoading.value) {
-                        Text(
-                            text = "Loading Mpasi...",
-                            fontFamily = bodyFontFamily,
-                            style = MaterialTheme.typography.bodyLarge.copy(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Normal
-                            ),
-                            color = Color.Gray,
-                            modifier = Modifier.padding(top = 8.dp)
-                        )
-                    } else if (mpasi.value.isEmpty()) {
-                        Text(
-                            text = "No mpasi available",
-                            fontFamily = bodyFontFamily,
-                            style = MaterialTheme.typography.bodyLarge.copy(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Normal
-                            ),
-                            color = Color.Gray,
-                            modifier = Modifier.padding(top = 8.dp)
-                        )
-                    } else {
-                        LazyRow(
-                            contentPadding = PaddingValues(2.dp),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp),
-                            modifier = modifier.padding(top = 8.dp)
-                        ) {
-                            items(mpasi.value, key = { it.id_mpasi }) {
-                                MpasiItem(mpasi = it){ mpasiId ->
-                                    navController.navigate(Screen.DetailMpasi.route+"/$mpasiId")
-                                }
+                    LazyRow(
+                        contentPadding = PaddingValues(2.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        modifier = modifier.padding(top = 8.dp)
+                    ) {
+                        items(mpasi, key = { it.id }) {
+                            MpasiItem(mpasi = it){ mpasiId ->
+                                navController.navigate(Screen.DetailMpasi.route+"/$mpasiId")
                             }
                         }
                     }
@@ -366,51 +299,19 @@ fun HomeScreen(
                         color = Color.Black,
                         modifier = Modifier.padding(top = 16.dp)
                     )
-                    if (isLoading.value) {
-                        Text(
-                            text = "Loading articles...",
-                            fontFamily = bodyFontFamily,
-                            style = MaterialTheme.typography.bodyLarge.copy(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Normal
-                            ),
-                            color = Color.Gray,
-                            modifier = Modifier.padding(top = 8.dp)
-                        )
-                    } else if (artikelRekomendasi.value.isEmpty()) {
-                        Text(
-                            text = "No articles available",
-                            fontFamily = bodyFontFamily,
-                            style = MaterialTheme.typography.bodyLarge.copy(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Normal
-                            ),
-                            color = Color.Gray,
-                            modifier = Modifier.padding(top = 8.dp)
-                        )
-                    } else {
-                        LazyRow(
-                            contentPadding = PaddingValues(2.dp),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp),
-                            modifier = modifier.padding(top = 8.dp)
-                        ) {
-                            items(artikelRekomendasi.value, key = { it.id_artikel }) {
-                                ArtikelRekomendasiItem(rekomArt = it) { articleId ->
-                                    navController.navigate(Screen.DetailArticle.route + "/$articleId")
-                                }
+                    LazyRow(
+                        contentPadding = PaddingValues(2.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        modifier = modifier.padding(top = 8.dp)
+                    ) {
+                        items(artikelRekomendasi, key = { it.id }) {
+                            ArtikelRekomendasiItem(rekomArt = it) {articleId->
+                                navController.navigate(Screen.DetailArticle.route+"/$articleId")
                             }
                         }
                     }
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun HomeScreenPreview(){
-    PekaTheme {
-        HomeScreen(navController = rememberNavController())
     }
 }
