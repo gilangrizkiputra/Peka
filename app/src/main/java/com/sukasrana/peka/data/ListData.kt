@@ -24,22 +24,22 @@ object ListData {
         ),
     )
 
-    val mpasi = listOf(
-        Mpasi(
-            id = 1,
-            nama = "Bubur Brokoli dan Wortel",
-            desk = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione rerum labore dolorem cumque, fugit ab nostrum eveniet veniam placeat quidem similique omnis nemo fuga alias assumenda. Odit, non ut! Error!",
-            tanggal = "15 Mei 2024",
-            photo = R.drawable.image_bubur_brokoli_mpasi_beranda
-        ),
-        Mpasi(
-            id = 2,
-            nama = "Bubur pisang dan Jeruk",
-            desk = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione rerum labore dolorem cumque, fugit ab nostrum eveniet veniam placeat quidem similique omnis nemo fuga alias assumenda. Odit, non ut! Error!",
-            tanggal = "15 Mei 2024",
-            photo = R.drawable.image_bubur_pisang_jeruk_mpasi_beranda2
-        )
-    )
+//    val mpasi = listOf(
+//        Mpasi(
+//            id = 1,
+//            nama = "Bubur Brokoli dan Wortel",
+//            desk = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione rerum labore dolorem cumque, fugit ab nostrum eveniet veniam placeat quidem similique omnis nemo fuga alias assumenda. Odit, non ut! Error!",
+//            tanggal = "15 Mei 2024",
+//            photo = R.drawable.image_bubur_brokoli_mpasi_beranda
+//        ),
+//        Mpasi(
+//            id = 2,
+//            nama = "Bubur pisang dan Jeruk",
+//            desk = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione rerum labore dolorem cumque, fugit ab nostrum eveniet veniam placeat quidem similique omnis nemo fuga alias assumenda. Odit, non ut! Error!",
+//            tanggal = "15 Mei 2024",
+//            photo = R.drawable.image_bubur_pisang_jeruk_mpasi_beranda2
+//        )
+//    )
 
 //    val TheArticel = listOf(
 //        Article(
@@ -86,93 +86,93 @@ object ListData {
 //        ),
 //    )
 
-    val TheMpasi = listOf(
-        MpasiModel(
-            id = 1,
-            desk = "Resep MPASI, 6 Bulan, Makan Pagi Makan Siang, Makan Malam",
-            nama = R.string.menu_buburWortel,
-            gizi = R.string.gizi_buburWortel,
-            bahan = R.string.bahan_buburWortel,
-            bulan = 6,
-            caramemasak = R.string.cara_buburWortel,
-            tanggal = "12 Januari",
-            photo = R.drawable.nutrisi,
-            logo = R.drawable.ic_mpasi
-        ),
-        MpasiModel(
-            id = 2,
-            desk = "Resep MPASI, 6 Bulan, Makan Pagi Makan Siang, Makan Malam",
-            nama = R.string.menu_appleStew,
-            gizi = R.string.gizi_appleStew,
-            bahan = R.string.bahan_appleStew,
-            bulan = 6,
-            caramemasak = R.string.cara_appleStew,
-            tanggal = "12 Januari",
-            photo = R.drawable.nutrisi,
-            logo = R.drawable.ic_mpasi
-        ),
-        MpasiModel(
-            id = 3,
-            desk = "Resep MPASI, 8 Bulan, Makan Pagi Makan Siang, Makan Malam",
-            nama = R.string.menu_buburTongseng,
-            gizi = R.string.gizi_buburTongseng,
-            bahan = R.string.bahan_buburTongseng,
-            bulan = 8,
-            caramemasak = R.string.cara_buburTongseng,
-            tanggal = "12 Januari",
-            photo = R.drawable.nutrisi,
-            logo = R.drawable.ic_mpasi
-        ),
-        MpasiModel(
-            id = 4,
-            desk = "Resep MPASI, 8 Bulan, Makan Pagi Makan Siang, Makan Malam",
-            nama = R.string.menu_oatmeal,
-            gizi = R.string.gizi_oatmeal,
-            bahan = R.string.bahan_oatmeal,
-            bulan = 8,
-            caramemasak = R.string.cara_oatmeal,
-            tanggal = "12 Januari",
-            photo = R.drawable.nutrisi,
-            logo = R.drawable.ic_mpasi
-        ),
-        MpasiModel(
-            id = 5,
-            desk = "Resep MPASI, 11 Bulan, Makan Pagi Makan Siang, Makan Malam",
-            nama = R.string.menu_nasiTim,
-            gizi = R.string.gizi_nasiTim,
-            bahan = R.string.bahan_nasiTim,
-            bulan = 11,
-            caramemasak = R.string.cara_nasiTim,
-            tanggal = "12 Januari",
-            photo = R.drawable.nutrisi,
-            logo = R.drawable.ic_mpasi
-        ),
-        MpasiModel(
-            id = 6,
-            desk = "Resep MPASI, 11 Bulan, Makan Pagi Makan Siang, Makan Malam",
-            nama = R.string.menu_berasMerah,
-            gizi = R.string.gizi_berasMerah,
-            bahan = R.string.bahan_berasMerah,
-            bulan = 11,
-            caramemasak = R.string.cara_berasMerah,
-            tanggal = "12 Januari",
-            photo = R.drawable.nutrisi,
-            logo = R.drawable.ic_mpasi
-        ),
-        MpasiModel(
-            id = 7,
-            desk = "Resep MPASI, 12 Bulan, Makan Pagi Makan Siang, Makan Malam",
-            nama = R.string.menu_buburKentang,
-            gizi = R.string.gizi_buburKentang,
-            bahan = R.string.bahan_buburKentang,
-            bulan = 12,
-            caramemasak = R.string.cara_buburKentang,
-            tanggal = "12 Januari",
-            photo = R.drawable.nutrisi,
-            logo = R.drawable.ic_mpasi
-        ),
-
-        )
+//    val TheMpasi = listOf(
+//        MpasiModel(
+//            id = 1,
+//            desk = "Resep MPASI, 6 Bulan, Makan Pagi Makan Siang, Makan Malam",
+//            nama = R.string.menu_buburWortel,
+//            gizi = R.string.gizi_buburWortel,
+//            bahan = R.string.bahan_buburWortel,
+//            bulan = 6,
+//            caramemasak = R.string.cara_buburWortel,
+//            tanggal = "12 Januari",
+//            photo = R.drawable.nutrisi,
+//            logo = R.drawable.ic_mpasi
+//        ),
+//        MpasiModel(
+//            id = 2,
+//            desk = "Resep MPASI, 6 Bulan, Makan Pagi Makan Siang, Makan Malam",
+//            nama = R.string.menu_appleStew,
+//            gizi = R.string.gizi_appleStew,
+//            bahan = R.string.bahan_appleStew,
+//            bulan = 6,
+//            caramemasak = R.string.cara_appleStew,
+//            tanggal = "12 Januari",
+//            photo = R.drawable.nutrisi,
+//            logo = R.drawable.ic_mpasi
+//        ),
+//        MpasiModel(
+//            id = 3,
+//            desk = "Resep MPASI, 8 Bulan, Makan Pagi Makan Siang, Makan Malam",
+//            nama = R.string.menu_buburTongseng,
+//            gizi = R.string.gizi_buburTongseng,
+//            bahan = R.string.bahan_buburTongseng,
+//            bulan = 8,
+//            caramemasak = R.string.cara_buburTongseng,
+//            tanggal = "12 Januari",
+//            photo = R.drawable.nutrisi,
+//            logo = R.drawable.ic_mpasi
+//        ),
+//        MpasiModel(
+//            id = 4,
+//            desk = "Resep MPASI, 8 Bulan, Makan Pagi Makan Siang, Makan Malam",
+//            nama = R.string.menu_oatmeal,
+//            gizi = R.string.gizi_oatmeal,
+//            bahan = R.string.bahan_oatmeal,
+//            bulan = 8,
+//            caramemasak = R.string.cara_oatmeal,
+//            tanggal = "12 Januari",
+//            photo = R.drawable.nutrisi,
+//            logo = R.drawable.ic_mpasi
+//        ),
+//        MpasiModel(
+//            id = 5,
+//            desk = "Resep MPASI, 11 Bulan, Makan Pagi Makan Siang, Makan Malam",
+//            nama = R.string.menu_nasiTim,
+//            gizi = R.string.gizi_nasiTim,
+//            bahan = R.string.bahan_nasiTim,
+//            bulan = 11,
+//            caramemasak = R.string.cara_nasiTim,
+//            tanggal = "12 Januari",
+//            photo = R.drawable.nutrisi,
+//            logo = R.drawable.ic_mpasi
+//        ),
+//        MpasiModel(
+//            id = 6,
+//            desk = "Resep MPASI, 11 Bulan, Makan Pagi Makan Siang, Makan Malam",
+//            nama = R.string.menu_berasMerah,
+//            gizi = R.string.gizi_berasMerah,
+//            bahan = R.string.bahan_berasMerah,
+//            bulan = 11,
+//            caramemasak = R.string.cara_berasMerah,
+//            tanggal = "12 Januari",
+//            photo = R.drawable.nutrisi,
+//            logo = R.drawable.ic_mpasi
+//        ),
+//        MpasiModel(
+//            id = 7,
+//            desk = "Resep MPASI, 12 Bulan, Makan Pagi Makan Siang, Makan Malam",
+//            nama = R.string.menu_buburKentang,
+//            gizi = R.string.gizi_buburKentang,
+//            bahan = R.string.bahan_buburKentang,
+//            bulan = 12,
+//            caramemasak = R.string.cara_buburKentang,
+//            tanggal = "12 Januari",
+//            photo = R.drawable.nutrisi,
+//            logo = R.drawable.ic_mpasi
+//        ),
+//
+//        )
 
     val listMkia = listOf(
         Mkia(

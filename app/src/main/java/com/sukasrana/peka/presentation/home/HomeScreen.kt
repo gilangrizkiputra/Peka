@@ -57,6 +57,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.data.repository.fetchArticles
+import com.sukasrana.peka.data.repository.fetchMpasi
 import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.ui.theme.PekaTheme
 
@@ -64,14 +65,14 @@ import com.sukasrana.peka.ui.theme.PekaTheme
 fun HomeScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    balita: List<Balita> = ListData.dataBalita,
-    mpasi: List<Mpasi> = ListData.mpasi
+    balita: List<Balita> = ListData.dataBalita
 ) {
 
     val artikelRekomendasi = remember { mutableStateOf<List<Article>>(emptyList()) }
+    val mpasi = remember { mutableStateOf<List<Mpasi>>(emptyList()) }
     val isLoading = remember { mutableStateOf(true) }
 
-    // Load data from API
+    // Load data from API Article
     LaunchedEffect(Unit) {
         Log.d("HomeScreen", "Fetching articles")
         val articles = fetchArticles()
@@ -80,6 +81,19 @@ fun HomeScreen(
             artikelRekomendasi.value = articles
         } else {
             Log.e("HomeScreen", "Failed to fetch articles")
+        }
+        isLoading.value = false
+    }
+
+    // Load data from API Mpasi
+    LaunchedEffect(Unit) {
+        Log.d("HomeScreen", "Fetching Mpasi")
+        val mpasiModel = fetchMpasi()
+        if (mpasiModel != null) {
+            Log.d("HomeScreen", "Mpasi fetched: $mpasiModel")
+            mpasi.value = mpasiModel
+        } else {
+            Log.e("HomeScreen", "Failed to fetch Mpasi")
         }
         isLoading.value = false
     }
@@ -296,14 +310,38 @@ fun HomeScreen(
                                 .clickable { navController.navigate(Screen.Mpasi.route) }
                         )
                     }
-                    LazyRow(
-                        contentPadding = PaddingValues(2.dp),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        modifier = modifier.padding(top = 8.dp)
-                    ) {
-                        items(mpasi, key = { it.id }) {
-                            MpasiItem(mpasi = it){ mpasiId ->
-                                navController.navigate(Screen.DetailMpasi.route+"/$mpasiId")
+                    if (isLoading.value) {
+                        Text(
+                            text = "Loading Mpasi...",
+                            fontFamily = bodyFontFamily,
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Normal
+                            ),
+                            color = Color.Black,
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
+                    } else if (mpasi.value.isEmpty()) {
+                        Text(
+                            text = "No mpasi available",
+                            fontFamily = bodyFontFamily,
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Normal
+                            ),
+                            color = Color.Black,
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
+                    } else {
+                        LazyRow(
+                            contentPadding = PaddingValues(2.dp),
+                            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                            modifier = modifier.padding(top = 8.dp)
+                        ) {
+                            items(mpasi.value, key = { it.id_mpasi }) {
+                                MpasiItem(mpasi = it){ mpasiId ->
+                                    navController.navigate(Screen.DetailMpasi.route+"/$mpasiId")
+                                }
                             }
                         }
                     }

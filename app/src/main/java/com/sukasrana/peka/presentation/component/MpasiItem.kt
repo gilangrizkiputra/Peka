@@ -31,15 +31,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberImagePainter
 import com.sukasrana.peka.R
 import com.sukasrana.peka.model.Article
+import com.sukasrana.peka.model.Mpasi
 import com.sukasrana.peka.model.MpasiModel
 import com.sukasrana.peka.ui.theme.PekaTheme
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
 @Composable
 fun MpasiItem(
-    mpasi: MpasiModel,
+    mpasi: Mpasi,
     modifier: Modifier = Modifier,
     onItemClicked: (Int) -> Unit
 ) {
@@ -48,16 +50,16 @@ fun MpasiItem(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .clickable {
-                onItemClicked(mpasi.id)
+                onItemClicked(mpasi.id_mpasi)
             }
             .fillMaxWidth()
-            .padding(start = 16.dp) // Menambahkan margin 16dp di sekeliling keseluruhan item
+            .padding(start = 16.dp)
             .width(360.dp)
             .height(117.dp)
     ) {
         Image(
-            painter = painterResource(id = mpasi.photo),
-            contentDescription ="${stringResource(id = mpasi.nama)}",
+            painter = rememberImagePainter(mpasi.image),
+            contentDescription = mpasi.title,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(130.dp, 85.dp)
@@ -66,10 +68,10 @@ fun MpasiItem(
 
         Column (
             modifier = Modifier
-                .padding(start = 8.dp) // Margin yang diminta
+                .padding(start = 8.dp)
         ){
             Text(
-                text = "${stringResource(id = mpasi.nama)}",
+                text = mpasi.title,
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
             )
@@ -82,8 +84,8 @@ fun MpasiItem(
                     modifier = Modifier.padding(top = 4.dp)
                 ){
                     Image(
-                        painter = painterResource(id = mpasi.logo),
-                        contentDescription ="${stringResource(id = mpasi.nama)}",
+                        painter = painterResource(id = R.drawable.ic_mpasi),
+                        contentDescription =mpasi.title,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .size(10.dp, 10.dp)
@@ -91,9 +93,8 @@ fun MpasiItem(
                     )
 
                 }
-
                 Text(
-                    text = mpasi.desk,
+                    text = "Resep Mpasi ${mpasi.category} Makan Pagi, Makan Siang, Makan Malam",
                     fontFamily = bodyFontFamily,
                     style = MaterialTheme.typography.bodyMedium.copy(fontSize = 8.sp, fontWeight = FontWeight.Normal, lineHeight = 10.sp),
                     modifier = Modifier
@@ -101,37 +102,29 @@ fun MpasiItem(
                         .size(180.dp, 30.dp)
                 )
             }
-
-
-
             Text(
-                text = mpasi.tanggal,
+                text = mpasi.date,
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyMedium.copy(fontSize = 8.sp, fontWeight = FontWeight.Normal),
                 modifier = Modifier.padding(top = 16.dp)
-
             )
-
-
         }
 
     }
 
-
-
 }
 
 
-@Preview(showBackground = true)
-@Composable
-private fun MpasiItemPreview() {
-    PekaTheme {
-        MpasiItem(
-            mpasi = MpasiModel(1,"Resep MPASI, 6 Bulan, Makan Pagi ,Makan Siang, Makan Malam", R.string.menu_buburWortel, R.string.gizi_buburWortel, R.string.bahan_buburWortel,R.string.cara_buburWortel,
-                6,"12 Januari 2024", R.drawable.nutrisi,R.drawable.ic_mpasi),
-            onItemClicked = { articleId ->
-                println("Article Id : $articleId")
-            }
-        )
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//private fun MpasiItemPreview() {
+//    PekaTheme {
+//        MpasiItem(
+//            mpasi = MpasiModel(1,"Resep MPASI, 6 Bulan, Makan Pagi ,Makan Siang, Makan Malam", R.string.menu_buburWortel, R.string.gizi_buburWortel, R.string.bahan_buburWortel,R.string.cara_buburWortel,
+//                6,"12 Januari 2024", R.drawable.nutrisi,R.drawable.ic_mpasi),
+//            onItemClicked = { articleId ->
+//                println("Article Id : $articleId")
+//            }
+//        )
+//    }
+//}
