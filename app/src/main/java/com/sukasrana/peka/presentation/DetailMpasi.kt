@@ -17,6 +17,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,6 +36,10 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.sukasrana.peka.data.ListData
+import com.sukasrana.peka.data.repository.fetchArticles
+import com.sukasrana.peka.data.repository.fetchMpasi
+import com.sukasrana.peka.model.Article
+import com.sukasrana.peka.model.Mpasi
 import com.sukasrana.peka.model.MpasiModel
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
@@ -42,16 +49,33 @@ fun DetailMpasi(
     navController: NavController,
     mpasiId: Int?
 ) {
-    val newMpasi = ListData.TheMpasi.filter { mpasi ->
-        mpasi.id == mpasiId
+
+    val mpasi = remember { mutableStateOf<Mpasi?>(null) }
+
+    // Pemanggilan data mpasi berdasarkan ID
+    LaunchedEffect(mpasiId) {
+        mpasi.value = fetchMpasi()?.find { it.id_mpasi == mpasiId }
     }
-    DetailMpasiContent(navController, newMpasiList = newMpasi)
+
+    mpasi.value?.let {
+        DetailMpasiContent(navController, newMpasiList = it)
+    } ?: run {
+        // Show loading or error state if needed
+        Text(
+            text = "Loading...",
+            style = MaterialTheme.typography.bodyLarge.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold
+            ),
+            modifier = modifier.padding(16.dp)
+        )
+    }
 }
 
 @Composable
 private fun DetailMpasiContent(
     navController: NavController,
-    newMpasiList: List<MpasiModel>,
+    newMpasiList: Mpasi,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -77,20 +101,20 @@ private fun DetailMpasiContent(
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(data = newMpasiList[0].photo)
+                    .data(data = newMpasiList.image)
                     .build(),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(height = 250.dp, width = 366.dp)
                     .clip(RoundedCornerShape(10.dp)),
-                contentDescription = "Poster Movie"
+                contentDescription = "Image Mpasi"
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
 
         Column(modifier = Modifier.padding(top = 16.dp)) {
             Text(
-                text = stringResource(id = newMpasiList[0].nama),
+                text = newMpasiList.title,
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontSize = 18.sp,
@@ -98,37 +122,30 @@ private fun DetailMpasiContent(
                 )
             )
             Text(
-                text = stringResource(id = newMpasiList[0].gizi),
+                text = newMpasiList.content,
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyLarge.copy(
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Normal
-                )
-            )
-            Text(
-                text = stringResource(id = newMpasiList[0].bahan),
-                fontFamily = bodyFontFamily,
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.Normal
-                )
-            )
-            Text(
-                text = stringResource(id = newMpasiList[0].caramemasak),
-                fontFamily = bodyFontFamily,
-                style = MaterialTheme.typography.bodyMedium.copy(
                     fontSize = 14.sp,
-                    fontWeight = FontWeight.Normal,
-                    textAlign = TextAlign.Justify
+                    fontWeight = FontWeight.Normal
                 ),
                 modifier = Modifier.padding(top = 16.dp)
+            )
+            Text(
+                text = "Sumber : ${newMpasiList.sumber}",
+                fontFamily = bodyFontFamily,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Normal
+                ),
+                modifier = Modifier.padding(top = 16.dp)
+
             )
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun DetailMapContentPreview() {
-    DetailMpasiContent(navController = rememberNavController(),newMpasiList = ListData.TheMpasi)
-}
+//@Preview(showBackground = true)
+//@Composable
+//private fun DetailMapContentPreview() {
+//    DetailMpasiContent(navController = rememberNavController(),newMpasiList = ListData.TheMpasi)
+//}

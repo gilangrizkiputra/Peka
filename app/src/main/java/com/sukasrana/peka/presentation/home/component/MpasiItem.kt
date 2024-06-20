@@ -14,13 +14,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberImagePainter
 import com.sukasrana.peka.R
 import com.sukasrana.peka.model.Mpasi
 import com.sukasrana.peka.ui.theme.PekaTheme
@@ -34,7 +37,7 @@ fun MpasiItem(
 ) {
     Surface(
         modifier = modifier
-            .clickable { onItemClicked(mpasi.id) }
+            .clickable { onItemClicked(mpasi.id_mpasi) }
             .width(187.dp)
             .height(140.dp),
         color = MaterialTheme.colorScheme.surface,
@@ -46,22 +49,27 @@ fun MpasiItem(
             modifier = Modifier.padding(bottom = 8.dp)
         ) {
             Image(
-                painter = painterResource(id = mpasi.photo),
-                contentDescription = "Bubur Brokoli dan Wortel",
+                painter = rememberImagePainter(mpasi.image),
+                contentDescription = mpasi.title,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
+                    .width(187.dp)
+                    .height(80.dp)
+                    .clip(RoundedCornerShape(topStart = 10.dp))
             )
             Text(
-                text = mpasi.nama,
+                text = mpasi.title,
                 fontFamily = bodyFontFamily,
                 style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp, fontWeight = FontWeight.SemiBold),
                 color = Color.Black,
                 textAlign = TextAlign.Start,
-                modifier = Modifier.width(187.dp).padding(top = 8.dp, start = 8.dp),
+                modifier = Modifier
+                    .width(187.dp)
+                    .padding(top = 8.dp, start = 8.dp),
                 maxLines = 1
             )
             Text(
-                text = mpasi.tanggal,
-                fontFamily = bodyFontFamily,
+                text = mpasi.date,
                 style = MaterialTheme.typography.bodyMedium.copy(fontSize = 7.sp, fontWeight = FontWeight.ExtraLight),
                 textAlign = TextAlign.Right,
                 modifier = Modifier
@@ -72,20 +80,20 @@ fun MpasiItem(
     }
 }
 
-@Preview
-@Composable
-private fun MpasiItemHorizontalPreview() {
-    PekaTheme {
-        MpasiItem(mpasi = Mpasi(
-            1,
-            "Bubur Brokoli dan Wortel",
-            "lorem",
-            "15 Mei 24",
-            R.drawable.image_bubur_brokoli_mpasi_beranda
-        ),
-            onItemClicked = { balitaId ->
-                println("Balita Id : $balitaId")
-            }
-        )
-    }
-}
+//@Preview
+//@Composable
+//private fun MpasiItemHorizontalPreview() {
+//    PekaTheme {
+//        MpasiItem(mpasi = Mpasi(
+//            1,
+//            "Bubur Brokoli dan Wortel",
+//            "lorem",
+//            "15 Mei 24",
+//            R.drawable.image_bubur_brokoli_mpasi_beranda
+//        ),
+//            onItemClicked = { balitaId ->
+//                println("Balita Id : $balitaId")
+//            }
+//        )
+//    }
+//}

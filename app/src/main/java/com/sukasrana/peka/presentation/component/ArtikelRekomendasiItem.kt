@@ -44,7 +44,7 @@ fun ArtikelRekomendasiItem(
             .height(140.dp),
         color = MaterialTheme.colorScheme.surface,
         shadowElevation = 4.dp,
-        shape = RoundedCornerShape(10.dp)
+        shape = RoundedCornerShape( 10.dp)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -57,7 +57,7 @@ fun ArtikelRekomendasiItem(
                 modifier = Modifier
                     .width(187.dp)
                     .height(80.dp)
-                    .clip(RoundedCornerShape(10.dp))
+                    .clip(RoundedCornerShape(topStart = 10.dp))
             )
             Text(
                 text = rekomArt.title,

@@ -1,6 +1,8 @@
 package com.sukasrana.peka.presentation
 
+import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,6 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -37,25 +40,47 @@ import com.sukasrana.peka.presentation.component.MpasiItem
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import com.sukasrana.peka.data.repository.fetchArticles
+import com.sukasrana.peka.data.repository.fetchMpasi
+import com.sukasrana.peka.model.Article
+import com.sukasrana.peka.model.Mpasi
 import com.sukasrana.peka.navigation.Screen
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 @Composable
 fun MpasiScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    mpasi: List<MpasiModel> = ListData.TheMpasi,
 ) {
-    // State to hold the current category
-    var selectedCategory by remember { mutableStateOf("semua") }
 
-    // Filter the list based on the selected category
-    val filteredMpasi = when (selectedCategory) {
-        "6-8 Bulan" -> mpasi.filter { it.bulan == 6 }
-        "9-11 Bulan" -> mpasi.filter { it.bulan == 8 }
-        "12 Bulan >" -> mpasi.filter { it.bulan == 9 }
-        else -> mpasi
+    val mpasi = remember { mutableStateOf<List<Mpasi>>(emptyList()) }
+    val filteredMpasi = remember { mutableStateOf<List<Mpasi>>(emptyList()) }
+    val selectedCategory = remember { mutableStateOf("Semua") }
+
+    // Pemanggilan data menggunakan LaunchedEffect
+    LaunchedEffect(Unit) {
+        withContext(Dispatchers.IO) {
+            val mpasiModel = fetchMpasi()
+            if (mpasiModel != null) {
+                mpasi.value = mpasiModel
+                filteredMpasi.value = mpasiModel
+            }
+        }
     }
+
+    fun filterMpasi(category: String) {
+        selectedCategory.value = category
+        filteredMpasi.value = when (selectedCategory.value) {
+            "Semua" -> mpasi.value
+            "6-8 Bulan" -> mpasi.value.filter { it.category in listOf("6 Bulan", "7 Bulan", "8 Bulan") }
+            "9-11 Bulan" -> mpasi.value.filter { it.category in listOf("9 Bulan", "10 Bulan", "11 Bulan") }
+            "12 Bulan" -> mpasi.value.filter { it.category == "12 Bulan" }
+            else -> mpasi.value
+        }
+    }
+
 
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -106,7 +131,7 @@ fun MpasiScreen(
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 OutlinedButton(
-                    onClick = { selectedCategory = "Semua" },
+                    onClick = { filterMpasi("Semua") },
                     modifier = Modifier
                         .weight(1f)
                         .size(76.dp, 30.dp)
@@ -122,7 +147,7 @@ fun MpasiScreen(
                 }
                 Spacer(modifier = Modifier.width(4.dp))
                 OutlinedButton(
-                    onClick = { selectedCategory = "6-8 Bulan" },
+                    onClick = { filterMpasi("6-8 Bulan") },
                     modifier = Modifier
                         .weight(1f)
                         .size(76.dp, 30.dp)
@@ -138,7 +163,7 @@ fun MpasiScreen(
                 }
                 Spacer(modifier = Modifier.width(4.dp))
                 OutlinedButton(
-                    onClick = { selectedCategory = "9-11 Bulan" },
+                    onClick = { filterMpasi("9-11 Bulan") },
                     modifier = Modifier
                         .weight(1f)
                         .size(76.dp, 30.dp)
@@ -154,10 +179,11 @@ fun MpasiScreen(
                 }
                 Spacer(modifier = Modifier.width(4.dp))
                 OutlinedButton(
-                    onClick = { selectedCategory = "12 Bulan >" },
+                    onClick = { filterMpasi("12 Bulan") },
                     modifier = Modifier
                         .weight(1f)
                         .size(76.dp, 30.dp)
+
                 ) {
                     Text(
                         text = "12 Bulan >",
@@ -171,7 +197,7 @@ fun MpasiScreen(
             }
         }
 
-        items(filteredMpasi, key = { it.id }) { item ->
+        items(filteredMpasi.value, key = { it.id_mpasi }) { item ->
             MpasiItem(mpasi = item) { mpasiId ->
                 navController.navigate(Screen.DetailMpasi.route+"/$mpasiId")
             }
