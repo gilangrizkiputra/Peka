@@ -199,7 +199,7 @@ fun HomeScreen(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold
                     ),
-                    color = Color.Gray,
+                    color = Color.Black,
                     modifier = Modifier
                 )
                 LazyRow(
