@@ -12,15 +12,14 @@ import com.sukasrana.peka.model.MpasiModel
 object ListData {
     val dataBalita = listOf(
         Balita(
-            id = 1,
-            nomorKartuKeluarga = 321001001001,
-            nikAnak = 3211505240016,
+            id_balita = 1,
+            id_user = 1,
+            nik = 321001001001,
             nama = "Asep Knalpot",
-            tempatLahir = "Madiun",
-            tanggal = "15-05-24",
-            umur = 2,
-            golanganDarah = "A",
-            jenisKelamin = "Laki-laki"
+            gender = "Laki - Laki",
+            birth_date = "15-05-24",
+            blood_type = "A",
+            birth_location = "Madiun"
         ),
     )
 
@@ -230,7 +229,8 @@ object ListData {
             Point(1f, 8f),
             Point(2f, 12f),
             Point(3f, 16f),
-            Point(4f, 20f)
+            Point(4f, 20f),
+            Point(5f, 50f)
         )
 
     val DataTinggi: List<Point> =

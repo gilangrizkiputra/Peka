@@ -57,25 +57,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.sukasrana.peka.data.repository.fetchBaliat
 import com.sukasrana.peka.data.repository.fetchArticles
 import com.sukasrana.peka.data.repository.fetchMpasi
 import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.ui.theme.PekaTheme
 import com.sukasrana.peka.ui.theme.primaryColor
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 fun HomeScreen(
     navController: NavController,
-    modifier: Modifier = Modifier,
-    balita: List<Balita> = ListData.dataBalita
+    modifier: Modifier = Modifier
 ) {
 
+    val balita = remember { mutableStateOf<List<Balita>>(emptyList()) }
     val artikelRekomendasi = remember { mutableStateOf<List<Article>>(emptyList()) }
     val mpasi = remember { mutableStateOf<List<Mpasi>>(emptyList()) }
     val isLoading = remember { mutableStateOf(true) }
 
-    // Load data from API Article
     LaunchedEffect(Unit) {
+        withContext(Dispatchers.IO) {
+            val data = fetchBaliat()
+            if (data != null) {
+                balita.value = data
+            }
+        }
+
         Log.d("HomeScreen", "Fetching articles")
         val articles = fetchArticles()
         if (articles != null) {
@@ -85,10 +94,7 @@ fun HomeScreen(
             Log.e("HomeScreen", "Failed to fetch articles")
         }
         isLoading.value = false
-    }
 
-    // Load data from API Mpasi
-    LaunchedEffect(Unit) {
         Log.d("HomeScreen", "Fetching Mpasi")
         val mpasiModel = fetchMpasi()
         if (mpasiModel != null) {
@@ -99,8 +105,6 @@ fun HomeScreen(
         }
         isLoading.value = false
     }
-
-
     LazyColumn(
         modifier = modifier.fillMaxSize(),
     ) {
@@ -108,9 +112,7 @@ fun HomeScreen(
             Box(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Box(
-
-                ) {
+                Box {
                     Surface(
                         modifier = modifier
                             .padding(0.dp)
@@ -197,7 +199,7 @@ fun HomeScreen(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold
                     ),
-                    color = Color.Black,
+                    color = Color.Gray,
                     modifier = Modifier
                 )
                 LazyRow(
@@ -205,8 +207,13 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = modifier.padding(top = 8.dp)
                 ) {
-                    items(balita, key = { it.id }) {
-                        BalitaItem(balita = it, navController = navController, modifier = Modifier)
+                    items(balita.value, key = { it.id_balita }) {
+                        BalitaItem(
+                            balita = it,
+                            balitaId = it.id_balita,
+                            navController = navController,
+                            modifier = Modifier
+                        )
                     }
                     item {
                         AddBalitaItem(navController = navController)
@@ -357,8 +364,8 @@ fun HomeScreen(
                             modifier = modifier.padding(top = 8.dp)
                         ) {
                             items(mpasi.value, key = { it.id_mpasi }) {
-                                MpasiItem(mpasi = it){ mpasiId ->
-                                    navController.navigate(Screen.DetailMpasi.route+"/$mpasiId")
+                                MpasiItem(mpasi = it) { mpasiId ->
+                                    navController.navigate(Screen.DetailMpasi.route + "/$mpasiId")
                                 }
                             }
                         }
@@ -411,13 +418,5 @@ fun HomeScreen(
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun HomeScreenPreview(){
-    PekaTheme {
-        HomeScreen(navController = rememberNavController())
     }
 }

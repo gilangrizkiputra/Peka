@@ -21,29 +21,32 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.googlefonts.Font
+import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sukasrana.peka.R
-import com.sukasrana.peka.model.Balita
-import com.sukasrana.peka.ui.theme.PekaTheme
-import androidx.compose.ui.text.googlefonts.GoogleFont
-import androidx.compose.ui.text.googlefonts.Font
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.sukasrana.peka.R
+import com.sukasrana.peka.model.Balita
 import com.sukasrana.peka.navigation.Screen
+import com.sukasrana.peka.ui.theme.PekaTheme
+import com.sukasrana.peka.ui.theme.bodyFontFamily
 import com.sukasrana.peka.ui.theme.provider
 import com.sukasrana.peka.ui.theme.secondaryTreeColor
 import com.sukasrana.peka.ui.theme.secondaryTwoColor
-import com.sukasrana.peka.ui.theme.bodyFontFamily
+import java.time.OffsetDateTime
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun BalitaItem(
     navController: NavController,
     modifier: Modifier = Modifier,
     balita: Balita,
+    balitaId: Int?
     //zonItemClicked: (Int) -> Unit
 )
 {
@@ -56,10 +59,12 @@ fun BalitaItem(
             style = FontStyle.Italic
         )
     )
+    val dob = balita.birth_date
+    val (years, months) = AgeCalculator(dob)
     Surface(
         modifier = modifier
             //.clickable { onItemClicked(balita.id) }
-            .clickable { navController.navigate(Screen.Balita.route) }
+            .clickable { navController.navigate(Screen.Balita.route+"/$balitaId") }
             .width(235.dp),
         color = MaterialTheme.colorScheme.surface,
         shadowElevation = 4.dp,
@@ -115,7 +120,11 @@ fun BalitaItem(
                     maxLines = 1
                 )
                 Text(
-                    text = "${balita.umur} Tahun",
+                    text = if (years < 1) {
+                        "$months bulan"
+                    }else {
+                        "$years tahun $months bulan"
+                    },
                     fontFamily = bodyFontFamily,
                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 11.sp, fontWeight = FontWeight.Normal),
                     color = Color.Black,
@@ -127,24 +136,23 @@ fun BalitaItem(
     }
 }
 
-@Preview
-@Composable
-private fun BalitaItemHorizontalPreview() {
-    PekaTheme {
-        BalitaItem(balita = Balita(
-            1,
-            321001001001,
-            3211505240016,
-            "Asep Knalpot",
-            "15-05-24",
-            "15-05-24",
-            2,
-            "A",
-            "Laki-laki",
-        ), navController = rememberNavController()
+//@Preview
+//@Composable
+//private fun BalitaItemHorizontalPreview() {
+//    PekaTheme {
+//        BalitaItem(balita = Balita(
+//            1,
+//            1,
+//            "Asep",
+//            222000,
+//            "Laki - Laki",
+//            "2021-05-24",
+//            "medan",
+//            "A"
+//        ), navController = rememberNavController()
 //            onItemClicked = { balitaId ->
 //                println("Balita Id : $balitaId")
 //            }
-        )
-    }
-}
+//        )
+//    }
+//}

@@ -6,9 +6,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.yml.charts.axis.AxisData
+import co.yml.charts.common.model.Point
 import co.yml.charts.ui.linechart.LineChart
 import co.yml.charts.ui.linechart.model.GridLines
 import co.yml.charts.ui.linechart.model.IntersectionPoint
@@ -19,18 +19,17 @@ import co.yml.charts.ui.linechart.model.LineStyle
 import co.yml.charts.ui.linechart.model.SelectionHighlightPoint
 import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.ui.linechart.model.ShadowUnderLine
-import com.sukasrana.peka.data.ListData.DataBerat
-import com.sukasrana.peka.ui.theme.PekaTheme
 
 @Composable
 fun BeratChat(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    dataBerat: List<Point>
 ){
     val steps = 10
     val xAxisData = AxisData.Builder()
         .axisStepSize(100.dp)
         .backgroundColor(MaterialTheme.colorScheme.background)
-        .steps(DataBerat.size - 1)
+        .steps(dataBerat.size - 1)
         .labelData { i -> i.toString() }
         .labelAndAxisLinePadding(15.dp)
         .build()
@@ -48,7 +47,7 @@ fun BeratChat(
         linePlotData = LinePlotData(
             lines = listOf(
                 Line(
-                    dataPoints = DataBerat,
+                    dataPoints = dataBerat,
                     LineStyle(),
                     IntersectionPoint(),
                     SelectionHighlightPoint(),
@@ -69,12 +68,4 @@ fun BeratChat(
             .height(300.dp),
         lineChartData = lineChartData
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun PrevieTryChartline(){
-    PekaTheme {
-        BeratChat()
-    }
 }
