@@ -60,7 +60,7 @@ fun BalitaItem(
         )
     )
     val dob = balita.birth_date
-    val age = AgeCalculator(dob)
+    val (years, months) = AgeCalculator(dob)
     Surface(
         modifier = modifier
             //.clickable { onItemClicked(balita.id) }
@@ -120,7 +120,11 @@ fun BalitaItem(
                     maxLines = 1
                 )
                 Text(
-                    text = "${age} Bulan",
+                    text = if (years < 1) {
+                        "$months bulan"
+                    }else {
+                        "$years tahun $months bulan"
+                    },
                     fontFamily = bodyFontFamily,
                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 11.sp, fontWeight = FontWeight.Normal),
                     color = Color.Black,

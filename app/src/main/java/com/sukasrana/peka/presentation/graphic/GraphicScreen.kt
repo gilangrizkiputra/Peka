@@ -48,6 +48,7 @@ import com.sukasrana.peka.model.Balita
 import com.sukasrana.peka.presentation.component.ArtikelRekomendasiItem
 import com.sukasrana.peka.presentation.graphic.component.BeratChat
 import com.sukasrana.peka.presentation.graphic.component.TinggiBadan
+import com.sukasrana.peka.presentation.home.component.AgeCalculator
 import com.sukasrana.peka.ui.theme.onPrimaryLight
 import com.sukasrana.peka.ui.theme.secondaryColor
 import com.sukasrana.peka.ui.theme.secondaryTwoColor
@@ -61,12 +62,12 @@ fun GraphicScreen(
     artikelRekomendasi: List<Article> = ListData.TheArticel,
     balitaId: Int?
 ) {
-    var balita by remember { mutableStateOf<List<Balita>>(emptyList()) }
+    var balita by remember { mutableStateOf<Balita?>(null) }
     LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
             val data = balitaId?.let { fetchBaliatById(it) }
             if (data != null) {
-                balita = data
+                balita = data[0]
             }
         }
     }
@@ -96,176 +97,187 @@ fun GraphicScreen(
                         .align(Alignment.CenterHorizontally)
                         .padding(bottom = 16.dp)
                 )
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .padding(20.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.image_balita_beranda),
-                        contentDescription = "Balita",
-                    )
+                balita?.let {
+                    val dob = it.birth_date
+                    val (years, months) = AgeCalculator(dob)
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .padding(20.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.image_balita_beranda),
+                            contentDescription = "Balita",
+                        )
 
-                    Text(
-                        text = "Nama Balita",
-                        style = MaterialTheme.typography.titleLarge,
-                        modifier = Modifier
-                            .padding(10.dp)
-                    )
-                }
-                Row(
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .width(80.dp)
-                            .height(100.dp)
-                            .clip(shape = RoundedCornerShape(5.dp))
-                            .background(secondaryTwoColor)
-                    ) {
-                        Box(
-                            contentAlignment = Alignment.CenterStart,
+                        Text(
+                            text = it.nama,
+                            style = MaterialTheme.typography.titleLarge,
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .height(37.dp)
+                                .padding(10.dp)
+                        )
+                    }
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .width(80.dp)
+                                .height(100.dp)
                                 .clip(shape = RoundedCornerShape(5.dp))
-                                .background(secondaryColor)
+                                .background(secondaryTwoColor)
                         ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_berat_badan),
-                                contentDescription = "icon berat badan",
-                                modifier = Modifier.padding(9.dp)
-                            )
+                            Box(
+                                contentAlignment = Alignment.CenterStart,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(37.dp)
+                                    .clip(shape = RoundedCornerShape(5.dp))
+                                    .background(secondaryColor)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.ic_berat_badan),
+                                    contentDescription = "icon berat badan",
+                                    modifier = Modifier.padding(9.dp)
+                                )
+                            }
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(3.dp)
+                            ) {
+                                Text(
+                                    text = "Berat Badan",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    textAlign = TextAlign.Center
+                                )
+                                Text(text = "15 Kg", style = MaterialTheme.typography.bodyLarge)
+                            }
                         }
                         Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center,
                             modifier = Modifier
-                                .fillMaxSize()
-                                .padding(3.dp)
-                        ) {
-                            Text(
-                                text = "Berat Badan",
-                                style = MaterialTheme.typography.bodySmall,
-                                textAlign = TextAlign.Center
-                            )
-                            Text(text = "15 Kg", style = MaterialTheme.typography.bodyLarge)
-                        }
-                    }
-                    Column(
-                        modifier = Modifier
-                            .width(80.dp)
-                            .height(100.dp)
-                            .clip(shape = RoundedCornerShape(5.dp))
-                            .background(secondaryTwoColor)
-                    ) {
-                        Box(
-                            contentAlignment = Alignment.CenterStart,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(37.dp)
+                                .width(80.dp)
+                                .height(100.dp)
                                 .clip(shape = RoundedCornerShape(5.dp))
-                                .background(secondaryColor)
+                                .background(secondaryTwoColor)
                         ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_tinggi_badan),
-                                contentDescription = "icon tinggi badan",
-                                modifier = Modifier.padding(9.dp)
-                            )
+                            Box(
+                                contentAlignment = Alignment.CenterStart,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(37.dp)
+                                    .clip(shape = RoundedCornerShape(5.dp))
+                                    .background(secondaryColor)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.ic_tinggi_badan),
+                                    contentDescription = "icon tinggi badan",
+                                    modifier = Modifier.padding(9.dp)
+                                )
+                            }
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(3.dp)
+                            ) {
+                                Text(
+                                    text = "Tinggi Badan",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    textAlign = TextAlign.Center
+                                )
+                                Text(text = "75 cm", style = MaterialTheme.typography.bodyLarge)
+                            }
                         }
                         Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center,
                             modifier = Modifier
-                                .fillMaxSize()
-                                .padding(3.dp)
-                        ) {
-                            Text(
-                                text = "Tinggi Badan",
-                                style = MaterialTheme.typography.bodySmall,
-                                textAlign = TextAlign.Center
-                            )
-                            Text(text = "75 cm", style = MaterialTheme.typography.bodyLarge)
-                        }
-                    }
-                    Column(
-                        modifier = Modifier
-                            .width(80.dp)
-                            .height(100.dp)
-                            .clip(shape = RoundedCornerShape(5.dp))
-                            .background(secondaryTwoColor)
-                    ) {
-                        Box(
-                            contentAlignment = Alignment.CenterStart,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(37.dp)
+                                .width(80.dp)
+                                .height(100.dp)
                                 .clip(shape = RoundedCornerShape(5.dp))
-                                .background(secondaryColor)
+                                .background(secondaryTwoColor)
                         ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_umur),
-                                contentDescription = "icon umur",
-                                modifier = Modifier.padding(9.dp)
-                            )
+                            Box(
+                                contentAlignment = Alignment.CenterStart,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(37.dp)
+                                    .clip(shape = RoundedCornerShape(5.dp))
+                                    .background(secondaryColor)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.ic_umur),
+                                    contentDescription = "icon umur",
+                                    modifier = Modifier.padding(9.dp)
+                                )
+                            }
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(3.dp)
+                            ) {
+                                Text(
+                                    text = "Umur",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    textAlign = TextAlign.Center
+                                )
+                                Text(
+                                    text = if (years < 1) {
+                                        "$months bulan"
+                                    }else{
+                                        "$years tahun $months bulan"
+                                    },
+                                    style = MaterialTheme.typography.bodyLarge)
+                            }
                         }
                         Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center,
                             modifier = Modifier
-                                .fillMaxSize()
-                                .padding(3.dp)
-                        ) {
-                            Text(
-                                text = "Umur",
-                                style = MaterialTheme.typography.bodySmall,
-                                textAlign = TextAlign.Center
-                            )
-                            Text(text = "10 Bulan", style = MaterialTheme.typography.bodyLarge)
-                        }
-                    }
-                    Column(
-                        modifier = Modifier
-                            .width(80.dp)
-                            .height(100.dp)
-                            .clip(shape = RoundedCornerShape(5.dp))
-                            .background(secondaryTwoColor)
-                    ) {
-                        Box(
-                            contentAlignment = Alignment.CenterStart,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(37.dp)
+                                .width(80.dp)
+                                .height(100.dp)
                                 .clip(shape = RoundedCornerShape(5.dp))
-                                .background(secondaryColor)
+                                .background(secondaryTwoColor)
                         ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_jenis_kelamin),
-                                contentDescription = "icon timbangan",
-                                modifier = Modifier.padding(9.dp)
-                            )
-                        }
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center,
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(3.dp)
-                        ) {
-                            Text(
-                                text = "Jenis kelamin",
-                                style = MaterialTheme.typography.bodySmall,
-                                textAlign = TextAlign.Center
-                            )
-                            Icon(
-                                imageVector = Icons.Default.Male,
-                                contentDescription = "Gender icon"
-                            )
+                            Box(
+                                contentAlignment = Alignment.CenterStart,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(37.dp)
+                                    .clip(shape = RoundedCornerShape(5.dp))
+                                    .background(secondaryColor)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.ic_jenis_kelamin),
+                                    contentDescription = "icon timbangan",
+                                    modifier = Modifier.padding(9.dp)
+                                )
+                            }
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(3.dp)
+                            ) {
+                                Text(
+                                    text = it.gender,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    textAlign = TextAlign.Center
+                                )
+                                Icon(
+                                    imageVector = Icons.Default.Male,
+                                    contentDescription = "Gender icon"
+                                )
+                            }
                         }
                     }
+
                 }
             }
         }
