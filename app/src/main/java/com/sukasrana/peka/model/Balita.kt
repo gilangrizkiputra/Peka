@@ -1,13 +1,12 @@
 package com.sukasrana.peka.model
 
 data class Balita(
-    var id: Int,
-    var nomorKartuKeluarga : Long,
-    var nikAnak : Long,
-    var nama : String,
-    var tempatLahir : String,
-    var tanggal : String,
-    var umur :Int,
-    var golanganDarah : String,
-    var jenisKelamin : String,
+    var id_balita: Int,
+    var id_user: Int,
+    var nama: String,
+    var nik: Long,
+    var gender: String,
+    var birth_date: String,
+    var birth_location:String,
+    var blood_type: String
 )

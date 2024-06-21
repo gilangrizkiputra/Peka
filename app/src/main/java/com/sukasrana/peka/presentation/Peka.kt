@@ -6,11 +6,8 @@ import com.sukasrana.peka.presentation.login.SignUpScreen
 import com.sukasrana.peka.presentation.login.SwitchScreen
 import com.sukasrana.peka.presentation.onboarding.OnBoardingScreen
 import com.sukasrana.peka.presentation.splash.SplashScreen
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -38,7 +35,6 @@ import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.presentation.home.HomeScreen
 import com.sukasrana.peka.presentation.notification.NotificationScreen
 import com.sukasrana.peka.ui.theme.primaryColor
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.navigation.NavType
@@ -144,9 +140,14 @@ fun Peka(
                 nav.value = "no_bot"
             }
 
-            composable(Screen.Balita.route) {
+            composable(Screen.Balita.route+ "/{balitaId}",
+                arguments = listOf(navArgument("balitaId") { type = NavType.IntType })
+            ) { navBackStackEntry ->
                 nav.value = "no_bot"
-                GraphicScreen(navController)
+                GraphicScreen(
+                    navController,
+                    balitaId = navBackStackEntry.arguments?.getInt("balitaId")
+                )
             }
 
             composable(Screen.Mkia.route) {
