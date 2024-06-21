@@ -229,7 +229,8 @@ object ListData {
             Point(1f, 8f),
             Point(2f, 12f),
             Point(3f, 16f),
-            Point(4f, 20f)
+            Point(4f, 20f),
+            Point(5f, 50f)
         )
 
     val DataTinggi: List<Point> =
