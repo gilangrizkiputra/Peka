@@ -14,6 +14,16 @@ interface ApiService {
     @POST("user")
     suspend fun addUser(@Body user: User): Response<Unit>
 
+
+
+
+
+
+
+
+
+
+
     @POST("addbalita")
     suspend fun addBalita(@Body balita: Balita): Response<Unit>
 
