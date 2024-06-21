@@ -1,5 +1,6 @@
 package com.sukasrana.peka.presentation.graphic
 
+import android.util.Log
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -41,11 +42,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import co.yml.charts.common.model.Point
 import com.sukasrana.peka.R
 import com.sukasrana.peka.data.ListData
+import com.sukasrana.peka.data.repository.fetchArticles
 import com.sukasrana.peka.data.ListData.DataBerat
 import com.sukasrana.peka.data.repository.fetchBaliatById
 import com.sukasrana.peka.data.repository.fetchDataBaliatById
@@ -56,6 +60,7 @@ import com.sukasrana.peka.presentation.component.ArtikelRekomendasiItem
 import com.sukasrana.peka.presentation.graphic.component.BeratChat
 import com.sukasrana.peka.presentation.graphic.component.TinggiBadan
 import com.sukasrana.peka.presentation.home.component.AgeCalculator
+import com.sukasrana.peka.ui.theme.PekaTheme
 import com.sukasrana.peka.ui.theme.onPrimaryLight
 import com.sukasrana.peka.ui.theme.secondaryColor
 import com.sukasrana.peka.ui.theme.secondaryTwoColor
@@ -67,7 +72,6 @@ import kotlinx.coroutines.withContext
 fun GraphicScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    artikelRekomendasi: List<Article> = ListData.TheArticel,
     balitaId: Int?
 ) {
     var listDataBerat: List<Point> = remember {
@@ -75,6 +79,7 @@ fun GraphicScreen(
     }
     var balita by remember { mutableStateOf<Balita?>(null) }
     val dataBalita = remember { mutableStateListOf<DataBalita?>() }
+    val artikelRekomendasi = remember { mutableStateOf<List<Article>>(emptyList()) }
     LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
             val data = balitaId?.let { fetchBaliatById(it) }
@@ -85,6 +90,15 @@ fun GraphicScreen(
             if (dataB != null) {
                 dataBalita.clear()
                 dataBalita.addAll(dataB)
+            }
+
+            Log.d("GraphicScreen", "Fetching articles")
+            val articles = fetchArticles()
+            if (articles != null) {
+                Log.d("GraphicScreen", "Articles fetched: $articles")
+                artikelRekomendasi.value = articles
+            } else {
+                Log.e("GraphicScreen", "Failed to fetch articles")
             }
         }
         data class Unit(val x: Float, val y: Float)
@@ -476,9 +490,9 @@ fun GraphicScreen(
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         modifier = modifier.padding(top = 8.dp)
                     ) {
-                        items(artikelRekomendasi, key = { it.id }) {
-                            ArtikelRekomendasiItem(rekomArt = it, modifier = Modifier) {
-
+                        items(artikelRekomendasi.value, key = { it.id_artikel }) {
+                            ArtikelRekomendasiItem(rekomArt = it) { articleId ->
+                                navController.navigate("detail_article/$articleId")
                             }
                         }
                     }

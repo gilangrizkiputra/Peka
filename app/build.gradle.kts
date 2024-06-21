@@ -84,6 +84,8 @@ dependencies {
 
     //nabil menambahkan depencies
     implementation("androidx.navigation:navigation-compose:2.5.3")
+    implementation("androidx.compose.material:material-icons-extended:1.1.0-alpha05")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     //chart
     implementation("co.yml:ycharts:2.1.0")
@@ -104,6 +106,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.12")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+    implementation ("io.coil-kt:coil-compose:1.4.0")
     implementation ("androidx.compose.ui:ui-tooling:1.0.0-beta01")
 
 }
