@@ -93,10 +93,12 @@ fun HomeScreen(
         } else {
             Log.e("HomeScreen", "Failed to fetch articles")
         }
+
         isLoading.value = false
 
         Log.d("HomeScreen", "Fetching Mpasi")
         val mpasiModel = fetchMpasi()
+
         if (mpasiModel != null) {
             Log.d("HomeScreen", "Mpasi fetched: $mpasiModel")
             mpasi.value = mpasiModel
@@ -105,6 +107,7 @@ fun HomeScreen(
         }
         isLoading.value = false
     }
+
     LazyColumn(
         modifier = modifier.fillMaxSize(),
     ) {
