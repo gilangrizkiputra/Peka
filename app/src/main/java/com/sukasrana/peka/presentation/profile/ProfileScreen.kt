@@ -60,7 +60,7 @@ fun ProfileScreen(
                         fontWeight = FontWeight.Bold),
                     )
                 Text(
-                    text = "+62 87907654321",
+                    text = "Sri@Sukasrana.com",
                     fontFamily = bodyFontFamily,
                     style = MaterialTheme.typography.bodyLarge.copy(
                         fontSize = 14.sp,

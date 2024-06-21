@@ -74,9 +74,10 @@ fun HomeScreen(
     val mpasi = remember { mutableStateOf<List<Mpasi>>(emptyList()) }
     val isLoading = remember { mutableStateOf(true) }
 
-    // Load data from API Article
     LaunchedEffect(Unit) {
         Log.d("HomeScreen", "Fetching articles")
+        Log.d("HomeScreen", "Fetching Mpasi")
+        val mpasiModel = fetchMpasi()
         val articles = fetchArticles()
         if (articles != null) {
             Log.d("HomeScreen", "Articles fetched: $articles")
@@ -84,13 +85,6 @@ fun HomeScreen(
         } else {
             Log.e("HomeScreen", "Failed to fetch articles")
         }
-        isLoading.value = false
-    }
-
-    // Load data from API Mpasi
-    LaunchedEffect(Unit) {
-        Log.d("HomeScreen", "Fetching Mpasi")
-        val mpasiModel = fetchMpasi()
         if (mpasiModel != null) {
             Log.d("HomeScreen", "Mpasi fetched: $mpasiModel")
             mpasi.value = mpasiModel
@@ -99,7 +93,6 @@ fun HomeScreen(
         }
         isLoading.value = false
     }
-
 
     LazyColumn(
         modifier = modifier.fillMaxSize(),

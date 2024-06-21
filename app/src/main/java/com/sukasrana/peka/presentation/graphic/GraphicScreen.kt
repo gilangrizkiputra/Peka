@@ -63,7 +63,6 @@ fun GraphicScreen(
 
     val artikelRekomendasi = remember { mutableStateOf<List<Article>>(emptyList()) }
 
-    // Load data from API
     LaunchedEffect(Unit) {
         Log.d("GraphicScreen", "Fetching articles")
         val articles = fetchArticles()
