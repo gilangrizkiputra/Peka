@@ -2,6 +2,7 @@ package com.sukasrana.peka.network
 
 import com.sukasrana.peka.model.Balita
 import com.sukasrana.peka.model.BalitaResponse
+import com.sukasrana.peka.model.DataBalitaResponse
 import com.sukasrana.peka.model.User
 import retrofit2.Response
 import retrofit2.http.Body
@@ -21,4 +22,7 @@ interface ApiService {
 
     @GET("balita/{id_balita}")
     suspend fun getBalitaById(@Path("id_balita") id_balita: Int): Response<BalitaResponse>
+
+    @GET("databalita/{id_balita}")
+    suspend fun getDataBalitaById(@Path("id_balita") id_balita: Int): Response<DataBalitaResponse>
 }

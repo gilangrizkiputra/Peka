@@ -1,5 +1,6 @@
 package com.sukasrana.peka.presentation.graphic
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,6 +21,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Female
 import androidx.compose.material.icons.filled.Male
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,6 +34,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,11 +43,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import co.yml.charts.common.model.Point
 import com.sukasrana.peka.R
 import com.sukasrana.peka.data.ListData
+import com.sukasrana.peka.data.ListData.DataBerat
 import com.sukasrana.peka.data.repository.fetchBaliatById
+import com.sukasrana.peka.data.repository.fetchDataBaliatById
 import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.model.Balita
+import com.sukasrana.peka.model.DataBalita
 import com.sukasrana.peka.presentation.component.ArtikelRekomendasiItem
 import com.sukasrana.peka.presentation.graphic.component.BeratChat
 import com.sukasrana.peka.presentation.graphic.component.TinggiBadan
@@ -55,6 +62,7 @@ import com.sukasrana.peka.ui.theme.secondaryTwoColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+@SuppressLint("UnrememberedMutableState")
 @Composable
 fun GraphicScreen(
     navController: NavController,
@@ -62,15 +70,43 @@ fun GraphicScreen(
     artikelRekomendasi: List<Article> = ListData.TheArticel,
     balitaId: Int?
 ) {
+    var listDataBerat: List<Point> = remember {
+        mutableStateListOf(Point(x = 1f, y = 1f))
+    }
     var balita by remember { mutableStateOf<Balita?>(null) }
+    val dataBalita = remember { mutableStateListOf<DataBalita?>() }
     LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
             val data = balitaId?.let { fetchBaliatById(it) }
+            val dataB = balitaId?.let { fetchDataBaliatById(it) }
             if (data != null) {
                 balita = data[0]
             }
+            if (dataB != null) {
+                dataBalita.clear()
+                dataBalita.addAll(dataB)
+            }
         }
+        data class Unit(val x: Float, val y: Float)
+
+        fun Unit.toPoint(): Point {
+            return Point(x = this.x, y = this.y)
+        }
+
+        fun aUnitToAPoint(unitList: List<Unit>): List<Point> {
+            return unitList.map { it.toPoint() }
+        }
+
+        val beratList = dataBalita.map {
+            Unit(
+                x = it?.id_data_balita?.toFloat() ?: 1f,
+                y = it?.weight?.toFloat() ?: 10f)
+        }
+
+        listDataBerat = aUnitToAPoint(beratList)
     }
+
+    val lastData = dataBalita.lastOrNull()
 
     LazyColumn(
         modifier = modifier
@@ -97,8 +133,8 @@ fun GraphicScreen(
                         .align(Alignment.CenterHorizontally)
                         .padding(bottom = 16.dp)
                 )
-                balita?.let {
-                    val dob = it.birth_date
+                balita?.let { balita ->
+                    val dob = balita.birth_date
                     val (years, months) = AgeCalculator(dob)
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -111,7 +147,7 @@ fun GraphicScreen(
                         )
 
                         Text(
-                            text = it.nama,
+                            text = balita.nama,
                             style = MaterialTheme.typography.titleLarge,
                             modifier = Modifier
                                 .padding(10.dp)
@@ -156,7 +192,17 @@ fun GraphicScreen(
                                     style = MaterialTheme.typography.bodySmall,
                                     textAlign = TextAlign.Center
                                 )
-                                Text(text = "15 Kg", style = MaterialTheme.typography.bodyLarge)
+                                if (lastData != null) {
+                                    Text(
+                                        text = "${lastData.weight}",
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                } else {
+                                    Text(
+                                        text = "Belum Ada Data",
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                }
                             }
                         }
                         Column(
@@ -192,9 +238,21 @@ fun GraphicScreen(
                                     style = MaterialTheme.typography.bodySmall,
                                     textAlign = TextAlign.Center
                                 )
-                                Text(text = "75 cm", style = MaterialTheme.typography.bodyLarge)
+                                if (lastData != null) {
+                                    Text(
+                                        text = "${lastData.height}",
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                } else {
+
+                                    Text(
+                                        text = "Belum Ada Data",
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                }
                             }
                         }
+
                         Column(
                             modifier = Modifier
                                 .width(80.dp)
@@ -231,10 +289,11 @@ fun GraphicScreen(
                                 Text(
                                     text = if (years < 1) {
                                         "$months bulan"
-                                    }else{
+                                    } else {
                                         "$years tahun $months bulan"
                                     },
-                                    style = MaterialTheme.typography.bodyLarge)
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
                             }
                         }
                         Column(
@@ -266,12 +325,12 @@ fun GraphicScreen(
                                     .padding(3.dp)
                             ) {
                                 Text(
-                                    text = it.gender,
+                                    text = if (balita.gender == "man") "Laki - Laki" else "Perempuan",
                                     style = MaterialTheme.typography.bodySmall,
                                     textAlign = TextAlign.Center
                                 )
                                 Icon(
-                                    imageVector = Icons.Default.Male,
+                                    imageVector = if (balita.gender == "man") Icons.Default.Male else Icons.Default.Female,
                                     contentDescription = "Gender icon"
                                 )
                             }
@@ -302,7 +361,7 @@ fun GraphicScreen(
                             color = MaterialTheme.colorScheme.onPrimary,
                             modifier = Modifier.padding(bottom = 5.dp)
                         )
-                        BeratChat()
+                        BeratChat(dataBerat = DataBerat)
                     }
                     Spacer(modifier = Modifier.padding(5.dp))
                     Column(
@@ -359,10 +418,17 @@ fun GraphicScreen(
                                     .clip(shape = RoundedCornerShape(10.dp))
                                     .background(secondaryTwoColor)
                             ) {
-                                Text(
-                                    text = "Berat : 15 kg",
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
+                                if (lastData != null) {
+                                    Text(
+                                        text = "Berat : ${lastData.weight} kg",
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                } else {
+                                    Text(
+                                        text = "Belum ada data",
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                }
                             }
                             Box(
                                 contentAlignment = Alignment.Center,
@@ -372,10 +438,17 @@ fun GraphicScreen(
                                     .clip(shape = RoundedCornerShape(10.dp))
                                     .background(secondaryTwoColor)
                             ) {
-                                Text(
-                                    text = "Tinggi : 75 cm",
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
+                                if (lastData != null) {
+                                    Text(
+                                        text = "Tinggi : ${lastData.height} cm",
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                } else {
+                                    Text(
+                                        text = "Belum ada data",
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                }
                             }
                         }
                         Text(
