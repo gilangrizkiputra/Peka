@@ -1,7 +1,6 @@
 package com.sukasrana.peka.presentation.login
 
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +25,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,16 +36,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
+import com.sukasrana.peka.data.SharedPreferenceLogin
 import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.network.maps.LocationHelper
 import com.sukasrana.peka.presentation.component.EmailTextField
 import com.sukasrana.peka.presentation.component.PasswordTextField
-import com.sukasrana.peka.ui.theme.PekaTheme
 
 @Composable
 fun LoginScreen(
@@ -62,6 +60,22 @@ fun LoginScreen(
     var password by remember {
         mutableStateOf("")
     }
+
+    val preferencesManager = remember {
+        SharedPreferenceLogin(context)
+    }
+
+    LaunchedEffect(Unit) {
+        if (preferencesManager.isLoggedIn &&
+            !preferencesManager.email.isNullOrBlank() &&
+            !preferencesManager.password.isNullOrBlank()
+        ) {
+            navController.navigate(Screen.Home.route) {
+                popUpTo(Screen.Login.route) { inclusive = true }
+            }
+        }
+    }
+
 
     IconButton(
         onClick = { navController.navigateUp() },
@@ -84,7 +98,7 @@ fun LoginScreen(
         moveToForgot = {
             Toast.makeText(
                 context,
-                "Silahkan di kembangkan sendiri",
+                "Fitur belum tersedia",
                 Toast.LENGTH_SHORT
             ).show()
         },
@@ -92,8 +106,17 @@ fun LoginScreen(
             navController.navigate(Screen.Signup.route)
         },
         onLoginClick = {
-            navController.navigate(Screen.Home.route)
-            locationHelper.checkPermissionsAndStartLocationUpdate()
+                if (email.isNotBlank() && password.isNotBlank()) {
+                    preferencesManager.email = email
+                    preferencesManager.password = password
+                    preferencesManager.isLoggedIn = true
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Login.route) { inclusive = true }
+                    }
+                    locationHelper.checkPermissionsAndStartLocationUpdate()
+                } else {
+                    Toast.makeText(context, "Email dan password harus diisi", Toast.LENGTH_SHORT).show()
+                }
         },
         modifier = modifier
     )
@@ -203,12 +226,12 @@ fun LoginContent(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun LoginScreenPreview() {
-    val activity = LocalContext.current as ComponentActivity
-    val locationHelper = remember { LocationHelper(activity) }
-    PekaTheme {
-        LoginScreen(navController = rememberNavController(), locationHelper = locationHelper)
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//private fun LoginScreenPreview() {
+//    val activity = LocalContext.current as ComponentActivity
+//    val locationHelper = remember { LocationHelper(activity) }
+//    PekaTheme {
+//        LoginScreen(navController = rememberNavController(), locationHelper = locationHelper)
+//    }
+//}
