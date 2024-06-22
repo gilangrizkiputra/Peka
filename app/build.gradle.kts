@@ -109,4 +109,7 @@ dependencies {
     implementation ("io.coil-kt:coil-compose:1.4.0")
     implementation ("androidx.compose.ui:ui-tooling:1.0.0-beta01")
 
+    //data storage
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
+
 }

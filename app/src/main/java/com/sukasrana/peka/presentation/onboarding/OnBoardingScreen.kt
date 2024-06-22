@@ -30,6 +30,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,6 +39,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.data.OnBoardingData
+import com.sukasrana.peka.data.SharedPreferenceManager
 import com.sukasrana.peka.model.OnBoardingItem
 import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.ui.theme.PekaTheme
@@ -48,19 +50,39 @@ fun OnBoardingScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    val onBoardings = OnBoardingData.onBoardingItems
 
-    OnBoardingContent(
-        onBoardings = onBoardings,
-        moveToSwitch = {
+    val context = LocalContext.current
+    val preferencesManager = remember {
+        SharedPreferenceManager(context)
+    }
+    val onboardingCompleted = remember {
+        preferencesManager.isOnboardingCompleted()
+    }
+
+    LaunchedEffect(onboardingCompleted) {
+        if (onboardingCompleted) {
             navController.navigate(Screen.Switch.route) {
-                popUpTo(Screen.OnBoarding.route) {
-                    inclusive = true
-                }
+                popUpTo(0) { inclusive = true }
             }
-        },
-        modifier = modifier
-    )
+        }
+    }
+
+    if (!onboardingCompleted) {
+        val onBoardings = OnBoardingData.onBoardingItems
+
+        OnBoardingContent(
+            onBoardings = onBoardings,
+            moveToSwitch = {
+                preferencesManager.setOnboardingCompleted(true)
+                navController.navigate(Screen.Switch.route) {
+                    popUpTo(Screen.OnBoarding.route) {
+                        inclusive = true
+                    }
+                }
+            },
+            modifier = modifier
+        )
+    }
 }
 
 @SuppressLint("ResourceType")

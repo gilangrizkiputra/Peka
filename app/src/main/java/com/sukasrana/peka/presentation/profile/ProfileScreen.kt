@@ -17,16 +17,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
+import com.sukasrana.peka.data.SharedPreferenceLogin
 import com.sukasrana.peka.navigation.Screen
 import com.sukasrana.peka.ui.theme.bodyFontFamily
 
@@ -35,6 +36,12 @@ fun ProfileScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
+
+    val context = LocalContext.current
+    val preferencesManager = remember {
+        SharedPreferenceLogin(context)
+    }
+
     Column(
         modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp)
     ) {
@@ -60,7 +67,7 @@ fun ProfileScreen(
                         fontWeight = FontWeight.Bold),
                     )
                 Text(
-                    text = "+62 87907654321",
+                    text = "sri@sukasrana.com",
                     fontFamily = bodyFontFamily,
                     style = MaterialTheme.typography.bodyLarge.copy(
                         fontSize = 14.sp,
@@ -198,7 +205,12 @@ fun ProfileScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { navController.navigate(Screen.Login.route) }
+                    .clickable {
+                        preferencesManager.clear()
+                        navController.navigate(Screen.Login.route) {
+                            popUpTo(Screen.Home.route) { inclusive = true }
+                        }
+                    }
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically
@@ -223,8 +235,9 @@ fun ProfileScreen(
     }
 }
 
-@Preview(showSystemUi = true)
-@Composable
-private fun ProfilePrev() {
-    ProfileScreen(navController = rememberNavController())
-}
+
+//@Preview(showSystemUi = true)
+//@Composable
+//private fun ProfilePrev() {
+//    ProfileScreen(navController = rememberNavController())
+//}
