@@ -32,6 +32,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,6 +51,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.sukasrana.peka.R
+import com.sukasrana.peka.data.repository.fetchUserById
+import com.sukasrana.peka.data.repository.updateUser
+import com.sukasrana.peka.model.User
 import com.sukasrana.peka.presentation.addFormChild.component.TextFieldCustom
 import com.sukasrana.peka.presentation.component.NumberTextField
 import com.sukasrana.peka.presentation.component.PasswordTextField
@@ -58,16 +62,27 @@ import com.sukasrana.peka.ui.theme.PekaTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileEditScreen(
-    navController: NavController
+    navController: NavController,
+    userId: Int
 ) {
+    val context = LocalContext.current
+
+    var user by remember {
+        mutableStateOf<User?>(null)
+    }
+
+    var updateUserById by remember {
+        mutableStateOf(false)
+    }
+
+    LaunchedEffect(userId) {
+        user = fetchUserById(userId)
+    }
 
     var name by remember {
         mutableStateOf("")
     }
     var email by remember {
-        mutableStateOf("")
-    }
-    var number by remember {
         mutableStateOf("")
     }
     var nkk by remember {
@@ -101,6 +116,40 @@ fun ProfileEditScreen(
         }
     )
 
+    LaunchedEffect(user) {
+        user?.let {
+            name = it.nama
+            email = it.email
+            nkk = it.nik.toString()
+            profileImage = it.foto_profile
+        }
+    }
+
+    isEnable = password == pass
+
+
+    LaunchedEffect(updateUserById) {
+        if (updateUserById) {
+            val updatedUser = User(
+                id_user = userId,
+                nama = name,
+                email = email,
+                password = password,
+                nik = nkk.toLong(),
+                alamat = nkk,
+                authority = user?.authority ?: "",
+                foto_profile = profileImage.toString()
+            )
+            val success = updateUser(userId, updatedUser)
+            if (success) {
+                Toast.makeText(context, "Update successful", Toast.LENGTH_SHORT).show()
+                navController.navigateUp()
+            } else {
+                Toast.makeText(context, "Update failed", Toast.LENGTH_SHORT).show()
+            }
+            updateUserById = false
+        }
+    }
 
     ProfileEditContent(
         isEnable = isEnable,
@@ -121,7 +170,10 @@ fun ProfileEditScreen(
         onGalleryClick = {
             galleryLauncher.launch("image/*")
         },
-        profileImage = profileImage
+        profileImage = profileImage,
+        onSubmit = {
+            updateUserById = true
+        }
     )
 }
 
@@ -141,6 +193,7 @@ fun ProfileEditContent(
     onCameraClick: () -> Unit,
     onGalleryClick: () -> Unit,
     profileImage: Any?,
+    onSubmit: () -> Unit,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
@@ -251,7 +304,7 @@ fun ProfileEditContent(
             )
 
             Button(
-                onClick = { },
+                onClick = { onSubmit() },
                 enabled = isEnable,
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier
@@ -289,7 +342,9 @@ fun ProfileEditContent(
                         modifier = modifier
                             .size(70.dp)
                             .clickable {
-                                Toast.makeText(context, "Fitur Belum Tersedia", Toast.LENGTH_LONG).show()
+                                Toast
+                                    .makeText(context, "Fitur Belum Tersedia", Toast.LENGTH_LONG)
+                                    .show()
                             }
                     )
                     Spacer(modifier = modifier.padding(5.dp))
@@ -306,10 +361,10 @@ fun ProfileEditContent(
     }
 }
 
-@Preview
-@Composable
-private fun ProfileEditPreview() {
-    PekaTheme {
-        ProfileEditScreen(navController = rememberNavController())
-    }
-}
+//@Preview
+//@Composable
+//private fun ProfileEditPreview() {
+//    PekaTheme {
+//        ProfileEditScreen(navController = rememberNavController())
+//    }
+//}

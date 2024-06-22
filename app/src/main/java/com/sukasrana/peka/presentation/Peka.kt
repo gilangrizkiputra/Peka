@@ -179,7 +179,7 @@ fun Peka(
             composable(Screen.ProEdit.route) {
                 nav.value = "no_bot"
                 title.value = "Atur Profil Anda"
-                ProfileEditScreen(navController)
+                ProfileEditScreen(navController, userId = 1 )
             }
             composable(Screen.Feedback.route) {
                 nav.value = "no_bot"
