@@ -1,5 +1,7 @@
 package com.sukasrana.peka.presentation.addFormChild
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -40,12 +42,19 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.peka.R
+import com.sukasrana.peka.model.Balita
+import com.sukasrana.peka.model.User
 import com.sukasrana.peka.navigation.Screen
+import com.sukasrana.peka.network.RetrofitInstance
 import com.sukasrana.peka.presentation.addFormChild.component.TextFieldCustom
 import com.sukasrana.peka.ui.theme.PekaTheme
 import com.vanpra.composematerialdialogs.MaterialDialog
+import com.vanpra.composematerialdialogs.MaterialDialogState
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -57,12 +66,32 @@ fun AddFormChildScreen(
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
+    val radioOptions = listOf("man", "woman")
+    var (selectedOption, onOptionSelected) = remember { mutableStateOf("") }
+    var picekdDate by remember {
+        mutableStateOf(LocalDate.now())
+    }
+    val formattedDate by remember {
+        derivedStateOf {
+            DateTimeFormatter
+                .ofPattern("yyyy-MM-dd")
+                .format(picekdDate)
+        }
+    }
+
+    var namaAnak by remember {
+        mutableStateOf("")
+    }
 
     var nikAnak by remember {
         mutableStateOf("")
     }
 
-    var namaAnak by remember {
+    var gender by remember {
+        mutableStateOf("")
+    }
+
+    var birth_date by remember {
         mutableStateOf("")
     }
 
@@ -70,59 +99,123 @@ fun AddFormChildScreen(
         mutableStateOf("")
     }
 
-    var tanggal by remember {
-        mutableStateOf("")
-    }
-
     var golonganDarah by remember {
         mutableStateOf("")
     }
-    AddFormChildContent(
-        navController = navController,
-        nikAnak = nikAnak,
-        namaAnak = namaAnak,
-        tempatLahir = tempatLahir,
-        tanggal = tanggal,
-        golonganDarah = golonganDarah,
-        onnikAnakChange = { nikAnak = it },
-        onnamaAnakChange = { namaAnak = it },
-        ontempatLahirChange = { tempatLahir = it },
-        ontanggalChange = { tanggal = it },
-        ongolonganDarahChange = { golonganDarah = it },
-        onSimpanClick = {
-            navController.navigate(Screen.Home.route)
+
+    fun onAddBalitaClick() {
+        if (namaAnak.isEmpty() || nikAnak.isEmpty() || selectedOption.isEmpty() || tempatLahir.isEmpty() || golonganDarah.isEmpty()) {
+            Toast.makeText(context, "Data belum lengkap", Toast.LENGTH_LONG).show()
+            return
         }
+        gender = selectedOption
+        birth_date = formattedDate
+        val balita = Balita(
+            id_balita = null,
+            id_user = 1,
+            nama = namaAnak,
+            nik = nikAnak.toLong(),
+            gender = gender,
+            birth_date = birth_date,
+            birth_location = tempatLahir,
+            blood_type = golonganDarah
+        )
+        Log.d("BalitaData", "Data yang dikirim: $balita")
+
+        coroutineScope.launch {
+            try {
+                val response = RetrofitInstance.api.addBalita(balita)
+                if (response.isSuccessful) {
+                    Log.d("BalitaData", "Daftar berhasil")
+                    Toast.makeText(context, "Daftar Berhasil", Toast.LENGTH_LONG).show()
+                    navController.navigate(Screen.Home.route)
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Log.d("BalitaData", "Server Error: $errorBody")
+                    Toast.makeText(context, "Server Error: $errorBody", Toast.LENGTH_LONG).show()
+                }
+            } catch (e: Exception) {
+                when (e) {
+                    is IOException -> {
+                        Log.d("BalitaData", "Network Error: ${e.message}")
+                        Toast.makeText(context, "Network Error: ${e.message}", Toast.LENGTH_LONG)
+                            .show()
+                    }
+
+                    is HttpException -> {
+                        val code = e.code()
+                        val errorResponse = e.response()?.errorBody()?.string()
+                        Log.d("BalitaData", "HTTP Error: Code $code, $errorResponse")
+                        Toast.makeText(context, "HTTP Error: Code $code", Toast.LENGTH_LONG).show()
+                    }
+
+                    else -> {
+                        Log.d("BalitaData", "Unknown Error: ${e.message}")
+                        Toast.makeText(context, "Unknown Error: ${e.message}", Toast.LENGTH_LONG)
+                            .show()
+                    }
+                }
+            }
+        }
+    }
+    val dateDialogState = rememberMaterialDialogState()
+    MaterialDialog(
+        dialogState = dateDialogState,
+        properties = DialogProperties(
+            dismissOnBackPress = true
+        ),
+        buttons = {
+            positiveButton(text = "Ok")
+            negativeButton(text = "Batal")
+        }
+    ) {
+        datepicker(
+            initialDate = LocalDate.now(),
+            title = "Pilih Tanggal"
+        ){
+            picekdDate = it
+        }
+    }
+
+    AddFormChildContent(
+        radioOptions = radioOptions,
+        selectedOption = selectedOption,
+        onOptionSelected = onOptionSelected,
+        dateDialogState = dateDialogState,
+        formattedDate = formattedDate,
+        navController = navController,
+        namaAnak = namaAnak,
+        nikAnak = nikAnak,
+        tempatLahir = tempatLahir,
+        golonganDarah = golonganDarah,
+        onnamaAnakChange = { namaAnak = it },
+        onnikAnakChange = { nikAnak = it },
+        ontempatLahirChange = { tempatLahir = it },
+        ongolonganDarahChange = { golonganDarah = it },
+        onSimpanClick = { onAddBalitaClick() }
     )
 }
 
 @Composable
 fun AddFormChildContent(
-    nikAnak: String,
     namaAnak: String,
+    nikAnak: String,
     tempatLahir: String,
-    tanggal: String,
     golonganDarah: String,
-    onnikAnakChange: (String) -> Unit,
+    radioOptions: List<String>,
+    selectedOption: String,
+    onOptionSelected: (selectedOption: String) -> Unit,
+    dateDialogState: MaterialDialogState,
+    formattedDate: String,
     onnamaAnakChange: (String) -> Unit,
+    onnikAnakChange: (String) -> Unit,
     ontempatLahirChange: (String) -> Unit,
-    ontanggalChange: (String) -> Unit,
     ongolonganDarahChange: (String) -> Unit,
     onSimpanClick: () -> Unit,
     navController: NavController,
     modifier: Modifier = Modifier,
     scrollState: ScrollState = rememberScrollState(),
 ) {
-    var picekdDate by remember {
-        mutableStateOf(LocalDate.now())
-    }
-    val formattedDate by remember {
-        derivedStateOf {
-            DateTimeFormatter
-                .ofPattern("dd mm yyyy")
-                .format(picekdDate)
-        }
-    }
-    val dateDialogState = rememberMaterialDialogState()
     Column {
         IconButton(
             onClick = { navController.navigateUp() },
@@ -164,7 +257,7 @@ fun AddFormChildContent(
                 value = namaAnak,
                 onValueChange = onnamaAnakChange,
             )
-            Row{
+            Row {
                 Column(
                 ) {
                     Text(
@@ -203,8 +296,9 @@ fun AddFormChildContent(
                     Button(
                         onClick = { dateDialogState.show() },
                         modifier = modifier
-                            .height(55.dp)) {
-                        Text(text = "Pilih Tanggal")
+                            .height(55.dp)
+                    ) {
+                        Text(text = formattedDate)
                     }
                 }
             }
@@ -216,7 +310,7 @@ fun AddFormChildContent(
                 value = golonganDarah,
                 onValueChange = ongolonganDarahChange,
             )
-            RadioButton()
+            RButton(radioOptions = radioOptions, selectedOption = selectedOption,onOptionSelected)
 
             Button(
                 onClick = onSimpanClick,
@@ -233,27 +327,14 @@ fun AddFormChildContent(
             }
         }
     }
-    MaterialDialog(
-        dialogState = dateDialogState,
-        properties = DialogProperties(
-            dismissOnBackPress = true
-        ),
-        buttons = {
-            positiveButton(text = "Ok")
-            negativeButton(text = "Batal")
-        }
-    ) {
-        datepicker(
-            initialDate = LocalDate.now(),
-            title = "Pilih Tanggal"
-        )
-    }
 }
 
 @Composable
-fun RadioButton() {
-    val radioOptions = listOf("Laki - Laki", "Perempuan")
-    val (selectedOption, onOptionSelected) = remember { mutableStateOf<String?>(null) }
+fun RButton(
+    radioOptions: List<String>,
+    selectedOption: String,
+    onOptionSelected: (selectedOption: String) -> Unit,
+) {
     Row(
     ) {
         radioOptions.forEach { text ->
@@ -268,11 +349,16 @@ fun RadioButton() {
                     )
             ) {
                 RadioButton(
-                    selected = (text == selectedOption),
-                    onClick = { onOptionSelected(text) }
+                    selected = selectedOption == text,
+                    onClick = {
+                        onOptionSelected(text)
+                    }
                 )
                 Text(
-                    text = text,
+                    text = when{
+                        text == "man" -> "Laki - Laki"
+                        else -> "Perempuan"
+                    } ,
                     fontSize = 14.sp,
                     style = MaterialTheme.typography.labelSmall,
                     modifier = Modifier

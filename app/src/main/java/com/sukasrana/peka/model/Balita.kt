@@ -1,7 +1,7 @@
 package com.sukasrana.peka.model
 
 data class Balita(
-    var id_balita: Int,
+    var id_balita: Int?,
     var id_user: Int,
     var nama: String,
     var nik: Long,
