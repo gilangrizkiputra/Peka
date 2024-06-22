@@ -207,7 +207,7 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = modifier.padding(top = 8.dp)
                 ) {
-                    items(balita.value, key = { it.id_balita }) {
+                    items(balita.value, key = { it.id_balita!! }) {
                         BalitaItem(
                             balita = it,
                             balitaId = it.id_balita,

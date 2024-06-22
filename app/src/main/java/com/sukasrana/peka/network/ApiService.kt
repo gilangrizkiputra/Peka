@@ -27,7 +27,7 @@ interface ApiService {
     @GET("mkia")
     suspend fun readMkia(): Response<MkiaResponse>
 
-    @POST("addbalita")
+    @POST("balita")
     suspend fun addBalita(@Body balita: Balita): Response<Unit>
 
     @GET("balita")
