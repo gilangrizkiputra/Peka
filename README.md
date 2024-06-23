@@ -1,6 +1,6 @@
 ## PEKA (Peduli Kesehatan Anak)
 
-**Fitur :**
+### About Us
   - A
 
 **Note:**
