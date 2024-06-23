@@ -11,7 +11,7 @@ Code Google Maps `AndroidManifest.xml`:
 
 `<meta-data android:name="com.google.android.geo.API_KEY" android:value="YOUR_API_KEY" />`
 
-# Sukasrana Mobile Team
+## Sukasrana Mobile Team
 
 | Role                  | Name                | 
 | --------------------- | ------------------- |
