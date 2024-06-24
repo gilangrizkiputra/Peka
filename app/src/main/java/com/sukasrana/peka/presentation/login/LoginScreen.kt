@@ -1,5 +1,7 @@
 package com.sukasrana.peka.presentation.login
 
+import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
@@ -40,10 +42,15 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sukasrana.peka.R
 import com.sukasrana.peka.data.SharedPreferenceLogin
+import com.sukasrana.peka.model.LoginRequest
 import com.sukasrana.peka.navigation.Screen
+import com.sukasrana.peka.network.RetrofitInstance
 import com.sukasrana.peka.network.maps.LocationHelper
 import com.sukasrana.peka.presentation.component.EmailTextField
 import com.sukasrana.peka.presentation.component.PasswordTextField
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @Composable
 fun LoginScreen(
@@ -76,6 +83,59 @@ fun LoginScreen(
         }
     }
 
+    fun login() {
+        coroutineScope.launch {
+            try {
+                val loginRequest = LoginRequest(email, password)
+                Log.d("LoginRequest", "Request: $loginRequest")
+
+                val response = RetrofitInstance.api.loginUser(loginRequest)
+                Log.d("LoginResponse", "Response: ${response.isSuccessful}, Body: ${response.body()}")
+
+                if (email.isEmpty() && password.isEmpty()){
+                    Toast.makeText(context, "Mohon isi form login", Toast.LENGTH_SHORT).show()
+                }else{
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val loginResponse = response.body()!!
+                            if (loginResponse.success && loginResponse.data.id_user != null) {
+                                val user = loginResponse.data
+                                Log.d("LoginResponse", "User: $user")
+
+                                val sharedPref = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+                                with(sharedPref.edit()) {
+                                    user.id_user?.let { putInt("USER_ID", it) }
+                                    apply()
+                                }
+
+                                preferencesManager.email = email
+                                preferencesManager.password = password
+                                preferencesManager.isLoggedIn = true
+
+                                Toast.makeText(context, "Login berhasil!", Toast.LENGTH_SHORT).show()
+
+                                navController.navigate(Screen.Home.route) {
+                                    popUpTo(Screen.Login.route) { inclusive = true }
+                                }
+                                locationHelper.checkPermissionsAndStartLocationUpdate()
+                            } else {
+                                Log.e("LoginError", "Login tidak berhasil: ${loginResponse.success}")
+                                Toast.makeText(context, "Login gagal. Data pengguna tidak valid.", Toast.LENGTH_SHORT).show()
+                            }
+                        } else {
+                            Log.e("LoginError", "Response: ${response.code()} - ${response.message()}")
+                            Toast.makeText(context, "Email atau Password salah", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("LoginError", "Exception: ${e.localizedMessage}")
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Login gagal. Silakan coba lagi.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
     IconButton(
         onClick = { navController.navigateUp() },
@@ -105,19 +165,7 @@ fun LoginScreen(
         moveToSignUp = {
             navController.navigate(Screen.Signup.route)
         },
-        onLoginClick = {
-                if (email.isNotBlank() && password.isNotBlank()) {
-                    preferencesManager.email = email
-                    preferencesManager.password = password
-                    preferencesManager.isLoggedIn = true
-                    navController.navigate(Screen.Home.route) {
-                        popUpTo(Screen.Login.route) { inclusive = true }
-                    }
-                    locationHelper.checkPermissionsAndStartLocationUpdate()
-                } else {
-                    Toast.makeText(context, "Email dan password harus diisi", Toast.LENGTH_SHORT).show()
-                }
-        },
+        onLoginClick = { login() },
         modifier = modifier
     )
 }

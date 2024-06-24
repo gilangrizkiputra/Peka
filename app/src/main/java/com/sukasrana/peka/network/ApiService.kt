@@ -5,6 +5,8 @@ import com.sukasrana.peka.model.BalitaResponse
 import com.sukasrana.peka.model.DataBalitaResponse
 import com.sukasrana.peka.model.Article
 import com.sukasrana.peka.model.ArticleResponse
+import com.sukasrana.peka.model.LoginRequest
+import com.sukasrana.peka.model.LoginResponse
 import com.sukasrana.peka.model.MkiaResponse
 import com.sukasrana.peka.model.MpasiResponse
 import com.sukasrana.peka.model.User
@@ -25,6 +27,9 @@ interface ApiService {
 
     @PUT("user/{id_user}")
     suspend fun updateUser(@Path("id_user") id_user: Int, @Body user: User): Response<Unit>
+
+    @POST("user/login")
+    suspend fun loginUser(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
     @GET("artikel")
     suspend fun readArtikel(): Response<ArticleResponse>

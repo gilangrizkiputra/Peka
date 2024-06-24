@@ -1,5 +1,6 @@
 package com.sukasrana.peka.presentation
 
+import android.content.Context
 import androidx.activity.ComponentActivity
 import com.sukasrana.peka.presentation.login.LoginScreen
 import com.sukasrana.peka.presentation.login.SignUpScreen
@@ -15,6 +16,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -64,6 +66,11 @@ fun Peka(
     val title = remember { mutableStateOf("") }
     val navBackStack by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStack?.destination?.route
+
+    fun getCurrentUserId(context: Context): Int {
+        val sharedPref = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        return sharedPref.getInt("USER_ID", -1)
+    }
 
 
     Scaffold(
@@ -179,7 +186,17 @@ fun Peka(
             composable(Screen.ProEdit.route) {
                 nav.value = "no_bot"
                 title.value = "Atur Profil Anda"
-                ProfileEditScreen(navController, userId = 1 )
+                val context = LocalContext.current
+                val userId = getCurrentUserId(context)
+                if (userId != -1) {
+                    ProfileEditScreen(navController, userId = userId)
+                } else {
+                    LaunchedEffect(Unit) {
+                        navController.navigate(Screen.Login.route) {
+                            popUpTo(Screen.Profile.route) { inclusive = true }
+                        }
+                    }
+                }
             }
             composable(Screen.Feedback.route) {
                 nav.value = "no_bot"
