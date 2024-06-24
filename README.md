@@ -1,11 +1,4 @@
 <p align="center"><img align="center" src="https://github.com/gilangrizkiputra/Peka/blob/development/app/src/main/res/drawable/background_peka.png" alt="Background Peka"/></p>
-
-![Github Actions](https://circleci.com/gh/BeCipes/Mobile-Development.svg?style=shield)
-[![Issues](https://img.shields.io/github/issues/BeCipes/Mobile-Development)](https://github.com/BeCipes/Mobile-Development/issues)
-[![Kotlin](https://img.shields.io/badge/kotlin-1.8.0-blue.svg?logo=kotlin)](http://kotlinlang.org)
-[![Gradle](https://img.shields.io/badge/Gradle-8-green?style=flat)](https://gradle.org)
-[![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
-
 <hr>
 
 # PEKA
@@ -16,14 +9,6 @@ Sebuah aplikasi inovatif yang dirancang khusus untuk membantu meningkatkan efisi
 - **Menu Makanan Bergizi**: Bunda bisa melihat menu makanan bergizi untuk sang buah hati sesuai dengan range usia.
 - **Daftar Posyandu Secaran Online**: Bunda bisa mendaftarkan anaknya untuk pengecekan ke posyandu secara online.
 - **Notifikasi**: Bunda akan selalu mendapatkan notifikasi terkait kegiatan posyandu.
-
-
-## Teknologi yang Digunakan
-![Github Actions](https://circleci.com/gh/BeCipes/Mobile-Development.svg?style=shield)
-[![Issues](https://img.shields.io/github/issues/BeCipes/Mobile-Development)](https://github.com/BeCipes/Mobile-Development/issues)
-[![Kotlin](https://img.shields.io/badge/kotlin-1.8.0-blue.svg?logo=kotlin)](http://kotlinlang.org)
-[![Gradle](https://img.shields.io/badge/Gradle-8-green?style=flat)](https://gradle.org)
-[![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 ## Tools
 - Android Studio: 2023.3.1 Patch 1 (Jellyfish)
