@@ -58,6 +58,7 @@ import com.sukasrana.peka.model.Balita
 import com.sukasrana.peka.model.DataBalita
 import com.sukasrana.peka.presentation.component.ArtikelRekomendasiItem
 import com.sukasrana.peka.presentation.graphic.component.BeratChat
+import com.sukasrana.peka.presentation.graphic.component.StatusBalita
 import com.sukasrana.peka.presentation.graphic.component.TinggiBadan
 import com.sukasrana.peka.presentation.home.component.AgeCalculator
 import com.sukasrana.peka.ui.theme.PekaTheme
@@ -101,6 +102,7 @@ fun GraphicScreen(
     }
     val lastData = dataBalita.lastOrNull()
 
+    var status: String = "out"
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -129,6 +131,9 @@ fun GraphicScreen(
                 balita?.let { balita ->
                     val dob = balita.birth_date
                     val (years, months) = AgeCalculator(dob)
+                    val status = lastData?.let {
+                        StatusBalita(years = years, months = months, weight = it.weight)
+                    }
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
@@ -384,73 +389,96 @@ fun GraphicScreen(
                             .background(onPrimaryLight)
                             .padding(10.dp)
                     ) {
-                        Row {
-                            Text(
-                                text = "Interpetrasi :",
-                                style = MaterialTheme.typography.bodyMedium,
-                                modifier = Modifier.padding(2.dp)
-                            )
-                            Text(
-                                text = "Kekurangan Berat Badan",
-                                style = MaterialTheme.typography.bodyMedium,
+                        balita?.let { balita ->
+                            val dob = balita.birth_date
+                            val (years, months) = AgeCalculator(dob)
+                            val status = lastData?.let {
+                                StatusBalita(years = years, months = months, weight = it.weight)
+                            }
+                            Row {
+                                Text(
+                                    text = "Interpetrasi :",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    modifier = Modifier.padding(2.dp)
+                                )
+                                val color = if(status == "kurang" || status == "lebih") Color.Red else Color.Green
+                                Text(
+                                    text = when{
+                                        status == "kurang" -> "Kurang berat badan"
+                                        status == "sedang" -> "Berat badan ideal"
+                                        status == "lebih" -> "lebih berat badan"
+                                        else -> "Umur lebih dari 2 tahun"
+                                    },
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    modifier = Modifier
+                                        .clip(shape = RoundedCornerShape(5.dp))
+                                        .background(color)
+                                        .padding(
+                                            start = 5.dp,
+                                            top = 2.dp,
+                                            bottom = 2.dp,
+                                            end = 5.dp
+                                        )
+                                )
+                            }
+                            Row(
+                                horizontalArrangement = Arrangement.SpaceEvenly,
                                 modifier = Modifier
-                                    .clip(shape = RoundedCornerShape(5.dp))
-                                    .background(Color.Red)
-                                    .padding(start = 5.dp, top = 2.dp, bottom = 2.dp, end = 5.dp)
-                            )
-                        }
-                        Row(
-                            horizontalArrangement = Arrangement.SpaceEvenly,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(5.dp)
-                        ) {
-                            Box(
-                                contentAlignment = Alignment.Center,
-                                modifier = Modifier
-                                    .width(120.dp)
-                                    .height(50.dp)
-                                    .clip(shape = RoundedCornerShape(10.dp))
-                                    .background(secondaryTwoColor)
+                                    .fillMaxWidth()
+                                    .padding(5.dp)
                             ) {
-                                if (lastData != null) {
-                                    Text(
-                                        text = "Berat : ${lastData.weight} kg",
-                                        style = MaterialTheme.typography.bodyLarge
-                                    )
-                                } else {
-                                    Text(
-                                        text = "Belum ada data",
-                                        style = MaterialTheme.typography.bodyLarge
-                                    )
+                                Box(
+                                    contentAlignment = Alignment.Center,
+                                    modifier = Modifier
+                                        .width(120.dp)
+                                        .height(50.dp)
+                                        .clip(shape = RoundedCornerShape(10.dp))
+                                        .background(secondaryTwoColor)
+                                ) {
+                                    if (lastData != null) {
+                                        Text(
+                                            text = "Berat : ${lastData.weight} kg",
+                                            style = MaterialTheme.typography.bodyLarge
+                                        )
+                                    } else {
+                                        Text(
+                                            text = "Belum ada data",
+                                            style = MaterialTheme.typography.bodyLarge
+                                        )
+                                    }
+                                }
+                                Box(
+                                    contentAlignment = Alignment.Center,
+                                    modifier = Modifier
+                                        .width(120.dp)
+                                        .height(50.dp)
+                                        .clip(shape = RoundedCornerShape(10.dp))
+                                        .background(secondaryTwoColor)
+                                ) {
+                                    if (lastData != null) {
+                                        Text(
+                                            text = "Tinggi : ${lastData.height} cm",
+                                            style = MaterialTheme.typography.bodyLarge
+                                        )
+                                    } else {
+                                        Text(
+                                            text = "Belum ada data",
+                                            style = MaterialTheme.typography.bodyLarge
+                                        )
+                                    }
                                 }
                             }
-                            Box(
-                                contentAlignment = Alignment.Center,
-                                modifier = Modifier
-                                    .width(120.dp)
-                                    .height(50.dp)
-                                    .clip(shape = RoundedCornerShape(10.dp))
-                                    .background(secondaryTwoColor)
-                            ) {
-                                if (lastData != null) {
-                                    Text(
-                                        text = "Tinggi : ${lastData.height} cm",
-                                        style = MaterialTheme.typography.bodyLarge
-                                    )
-                                } else {
-                                    Text(
-                                        text = "Belum ada data",
-                                        style = MaterialTheme.typography.bodyLarge
-                                    )
-                                }
-                            }
+                            Text(
+                                text = when{
+                                    status == "kurang" -> "Anak anda mengalami Kekurangan berat badan, Jadwalkan kunjuangan ke dokter atau fasilitas kesehatan terdekat untuk informasi lebih lanjut."
+                                    status == "sedang" -> "Anak anda memiliki berat badan yang ideal"
+                                    status == "lebih" -> "Anak anda mengalami kelebihan berat badan, Jadwalkan kunjuangan ke dokter atau fasilitas kesehatan terdekat untuk informasi lebih lanjut."
+                                        else -> "Umur balita anda lebih dari 2 tahun"
+                                },
+                                style = MaterialTheme.typography.bodyMedium,
+                                textAlign = TextAlign.Justify
+                            )
                         }
-                        Text(
-                            text = "Anak Anda Mengalami Kekurangan berat badan, Jadwalkan kunjuangan ke dokter atau fasilitas kesehatan terdekat untuk informasi lebih lanjut ",
-                            style = MaterialTheme.typography.bodyMedium,
-                            textAlign = TextAlign.Justify
-                        )
                     }
                 }
             }
