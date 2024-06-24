@@ -53,18 +53,12 @@ fun FeedbackScreen(
     modifier: Modifier = Modifier
 ) {
     val cardData1 = listOf(
-        Card("Bagaimana cara mendaftar di aplikasi ini?", "aaaaaaaaaaaaaa"),
-        Card("Apakah saya bisa mendaftarkan lebih dari satu anak ?", "Ya, Anda dapat mendaftarkan lebih dari satu anak di aplikasi ini. Untuk melakukannya, ikuti langkah-langkah berikut:\n" +
-                "Pilih Pendaftaran online pada menu Home\n" +
-                "Lalu pilih jam kunjungan anda ke posyandu"),
-        Card("Apakah pendaftaran online ini gratis?", "Ya, Anda dapat mendaftarkan lebih dari satu anak di aplikasi ini. Untuk melakukannya, ikuti langkah-langkah berikut:\n" +
-                "Pilih Pendaftaran online pada menu Home\n" +
-                "Lalu pilih jam kunjungan anda ke posyandu")
+        Card("Apakah saya bisa mendaftarkan lebih dari satu anak?", "Ya, Anda dapat mendaftarkan lebih dari satu anak di aplikasi ini."),
+        Card("Apakah pendaftaran online ini gratis?", "Ya, aplikasi ini gratis dan aplikasi ini terhubung dengan posyandu Madiun daerah Manggis.")
     )
     val cardData2 = listOf(
-        Card("Bagaimana cara melihat grafik perkembangan anak saya?", "aaaaaaaaaaaaaa"),
-        Card("Apa saja parameter yang dilacak dalam fitur pantau tumbuh kembang anak?", "aaaaaaaaaaaaaa"),
-        Card("Bagaimana cara melihat grafik perkembangan anak saya?", "aaaaaaaaaaaaaa")
+        Card("Bagaimana cara melihat grafik perkembangan anak saya?", "Anda dapat melihat grafik perkembangan dengan cara memilih balita yang telah anda tambahkan. Data akan bertambah setiap anda melakukan kunjungan ke posyandu."),
+        Card("Apa saja parameter yang dilacak dalam fitur pantau tumbuh kembang anak?", "Untuk parameter yang dilacak adalah berat badan dan tinggi badan."),
     )
     LazyColumn(
         modifier = modifier
