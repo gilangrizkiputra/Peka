@@ -225,12 +225,10 @@ object ListData {
 
     val DataBerat: List<Point> =
         listOf(
-            Point(0f, 0f),
-            Point(1f, 8f),
-            Point(2f, 12f),
-            Point(3f, 16f),
-            Point(4f, 20f),
-            Point(5f, 50f)
+            Point(1f, 0f),
+            Point(2f, 1f),
+            Point(3f, 3f),
+            Point(4f, 4f),
         )
 
     val DataTinggi: List<Point> =

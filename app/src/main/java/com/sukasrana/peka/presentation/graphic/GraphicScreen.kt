@@ -75,9 +75,6 @@ fun GraphicScreen(
     modifier: Modifier = Modifier,
     balitaId: Int?
 ) {
-    var listDataBerat: List<Point> = remember {
-        mutableStateListOf(Point(x = 1f, y = 1f))
-    }
     var balita by remember { mutableStateOf<Balita?>(null) }
     val dataBalita = remember { mutableStateListOf<DataBalita?>() }
     val artikelRekomendasi = remember { mutableStateOf<List<Article>>(emptyList()) }
@@ -103,25 +100,6 @@ fun GraphicScreen(
             }
         }
     }
-    data class Unit(val x: Float, val y: Float)
-
-    fun Unit.toPoint(): Point {
-        return Point(x = this.x, y = this.y)
-    }
-
-    fun aUnitToAPoint(unitList: List<Unit>): List<Point> {
-        return unitList.map { it.toPoint() }
-    }
-
-    val beratList = dataBalita.map {
-        Unit(
-            x = it?.id_data_balita?.toFloat() ?: 1f,
-            y = it?.weight?.toFloat() ?: 10f
-        )
-    }
-
-    listDataBerat = aUnitToAPoint(beratList)
-
     val lastData = dataBalita.lastOrNull()
 
     var status: String = "out"
@@ -381,7 +359,9 @@ fun GraphicScreen(
                             color = MaterialTheme.colorScheme.onPrimary,
                             modifier = Modifier.padding(bottom = 5.dp)
                         )
-                        BeratChat(dataBerat = DataBerat)
+                        if (balitaId != null) {
+                            BeratChat(balitaId = balitaId)
+                        }
                     }
                     Spacer(modifier = Modifier.padding(5.dp))
                     Column(
@@ -398,7 +378,7 @@ fun GraphicScreen(
                             color = MaterialTheme.colorScheme.onPrimary,
                             modifier = Modifier.padding(bottom = 5.dp)
                         )
-                        TinggiBadan()
+                        balitaId?.let { TinggiBadan(balitaId = it) }
                     }
                     Spacer(modifier = Modifier.padding(5.dp))
                     Column(
@@ -531,10 +511,10 @@ fun GraphicScreen(
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//private fun GraphicScreenPreview() {
-//    PekaTheme {
-//        GraphicScreen(navController = rememberNavController())
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+private fun GraphicScreenPreview() {
+    PekaTheme {
+        GraphicScreen(navController = rememberNavController(), balitaId = 1)
+    }
+}
